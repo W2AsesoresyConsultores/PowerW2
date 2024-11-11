@@ -1,6 +1,5 @@
 import React from 'react';
 import 'tailwindcss/tailwind.css';
-import exampleImage from '../../assets/coaches.png'; // Asegúrate de cambiar esta ruta por la de tu imagen
 
 const CtaPower = () => {
   return (
@@ -43,7 +42,7 @@ const CtaPower = () => {
       </div>
       <div className="w-full md:w-1/2 flex justify-center items-center mt-8 md:mt-0">
         <div className="relative w-full md:w-2/3 h-auto bg-primarycolor p-4 rounded-lg">
-          <img src={exampleImage} alt="Person with tablet" className="w-full h-auto rounded-lg" />
+          
         </div>
       </div>
     </div>

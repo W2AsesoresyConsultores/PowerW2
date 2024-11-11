@@ -1,9 +1,4 @@
 import React from 'react';
-import logo from '../../assets/Logo Power.png';
-import CardOfertaPower from './CardOfertaPower';
-import gradiantPower from '../../assets/gradiantPower.svg'
-import DashboardContent from '../../assets/BGPOWER.svg'
-import imgSaasPower from '../../assets/imgSaasPower.png'
 
 function HeroPower() {
   return (
@@ -29,7 +24,7 @@ function HeroPower() {
         </div> */}
        
             <div className='w-full px-4'>
-               <img src={DashboardContent} className='mx-auto' alt="" /> 
+              
             </div>
               
                     

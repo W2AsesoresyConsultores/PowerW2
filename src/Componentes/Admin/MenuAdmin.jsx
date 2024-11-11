@@ -45,7 +45,7 @@ function MenuAdmin() {
         return;
       }
       localStorage.clear();
-      navigate("/Power");
+      navigate("/");
     } catch (error) {
       console.error("Error cerrando sesión:", error);
     }

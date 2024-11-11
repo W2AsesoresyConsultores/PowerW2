@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { UserAuth } from "../../Context/AuthContext";
 import { FcGoogle } from "react-icons/fc";
 import { IoMdClose } from "react-icons/io";
-import logo from '../../assets/Logo Power.png';
+
 
 function InicioWhatsapp({ onClose }) {
   const { signInWithGoogle, signOut } = UserAuth();
@@ -30,7 +30,7 @@ function InicioWhatsapp({ onClose }) {
               ¡Conoce el número del reclutador!
             </h1>
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
-              Inicia sesión en <img src={logo} alt="Power" className="inline-block w-20 md:w-24" /> y postula fácilmente a todas las ofertas laborales que te interesen.
+              Inicia sesión en  y postula fácilmente a todas las ofertas laborales que te interesen.
             </p>
           </div>
           <div className=" sm:mx-auto sm:w-full sm:max-w-md">

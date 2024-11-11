@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { UserAuth } from "../../Context/AuthContext";
 import { FcGoogle } from "react-icons/fc";
 import { IoMdClose } from "react-icons/io";
-import logo from '../../assets/Logo Power.png';
+
 
 function IniciarSesion({ onClose }) {
   const { signInWithGoogle } = UserAuth();

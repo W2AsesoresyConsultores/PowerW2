@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Login from './Login';
-import logo from '../../assets/Logo newPower.svg';
 import { IoMenu } from "react-icons/io5";
 
 function HeaderPower() {
@@ -70,7 +69,7 @@ function HeaderPower() {
         {/* Logo */}
         <div className="flex items-center justify-center md:justify-center">
           <a href="/Power">
-            <img src={logo} alt="Power" className="w-24 h-auto" /> 
+           
           </a>
         </div>
 

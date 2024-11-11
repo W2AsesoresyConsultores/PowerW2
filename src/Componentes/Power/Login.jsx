@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../supabase/supabase.config";
 import HeaderPower from "./HeaderPower";
-import DashboardContent from '../../assets/BGPOWER.svg';
+//import DashboardContent from '../../assets/BGPOWER.svg';
 import RegisterForm from "./RegisterForm";
 import VerificationMessage from "./VerificationMessage";
 
@@ -166,11 +166,7 @@ function Register() {
           className="opacity-40 w-full h-full object-cover"
           alt=""
         />
-        <img
-          src={DashboardContent}
-          className="absolute w-auto h-96"
-          alt="Dashboard Content"
-        />
+       
       </div>
       <div className="md:w-1/2 h-screen py-6 bg-white flex items-center mx-auto px-4 lg:px-40 justify-center overflow-y-scroll">
         {showVerification ? (
