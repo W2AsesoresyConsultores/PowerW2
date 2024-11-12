@@ -10,7 +10,7 @@ function TrabajosContainer2() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const navigate = useNavigate();
   const { id_oferta } = useParams();
-  
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -23,10 +23,17 @@ function TrabajosContainer2() {
   }, []);
 
   useEffect(() => {
+    // Restaurar el trabajo seleccionado desde localStorage al montar el componente
+    const storedJobId = localStorage.getItem('selectedJobId');
     const filteredResults = allActiveJobs
       .sort((a, b) => new Date(b.fecha_publicacion) - new Date(a.fecha_publicacion));
 
-    setSelectedJob(filteredResults[0] || null);
+    if (storedJobId) {
+      const storedJob = filteredResults.find(job => job.id_oferta === parseInt(storedJobId, 10));
+      setSelectedJob(storedJob || filteredResults[0]);
+    } else {
+      setSelectedJob(filteredResults[0] || null);
+    }
   }, [allActiveJobs]);
 
   useEffect(() => {
@@ -34,8 +41,10 @@ function TrabajosContainer2() {
       const foundJob = allActiveJobs.find(job => job.id_oferta === parseInt(id_oferta, 10));
       if (foundJob) {
         setSelectedJob(foundJob);
+        // Guardar el trabajo seleccionado en localStorage
+        localStorage.setItem('selectedJobId', foundJob.id_oferta);
       } else {
-        navigate('/');
+        navigate('/PowerAuth');
       }
     }
   }, [id_oferta, allActiveJobs, navigate]);
@@ -45,6 +54,8 @@ function TrabajosContainer2() {
       navigate(`/info-job-movil/${job.id_oferta}`);
     } else {
       setSelectedJob(job);
+      // Guardar el trabajo seleccionado en localStorage
+      localStorage.setItem('selectedJobId', job.id_oferta);
     }
   };
 
