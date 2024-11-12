@@ -1,6 +1,7 @@
 import { createContext, useState, useContext, useEffect } from 'react';
 import { supabase } from '../supabase/supabase.config';
 import { useNavigate } from 'react-router-dom';
+import { LinearProgress } from '@mui/material';
 
 const AuthContext = createContext();
 
@@ -104,9 +105,21 @@ export const AuthContextProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ signInWithGoogle, manualSignIn, signOut, user, loading }}>
-      {loading ? <div className="flex justify-center items-center h-screen w-full">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primarycolor"></div>
-      </div> : children}
+      {loading ? 
+      <div className="flex items-center justify-center h-screen">
+      <div className="w-3/4 md:w-1/2">
+        <LinearProgress 
+          sx={{
+            width: '80%',
+            backgroundColor: '#e2e8f0',
+            '& .MuiLinearProgress-bar': {
+              backgroundColor: '#2563eb',
+            }
+          }}
+        />
+      </div>
+    </div>
+      : children}
     </AuthContext.Provider>
   );
 };

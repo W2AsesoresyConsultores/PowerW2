@@ -4,6 +4,7 @@ import ExperienciaForm from './ExperienciaForm';
 import { UserAuth } from "../../Context/AuthContext";
 import HeaderPowerAuth from '../PowerAuth/HeaderPowerAuth';
 import { GrEdit } from "react-icons/gr";
+import { LinearProgress } from '@mui/material';
 
 const Profile1 = () => {
   const { user } = UserAuth();
@@ -242,9 +243,19 @@ const Profile1 = () => {
   };
 
   if (loading) return (
-    <div className="flex justify-center items-center h-screen w-full">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primarycolor"></div>
+    <div className="flex items-center justify-center h-screen">
+      <div className="w-3/4 md:w-1/2">
+        <LinearProgress 
+          sx={{
+            width: '80%',
+            backgroundColor: '#e2e8f0',
+            '& .MuiLinearProgress-bar': {
+              backgroundColor: '#2563eb',
+            }
+          }}
+        />
       </div>
+    </div>
   );
 
   return (
