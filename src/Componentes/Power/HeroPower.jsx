@@ -2,10 +2,10 @@ import React from 'react';
 
 function HeroPower() {
   return (
-    <div className='flex flex-col bg-[#003E9D] items-center justify-center w-full h-auto font-dmsans pt-28 md:pt-36 pb-12  text-gray-700 gap-6 bg-cover'
+    <div className='flex flex-col bg-newprimarycolor items-center justify-center w-full h-auto font-dmsans pt-28 md:pt-36 pb-12  text-gray-700 gap-6 bg-cover'
     // style={{ backgroundImage: `url(${gradiantPower})` }}
     >
-        <h1 className='text-3xl md:text-6xl font-semibold mb-4 text-center px-2 animate-fade-right text-white'>
+        <h1 className='text-3xl md:text-5xl font-semibold mb-4 text-center px-2 animate-fade-right text-white'>
           Vive la experiencia <span className='text-yellowprimary'>Power</span> y postula <br /> con nosotros
         </h1>
         <p className='mb-4 text-center px-2 animate-fade-right w-full md:w-1/2 text-gray-200'>
