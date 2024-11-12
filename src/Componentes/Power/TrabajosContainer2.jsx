@@ -35,7 +35,7 @@ function TrabajosContainer2() {
       if (foundJob) {
         setSelectedJob(foundJob);
       } else {
-        navigate('/Power');
+        navigate('/');
       }
     }
   }, [id_oferta, allActiveJobs, navigate]);

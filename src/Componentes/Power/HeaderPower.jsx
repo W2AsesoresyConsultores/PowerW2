@@ -66,7 +66,7 @@ function HeaderPower() {
         hasShadow ? 'shadow-none' : 'shadow-sm'
       } ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
       <div className="mx-auto px-4 flex justify-between md:justify-around items-center h-20">
-        {/* Logo */}
+          <Link className='text-white' to="/">Power</Link>
         <div className="flex items-center justify-center md:justify-center">
           <a href="/Power">
            
@@ -81,13 +81,7 @@ function HeaderPower() {
         </div>
 
         {/* Opciones de navegación */}
-        <div className="hidden md:flex  md:justify-center items-center w-full text-white text-md gap-4 font-lato">
-          <Link to="/" className="hover:text-yellowprimary">Inicio</Link>
-          <Link to="/Empresas" className="hover:text-yellowprimary">Empresas</Link>
-          <Link to="/DescubriendoTalentos" className="hover:text-yellowprimary">Descubriendo Talentos</Link>
-          <Link to="/Coworking" className="hover:text-yellowprimary">Coworking</Link>
-          <Link to="/Power" className="font-semibold text-yellowprimary hover:text-white underline decoration-yellowprimary underline-offset-4">Power</Link>
-        </div>
+        
 
         {/* Botones de login y registro */}
         <div className='flex'>
