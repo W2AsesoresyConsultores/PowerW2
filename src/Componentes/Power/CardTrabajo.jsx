@@ -11,7 +11,7 @@ import 'dayjs/locale/es'; // Importar el idioma español
 import relativeTime from 'dayjs/plugin/relativeTime';
 
 function CardTrabajo({ job, onSelectJob, isSelected }) {
-  const { puesto, modalidad, ubicacion, empresa, descripcion, id_reclutador, fecha_publicacion } =
+  const { puesto, modalidad, ubicacion, empresa, descripcion, id_reclutador, fecha_publicacion, empresa_img_url } =
     job;
 
   const [nombreReclutador, setNombreReclutador] = useState("");
@@ -58,8 +58,8 @@ function CardTrabajo({ job, onSelectJob, isSelected }) {
           <div className="flex items-center justify-between w-full">
             <div className="flex items-center justify-between w-full text-primarycolor">
               <div className="flex items-center space-x-2">
-                <div className="bg-primarycolor p-2 rounded-lg">
-                <MdOutlineVerifiedUser className="text-white text-xl" />
+              <div className="rounded-lg w-12 h-12">
+                <img src={empresa_img_url} className="w-full h-full rounded-lg" alt="" />
               </div>
               <div>
                 <h3 className="text-sm font-semibold text-gray-800">

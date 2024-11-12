@@ -63,10 +63,12 @@ function HeaderPower() {
   return (
     <header 
       className={`bg-newprimarycolor w-full z-10 font-dmsans fixed top-0 transition-transform duration-300 ${
-        hasShadow ? 'shadow-none' : 'shadow-sm'
+        hasShadow ? 'shadow-none' : ''
       } ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
       <div className="mx-auto px-4 flex justify-between md:justify-around items-center h-20">
-          <Link className='text-white' to="/">Power</Link>
+          <Link className='text-white' to="/">
+            <img src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/AssetsPower/Main/LogoPower.svg?t=2024-11-12T22%3A38%3A36.881Z" alt="" />
+          </Link>
         <div className="flex items-center justify-center md:justify-center">
           <a href="/Power">
            
