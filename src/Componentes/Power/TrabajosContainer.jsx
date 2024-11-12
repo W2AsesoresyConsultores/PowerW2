@@ -1,16 +1,16 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import CardTrabajo from './CardTrabajo';
 import InfoJobPower from './InfoJobPower';
-import JobsContext from '../../Context/JobsContext';
+import { supabase } from '../../supabase/supabase.config';
 import { useNavigate, useParams } from 'react-router-dom';
 
 function TrabajosContainer() {
-  const { userSearchResults } = useContext(JobsContext);
+  const [jobs, setJobs] = useState([]);
   const [selectedJob, setSelectedJob] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const navigate = useNavigate();
   const { id_oferta } = useParams();
-  console.log('Resultados de búsqueda de trabajos:', userSearchResults);
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -24,26 +24,36 @@ function TrabajosContainer() {
   }, []);
 
   useEffect(() => {
-    if (userSearchResults.length > 0) {
-      const filteredResults = userSearchResults
-        .filter(job => job.estado === 'activa') // Filtrar por estado "abierto"
-        .slice()
-        .sort((a, b) => new Date(b.fecha_publicacion) - new Date(a.fecha_publicacion));
-      
-      setSelectedJob(filteredResults[0]);
-    }
-  }, [userSearchResults]);
+    const fetchJobs = async () => {
+      const { data, error } = await supabase
+        .from('Oferta')
+        .select('*')
+        .eq('estado', 'activa')
+        .order('fecha_publicacion', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching jobs:', error);
+      } else {
+        setJobs(data);
+        if (data.length > 0) {
+          setSelectedJob(data[0]);
+        }
+      }
+    };
+
+    fetchJobs();
+  }, []);
 
   useEffect(() => {
-    if (id_oferta && userSearchResults.length > 0) {
-      const foundJob = userSearchResults.find(job => job.id_oferta === parseInt(id_oferta) && job.estado === 'activa');
+    if (id_oferta && jobs.length > 0) {
+      const foundJob = jobs.find(job => job.id_oferta === parseInt(id_oferta) && job.estado === 'activa');
       if (foundJob) {
         setSelectedJob(foundJob);
       } else {
         navigate('/');
       }
     }
-  }, [id_oferta, userSearchResults, navigate]);
+  }, [id_oferta, jobs, navigate]);
 
   const handleCardClick = (job) => {
     if (isMobile) {
@@ -64,18 +74,14 @@ function TrabajosContainer() {
             scrollbarWidth: 'none'
           }}
         >
-          {userSearchResults
-            .filter(job => job.estado === 'activa') // Filtrar por estado "abierto"
-            .slice()
-            .sort((a, b) => new Date(b.fecha_publicacion) - new Date(a.fecha_publicacion))
-            .map((job, index) => (
-              <CardTrabajo
-                key={index}
-                job={job}
-                onSelectJob={() => handleCardClick(job)}
-                isSelected={selectedJob === job}
-              />
-            ))}
+          {jobs.map((job, index) => (
+            <CardTrabajo
+              key={index}
+              job={job}
+              onSelectJob={() => handleCardClick(job)}
+              isSelected={selectedJob === job}
+            />
+          ))}
         </div>
         {selectedJob && !isMobile && (
           <InfoJobPower selectedJob={selectedJob} />

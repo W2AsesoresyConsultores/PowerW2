@@ -24,28 +24,9 @@ function HeroPower() {
         </div> */}
        
             <div className='w-full px-4'>
-              
+              <img className='mx-auto' src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/AssetsPower/Main/BGPOWER.svg?t=2024-11-11T23%3A31%3A31.247Z" alt="" />
             </div>
               
-                    
-                    
-                
-           
-        
-        <div className='flex justify-center animate-fade-left'>
-          
-          {/* <iframe
-            className='w-[80vw] h-[50vw] md:w-[70vw] md:h-[40vw] rounded-lg bg-white mb-4'
-            src="https://www.youtube.com/embed/9QvD3w3_Ga0?autoplay=1"
-            title="Qué es POWER y qué queremos Lograr con la misma"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allowFullScreen
-          ></iframe> */}
-        </div>
-
-        
     </div>
   );
 }
