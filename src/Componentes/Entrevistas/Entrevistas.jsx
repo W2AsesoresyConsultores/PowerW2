@@ -7,7 +7,7 @@ import { UserAuth } from '../../Context/AuthContext';
 import Filter from './Filter';
 import CargarExcel from './CargarExcel';
 import CrearCandidatoModal from './CrearCandidatoModal';
-//import DescargarPlantilla from './DescargarPlantilla';
+import DescargarPlantilla from './DescargarPlantilla';
 import CandidateStageMover from './CandidateStageMover';
 import SelectProceso from './SelectProceso';
 import DateFilter from './DateFilter';
@@ -190,7 +190,7 @@ function Entrevistas() {
           </div>
           <div className="flex space-x-4">
   <CargarExcel idReclutador={idReclutador} idOferta={idOferta} setCandidatosNoAuth={setCandidatosNoAuth} />
-  {/* <DescargarPlantilla /> */}
+  <DescargarPlantilla />
 </div>
         </div>
 
