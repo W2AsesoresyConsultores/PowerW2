@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../../supabase/supabase.config';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import Typography from '@mui/material/Typography';
 
 function SelectProceso({ idReclutador, currentOfferId, onSelectProceso }) {
   const [procesos, setProcesos] = useState([]);
@@ -43,11 +44,17 @@ function SelectProceso({ idReclutador, currentOfferId, onSelectProceso }) {
         onChange={handleSelect}
         label="Selecciona un Proceso"
       >
-        {filteredProcesos.map((proceso) => (
-          <MenuItem key={proceso.id_programa} value={proceso.id_oferta}>
-            {proceso.proceso}
+        {filteredProcesos.length > 0 ? (
+          filteredProcesos.map((proceso) => (
+            <MenuItem key={proceso.id_programa} value={proceso.id_oferta}>
+              {proceso.proceso}
+            </MenuItem>
+          ))
+        ) : (
+          <MenuItem disabled>
+            <Typography color="textSecondary">No hay más procesos disponibles</Typography>
           </MenuItem>
-        ))}
+        )}
       </Select>
     </FormControl>
   );

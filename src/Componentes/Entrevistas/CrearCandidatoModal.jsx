@@ -38,8 +38,8 @@ function CrearCandidatoModal({ idReclutador, idOferta, setCandidatosNoAuth }) {
     setLoading(true);
     setSuccess(false);
 
-    const today = new Date();
-    const formattedDate = today.toISOString().split('T')[0]; // YYYY-MM-DD
+     // Obtener la fecha actual en la zona horaria de Perú (UTC-5)
+     const  formattedDate = new Date().toLocaleString("en-US", { timeZone: "America/Lima" });
 
     const candidatoData = {
       id_user: uuidv4(),
