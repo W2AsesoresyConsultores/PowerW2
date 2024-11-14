@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
-import CardTrabajo2 from './CardTrabajo2';
-import InfoJob from '../PowerAuth/InfoJob';
+import CardTrabajo2 from './CardTrabajoAuth';
+import InfoJob from './InfoJob';
 import JobsContext from '../../Context/JobsContext';
 import { useNavigate, useParams } from 'react-router-dom';
 

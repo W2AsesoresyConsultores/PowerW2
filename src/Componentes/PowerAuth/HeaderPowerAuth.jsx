@@ -78,7 +78,7 @@ function HeaderPowerAuth() {
 
           {/* Foto del usuario con tooltip para Mi Perfil */}
           <Tooltip title="Mi Perfil" arrow>
-            <Link to="/Profile1">
+            <Link to="/Profile">
               <img
                 className="w-10 h-10 rounded-full my-2"
                 src={profile.avatar_url || 'https://icons.iconarchive.com/icons/papirus-team/papirus-status/512/avatar-default-icon.png'}
@@ -105,7 +105,7 @@ function HeaderPowerAuth() {
             Power
           </a>
           <div className='flex gap-4'>
-            <Link to="/Profile1">
+            <Link to="/Profile">
             <img
               className="w-10 h-10 rounded-full"
               src={profile.avatar_url || 'https://icons.iconarchive.com/icons/papirus-team/papirus-status/512/avatar-default-icon.png'}
@@ -138,7 +138,7 @@ function HeaderPowerAuth() {
               </button>
             </Tooltip>
             <Tooltip title="Mi Perfil" arrow>
-              <Link to="/Profile1" className="flex items-center gap-2 p-2 rounded-md hover:bg-gray-100 focus:outline-none transition">
+              <Link to="/Profile" className="flex items-center gap-2 p-2 rounded-md hover:bg-gray-100 focus:outline-none transition">
                 <RxAvatar size={20} className="text-gray-700" />
                 <span className="text-sm text-gray-800">Mi Perfil</span>
               </Link>

@@ -7,7 +7,7 @@ import Admin from "./Componentes/Admin/Admin.jsx";
 import AdminForm from "./Componentes/Form/AdminForm.jsx";
 import LoginAdmin from "./Componentes/Admin/LoginAdmin.jsx";
 import ProtectedRoute from "./ProtectedRoute.jsx";
-import Profile1 from "./Componentes/Profile/Profile1.jsx";
+import Profile from "./Componentes/Profile/Profile.jsx";
 import PgPostulados from "./Componentes/Admin/PgPostulados.jsx";
 import Share from "./Componentes/PowerAuth/Share.jsx";
 import InfoJobMovil from "./Componentes/PowerAuth/InfoJobMovil.jsx";
@@ -49,7 +49,7 @@ function App() {
             <Route path="/EditJob/:id_oferta" element={<ProtectedRoute><EditJob /></ProtectedRoute>} />
             <Route path="/Entrevistas/:id_oferta" element={<ProtectedRoute><Entrevistas /></ProtectedRoute>} />
             <Route path="/Postulados/:id" element={<ProtectedRoute><PgPostulados /></ProtectedRoute>} />
-            <Route path="/Profile1" element={<ProtectedRoute><Profile1 /></ProtectedRoute>} />
+            <Route path="/Profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           </Routes>
         </JobsProvider>
       </ThemeContextProvider>

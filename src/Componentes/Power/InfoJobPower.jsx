@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FaLocationDot } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import QuestionsModalPower from "./QuestionsModalPower"; // Importar el componente QuestionsModal
 import { supabase } from "../../supabase/supabase.config"; // Importar cliente de Supabase
 import { UserAuth } from "../../Context/AuthContext"; // Importar contexto de autenticación
 import { MdOutlineVerifiedUser } from "react-icons/md";
@@ -16,7 +14,6 @@ import InicioWhatsapp from './InicioWhatsapp';
 function InfoJobPower({ selectedJob }) {
     const { user } = UserAuth(); // Obtener información del usuario autenticado
     const [atBottom, setAtBottom] = useState(false);
-    const [isQuestionsModalOpen, setIsQuestionsModalOpen] = useState(false);
     const [hasApplied, setHasApplied] = useState(false); // Estado para rastrear si el usuario ya se postuló
     const [nombreReclutador, setNombreReclutador] = useState(""); // Estado para el nombre del reclutador
     const [isInicioWhatsappOpen, setIsInicioWhatsappOpen] = useState(false); 
@@ -116,10 +113,9 @@ function InfoJobPower({ selectedJob }) {
 
     // Formatear la fecha de publicación a dd-mm-yyyy
     const formattedDate = dayjs(selectedJob.fecha_publicacion).format("DD-MM-YYYY");
-    // Cargar el plugin
     // Cargar el plugin y configurar el idioma español
     dayjs.extend(relativeTime);
-    dayjs.locale('es'); // Configurar dayjs para usar español
+    dayjs.locale('es'); 
     
     // Obtener el tiempo en formato "hace X tiempo" y capitalizar la primera letra
     const timeAgo = dayjs(selectedJob.fecha_publicacion).fromNow();
@@ -163,63 +159,47 @@ function InfoJobPower({ selectedJob }) {
 
             <div className="flex justify-between mb-4">
                 <button
-                    className={`font-bold py-2 px-4 rounded-full w-48 ${
-                        hasApplied ? "bg-yellow-200 text-primarycolor cursor-not-allowed" : "bg-[#0057c2] text-white"
-                    }`}
-                    onClick={hasApplied ? null : () => setIsQuestionsModalOpen(true)} // Mostrar el modal de preguntas
-                    disabled={hasApplied}
+                    className="font-bold py-2 px-4 rounded-full w-48 bg-[#0057c2] text-white"
+                    onClick={() => navigate("/Login")} // Redirigir a /Login
                 >
-                    {hasApplied ? "Ya has postulado" : "Postularme"}
+                    Postularme
                 </button>
 
-                {/* Replace the old share button with ShareButton */}
                 <div className="mr-60">
-        <ShareButton selectedJob={selectedJob} />
-    </div>
+                    <ShareButton selectedJob={selectedJob} />
+                </div>
             </div>
 
             <div className="mb-4">
-                <p className="text-gray-700 text-sm leading-relaxed">
-                    <h3 className="font-semibold text-lg text-gray-800">Descripción</h3>
-                    <p>{selectedJob.descripcion}</p>
-                    {jobDetails.map((detail, index) => (
-                        <div key={index} className="py-2">
-                            <div className="font-semibold ">{detail.title}</div>
-                            <div className="mt-2">{detail.content}</div>
-                        </div>
-                    ))}
-                </p>
+                <h3 className="font-semibold text-lg text-gray-800">Descripción</h3>
+                <p className="text-gray-700 text-sm leading-relaxed">{selectedJob.descripcion}</p>
+                {jobDetails.map((detail, index) => (
+                    <div key={index} className="py-2">
+                        <div className="font-semibold">{detail.title}</div>
+                        <div className="mt-2">{detail.content}</div>
+                    </div>
+                ))}
             </div>
 
             <div className="flex justify-center mt-4">
                 <button
-                    className={`font-bold py-2 px-4 rounded-full mr-4 ${
-                        hasApplied
-                            ? "bg-gray-500 text-white cursor-not-allowed"
-                            : "bg-[#0057c2] text-white"
-                    }`}
-                    onClick={hasApplied ? null : () => setIsQuestionsModalOpen(true)} // Mostrar el modal de preguntas
-                    disabled={hasApplied}
+                    className="font-bold py-2 px-4 rounded-full mr-4 bg-[#0057c2] text-white"
+                    onClick={() => navigate("/Login")} // Redirigir a /Login
                 >
-                    {hasApplied ? "Ya has postulado" : "Postularme"}
+                    Postularme
                 </button>
                 <button
-        className="bg-[#00d35e] text-white font-bold py-2 px-4 rounded-full flex items-center"
-        onClick={() => setIsInicioWhatsappOpen(true)} // Abrir el componente InicioWhatsapp
-    >
-        <IoLogoWhatsapp className="mr-2" size={24} />
-        WhatsApp
-    </button>
-</div>
+                    className="bg-[#00d35e] text-white font-bold py-2 px-4 rounded-full flex items-center"
+                    onClick={() => setIsInicioWhatsappOpen(true)} // Abrir el componente InicioWhatsapp
+                >
+                    <IoLogoWhatsapp className="mr-2" size={24} />
+                    WhatsApp
+                </button>
+            </div>
 
-            <QuestionsModalPower
-                isOpen={isQuestionsModalOpen}
-                onClose={() => setIsQuestionsModalOpen(false)}
-                selectedJob={selectedJob}
-            />
-                  {isInicioWhatsappOpen && (
-        <InicioWhatsapp onClose={() => setIsInicioWhatsappOpen(false)} />
-      )}  
+            {isInicioWhatsappOpen && (
+                <InicioWhatsapp onClose={() => setIsInicioWhatsappOpen(false)} />
+            )}
         </div>
     );
 }
