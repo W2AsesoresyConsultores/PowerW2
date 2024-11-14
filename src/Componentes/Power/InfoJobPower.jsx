@@ -124,8 +124,6 @@ function InfoJobPower({ selectedJob }) {
     // Obtener el tiempo en formato "hace X tiempo" y capitalizar la primera letra
     const timeAgo = dayjs(selectedJob.fecha_publicacion).fromNow();
     const capitalizedTimeAgo = timeAgo.charAt(0).toUpperCase() + timeAgo.slice(1);
-    
-    console.log(capitalizedTimeAgo); // "Hace unos minutos"
 
 
     return (

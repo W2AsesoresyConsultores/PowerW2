@@ -1,16 +1,14 @@
 import React, { useState } from "react";
-import { UserAuth } from "../../Context/AuthContext";
 import { FcGoogle } from "react-icons/fc";
 import { IoMdClose } from "react-icons/io";
-
+import GoogleButton from './GoogleButton';
 
 function IniciarSesion({ onClose }) {
-  const { signInWithGoogle } = UserAuth();
   const [isOpen, setIsOpen] = useState(true);
 
   const closeModal = () => {
     setIsOpen(false);
-    onClose(); // Llama a la función de cierre del padre
+    onClose(); // Llama a la función de cierre del componente padre
   };
 
   if (!isOpen) return null;
@@ -34,18 +32,10 @@ function IniciarSesion({ onClose }) {
             </p>
           </div>
   
-          <div className=" sm:mx-auto sm:w-full sm:max-w-md">
+          <div className="sm:mx-auto sm:w-full sm:max-w-md">
             <div className="bg-white dark:bg-gray-700 px-4 pb-4 pt-4 sm:rounded-lg sm:px-10 sm:pb-6 sm:shadow-lg">
               <div className="mt-2">
-                <button
-                  onClick={signInWithGoogle}
-                  type="button"
-                  className="inline-flex w-full max-w-xs items-center justify-center rounded-md border border-gray-300 bg-white dark:bg-gray-700 px-4 py-2 text-sm font-medium text-gray-500 dark:text-white shadow-sm hover:bg-gray-50 dark:hover:bg-gray-600 disabled:cursor-wait disabled:opacity-50"
-                >
-                  <span className="sr-only">Inicia Sesión con Google</span>
-                  <FcGoogle className="h-8 w-8" />
-                  <span className="ml-2">Continuar con Google</span>
-                </button>
+                <GoogleButton /> {/* Componente GoogleButton que maneja el inicio de sesión */}
               </div>
             </div>
   
@@ -56,8 +46,7 @@ function IniciarSesion({ onClose }) {
                   className="font-semibold text-amber-500 dark:text-indigo-100"
                   href="/register"
                 >
-                  {" "}
-                  Regístrate
+                  {" "} Regístrate
                 </a>
               </span>
             </div>

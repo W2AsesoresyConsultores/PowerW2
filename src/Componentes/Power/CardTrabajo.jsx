@@ -43,8 +43,7 @@ function CardTrabajo({ job, onSelectJob, isSelected }) {
   // Obtener el tiempo en formato "hace X tiempo" y capitalizar la primera letra
   const timeAgo = dayjs(job.fecha_publicacion).fromNow();
   const capitalizedTimeAgo = timeAgo.charAt(0).toUpperCase() + timeAgo.slice(1);
-  
-  console.log(capitalizedTimeAgo); // "Hace unos minutos"
+
 
   return (
     <div className="w-full flex justify-center font-dmsans">
