@@ -8,33 +8,29 @@ function RegisterAdmin() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
-    const [nameEmpresa, setNameEmpresa] = useState('');
-    const [showNewEmpresaInput, setShowNewEmpresaInput] = useState(false);
-    const [error, setError] = useState('');
+    const [empresaId, setEmpresaId] = useState('');
     const [empresas, setEmpresas] = useState([]);
+    const [error, setError] = useState('');
 
+    // Cargar las empresas al montar el componente
     useEffect(() => {
         const fetchEmpresas = async () => {
             const { data, error } = await supabase
-                .from('perfiles')
-                .select('name_empresa', { distinct: true });
-
+                .from('Empresa')
+                .select('id_empresa, nombre_empresa');
             if (error) {
                 setError('Error al cargar empresas');
-                return;
+                console.error(error);
+            } else {
+                setEmpresas(data);
             }
-
-            const uniqueEmpresas = Array.from(new Set(data.map(item => item.name_empresa)));
-            setEmpresas(uniqueEmpresas.filter(empresa => empresa));
         };
-
         fetchEmpresas();
     }, []);
 
     const handleRegister = async () => {
-        const empresaToUse = showNewEmpresaInput ? nameEmpresa : nameEmpresa;
-
         try {
+            // Registrar usuario en Supabase
             const { data: user, error: userError } = await supabase.auth.signUp({ email, password });
 
             if (userError) {
@@ -42,15 +38,25 @@ function RegisterAdmin() {
                 return;
             }
 
+            // Obtener la fecha actual en la zona horaria de Perú (UTC-5)
+            const fecha = new Date().toLocaleString("en-US", { timeZone: "America/Lima" });
+
+            // Obtener el nombre de la empresa seleccionada
+            const selectedEmpresa = empresas.find(empresa => empresa.id_empresa === empresaId);
+            const nombreEmpresa = selectedEmpresa ? selectedEmpresa.nombre_empresa : '';
+
+            // Insertar perfil en la tabla perfiles con id_empresa y nombre_empresa
             const { error: profileError } = await supabase
                 .from('perfiles')
                 .insert([{
                     correo: email,
                     nombre: name,
-                    name_empresa: empresaToUse,
                     rol: 'reclutador',
                     id: user.user.id,
-                    user_id: user.user.id
+                    fecha_creacion: fecha,
+                    user_id: user.user.id,
+                    id_empresa: empresaId, // ID de la empresa seleccionada
+                    name_empresa: nombreEmpresa // Nombre de la empresa
                 }]);
 
             if (profileError) {
@@ -61,17 +67,6 @@ function RegisterAdmin() {
             navigate('/Admin');
         } catch (err) {
             setError('Ocurrió un error al registrarse');
-        }
-    };
-
-    const handleEmpresaChange = (e) => {
-        const selectedValue = e.target.value;
-        if (selectedValue === 'new') {
-            setShowNewEmpresaInput(true);
-            setNameEmpresa('');
-        } else {
-            setShowNewEmpresaInput(false);
-            setNameEmpresa(selectedValue);
         }
     };
 
@@ -105,30 +100,6 @@ function RegisterAdmin() {
                                     className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-8"
                                     required
                                 />
-                                <label className="font-regular text-md text-gray-600 pb-1 block">Empresa</label>
-                                <select
-                                    value={showNewEmpresaInput ? 'new' : nameEmpresa}
-                                    onChange={handleEmpresaChange}
-                                    className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-4"
-                                >
-                                    <option value="" disabled>Selecciona una empresa</option>
-                                    {empresas.map((empresa, index) => (
-                                        <option key={index} value={empresa}>
-                                            {empresa}
-                                        </option>
-                                    ))}
-                                    <option value="new">No encuentro mi empresa</option>
-                                </select>
-                                {showNewEmpresaInput && (
-                                    <input
-                                        type="text"
-                                        placeholder="Ingresa el nombre de la empresa"
-                                        value={nameEmpresa}
-                                        onChange={(e) => setNameEmpresa(e.target.value)}
-                                        className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-8"
-                                        required
-                                    />
-                                )}
                                 <label className="font-regular text-md text-gray-600 pb-1 block">Correo electrónico</label>
                                 <input
                                     type="email"
@@ -147,6 +118,19 @@ function RegisterAdmin() {
                                     className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-12"
                                     required
                                 />
+                                <label className="font-regular text-md text-gray-600 pb-1 block">Empresa</label>
+                                <select
+                                    value={empresaId}
+                                    onChange={(e) => setEmpresaId(e.target.value)}
+                                    className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-8"
+                                >
+                                    <option value="">Selecciona una empresa</option>
+                                    {empresas.map((empresa) => (
+                                        <option key={empresa.id_empresa} value={empresa.id_empresa}>
+                                            {empresa.nombre_empresa}
+                                        </option>
+                                    ))}
+                                </select>
                                 {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
                                 <button
                                     type="button"
