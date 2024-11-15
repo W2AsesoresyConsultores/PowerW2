@@ -3,6 +3,22 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabase/supabase.config';
 import HeaderPower from '../Power/HeaderPower';
 
+function Modal({ isOpen, onClose, nombreEmpresa }) {
+    if (!isOpen) return null;
+
+    return (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-gray-800 bg-opacity-75">
+            <div className="bg-white rounded-lg p-6">
+                <h2 className="text-lg font-bold">Nombre de la Empresa</h2>
+                <p>{nombreEmpresa}</p>
+                <button onClick={onClose} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    );
+}
+
 function RegisterAdmin() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
@@ -11,6 +27,8 @@ function RegisterAdmin() {
     const [empresaId, setEmpresaId] = useState('');
     const [empresas, setEmpresas] = useState([]);
     const [error, setError] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedNombreEmpresa, setSelectedNombreEmpresa] = useState('');
 
     // Cargar las empresas al montar el componente
     useEffect(() => {
@@ -41,9 +59,13 @@ function RegisterAdmin() {
             // Obtener la fecha actual en la zona horaria de Perú (UTC-5)
             const fecha = new Date().toLocaleString("en-US", { timeZone: "America/Lima" });
 
-            // Obtener el nombre de la empresa seleccionada
-            const selectedEmpresa = empresas.find(empresa => empresa.id_empresa === empresaId);
+            // Convertir empresaId a número para la comparación
+            const selectedEmpresa = empresas.find(empresa => empresa.id_empresa === Number(empresaId));
             const nombreEmpresa = selectedEmpresa ? selectedEmpresa.nombre_empresa : '';
+
+            // Mostrar el nombre de la empresa en el modal
+            setSelectedNombreEmpresa(nombreEmpresa);
+            setIsModalOpen(true);
 
             // Insertar perfil en la tabla perfiles con id_empresa y nombre_empresa
             const { error: profileError } = await supabase
