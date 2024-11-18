@@ -1,6 +1,6 @@
-import React, { useContext, useMemo } from "react";
+import React, { useState, useEffect, useContext, useMemo } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaSignOutAlt, FaSun, FaMoon } from "react-icons/fa";
+import { FaSignOutAlt } from "react-icons/fa";
 import {
   IoChatbubbleOutline,
   IoCalendarClearOutline,
@@ -10,8 +10,8 @@ import { RxAvatar, RxDashboard } from "react-icons/rx";
 import { useSpring, animated } from "@react-spring/web";
 import { supabase } from "../../supabase/supabase.config";
 import { ThemeContext } from "../../Context/ThemeContext";
+import { UserAuth } from "../../Context/AuthContext";
 
-// Componente reutilizable para los items del menú
 const MenuItem = ({ to, icon: Icon, label, themeMode }) => {
   const location = useLocation();
   const isActive = location.pathname === to;
@@ -35,7 +35,65 @@ const MenuItem = ({ to, icon: Icon, label, themeMode }) => {
 
 function MenuAdmin() {
   const navigate = useNavigate();
-  const { toggleTheme, themeMode } = useContext(ThemeContext); // Usamos el contexto de tema
+  const { user } = UserAuth();
+  const { toggleTheme, themeMode } = useContext(ThemeContext);
+  
+  const [id_empresa, setIdEmpresa] = useState(null);
+  const [empresaUrl, setEmpresaUrl] = useState('');
+  const [loading, setLoading] = useState(true);
+
+  const fetchProfile = async (userId) => {
+    try {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from('perfiles')
+        .select('id_empresa')
+        .eq('id', userId)
+        .single();
+
+      if (error) {
+        console.error("Error fetching profile:", error);
+        return;
+      }
+
+      if (data) {
+        setIdEmpresa(data.id_empresa);
+        // Fetch the empresa_url using the id_empresa
+        fetchEmpresaUrl(data.id_empresa);
+      }
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchEmpresaUrl = async (id_empresa) => {
+    try {
+      const { data, error } = await supabase
+        .from('Empresa')
+        .select('empresa_url')
+        .eq('id_empresa', id_empresa)
+        .single();
+
+      if (error) {
+        console.error("Error fetching empresa URL:", error);
+        return;
+      }
+
+      if (data) {
+        setEmpresaUrl(data.empresa_url);
+      }
+    } catch (error) {
+      console.error("Error fetching empresa URL:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (user?.id) {
+      fetchProfile(user.id);
+    }
+  }, [user?.id]);
 
   const handleLogout = async () => {
     try {
@@ -55,11 +113,7 @@ function MenuAdmin() {
     () => [
       { to: "/Admin", icon: RxDashboard, label: "Ofertas" },
       { to: "/Programa", icon: IoCalendarClearOutline, label: "Programación" },
-      {
-        to: "/Conversaciones",
-        icon: IoChatbubbleOutline,
-        label: "Conversaciones",
-      },
+      { to: "/Conversaciones", icon: IoChatbubbleOutline, label: "Conversaciones" },
       { to: "/Estadisticas", icon: IoStatsChartOutline, label: "Estadísticas" },
       { to: "/AdminProfile", icon: RxAvatar, label: "Mi Perfil" },
     ],
@@ -75,39 +129,22 @@ function MenuAdmin() {
       } px-4 shadow-sm flex flex-col justify-between pt-8 fixed`}
     >
       {/* Header del menú */}
-      <div className="flex justify-between items-center px-6 mb-8">
-        <h2 className="text-2xl w-full font-semibold font-dmsans text-primarycolor dark:text-white text-center">
-          Power
-        </h2>
-        {/* <button
-          onClick={toggleTheme}
-          className="relative w-16 h-8 rounded-full flex items-center bg-gray-200 transition-colors duration-300"
-          style={{
-            backgroundColor: themeMode === "light" ? "#E2E8F0" : "#1E3A8A",
-          }}
-        >
-          <div
-            className={`absolute top-1 w-6 h-6 rounded-full transition-transform duration-300 transform flex items-center justify-center ${
-              themeMode === "light"
-                ? "translate-x-1 bg-white"
-                : "translate-x-9 bg-gray-400"
-            }`}
-          >
-            {themeMode === "light" ? (
-              <FaSun className="text-yellowprimary text-sm" />
-            ) : (
-              <FaMoon className="text-white text-sm" />
+      <div className="flex flex-col items-center px-6 mb-8">
+        {loading ? (
+          <h2 className="text-2xl font-semibold font-dmsans text-primarycolor dark:text-white text-center">
+            Cargando...
+          </h2>
+        ) : (
+          <>
+            {empresaUrl && (
+              <img
+                src={empresaUrl}
+                alt="Empresa Logo"
+                className="w-20 h-20 mb-2 object-cover"
+              />
             )}
-          </div>
-          
-          {themeMode === "light" && (
-            <FaMoon className="absolute right-2 text-gray-400 text-sm" />
-          )}
-          
-          {themeMode === "dark" && (
-            <FaSun className="absolute left-2 text-blue-100 text-sm" />
-          )}
-        </button> */}
+          </>
+        )}
       </div>
 
       {/* Menú de navegación */}
