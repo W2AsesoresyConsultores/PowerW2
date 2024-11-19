@@ -140,7 +140,7 @@ function MenuAdmin() {
               <img
                 src={empresaUrl}
                 alt="Empresa Logo"
-                className="w-20 h-20 mb-2 object-cover"
+                className="max-w-full h-auto mb-2 object-contain"
               />
             )}
           </>
