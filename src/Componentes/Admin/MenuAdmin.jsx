@@ -12,6 +12,9 @@ import { supabase } from "../../supabase/supabase.config";
 import { ThemeContext } from "../../Context/ThemeContext";
 import { UserAuth } from "../../Context/AuthContext";
 
+// Asegúrate de importar el icono que quieras usar para "Página"
+import { IoDocumentText } from "react-icons/io5"; // Ejemplo de un nuevo icono
+
 const MenuItem = ({ to, icon: Icon, label, themeMode }) => {
   const location = useLocation();
   const isActive = location.pathname === to;
@@ -116,6 +119,7 @@ function MenuAdmin() {
       { to: "/Conversaciones", icon: IoChatbubbleOutline, label: "Conversaciones" },
       { to: "/Estadisticas", icon: IoStatsChartOutline, label: "Estadísticas" },
       { to: "/AdminProfile", icon: RxAvatar, label: "Mi Perfil" },
+      { to: "/Pagina", icon: IoDocumentText, label: "Página" }, // Nuevo elemento
     ],
     []
   );
