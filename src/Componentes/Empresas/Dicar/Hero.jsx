@@ -4,45 +4,54 @@ import ContainerDicar from "./ContainerDicar";
 const App = () => {
   return (
     <div className="bg-gray-100 font-dmsans">
-      {/* Hero Section */}
       <section className="relative bg-gray-900 text-white">
-        {/* Fondo con imagen */}
-        <div className="absolute inset-0">
-          <img
-            src="https://drogueriadicar.com.pe/wp-content/uploads/2019/11/DSC_1604-ok-SAT-copy-1.jpg"
-            alt="Trabajo en equipo en DICAR"
-            className="w-full h-full object-cover opacity-75"
-          />
-          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-        </div>
+  {/* Fondo con imagen */}
+  <div className="absolute inset-0">
+    <img
+      src="https://drogueriadicar.com.pe/wp-content/uploads/2019/11/DSC_1604-ok-SAT-copy-1.jpg"
+      alt="Trabajo en equipo en DICAR"
+      className="w-full h-full object-cover opacity-75"
+    />
+    <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+  </div>
 
-        {/* Contenido */}
-        <div className="relative max-w-screen-xl mx-auto px-6 lg:px-8 py-24 flex flex-col items-start">
-          <h1 className="text-4xl lg:text-5xl font-bold leading-tight">
-            Únete a Nuestro Equipo en DICAR
-          </h1>
-          <p className="mt-4 text-lg lg:text-xl max-w-lg">
-            En DICAR, creemos en el poder del trabajo en equipo y en un entorno donde cada colaborador puede crecer y aportar.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-4">
-            <a
-              href="#"
-              className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-medium"
-            >
-              Conoce nuestras vacantes
-            </a>
-            <a
-              href="tel:1234567890"
-              className="bg-gray-800 hover:bg-gray-700 text-white py-3 px-6 rounded-lg font-medium"
-            >
-              Contáctanos
-            </a>
-          </div>
-        </div>
-      </section>
+  {/* Logo */}
+  <div className="md:absolute ml-20 mt-6 hidden md:flex">
+    <img
+      src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/footer/cropped-logo-dicar.png?t=2024-11-25T02%3A59%3A33.313Z"
+      alt="Logo DICAR"
+      className="h-12"
+    />
+  </div>
+
+  {/* Contenido */}
+  <div className="relative max-w-screen-xl mx-auto px-6 lg:px-8 py-24 flex flex-col items-start">
+    <h1 className="text-4xl lg:text-5xl font-bold leading-tight">
+      Únete a Nuestro Equipo en DICAR
+    </h1>
+    <p className="mt-4 text-lg lg:text-xl max-w-lg">
+      En DICAR, creemos en el poder del trabajo en equipo y en un entorno donde
+      cada colaborador puede crecer y aportar.
+    </p>
+    <div className="mt-6 flex flex-wrap gap-4">
+      <a
+        href="#"
+        className="bg-amber-700 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-medium"
+      >
+        Conoce nuestras vacantes
+      </a>
+      <a
+        href="tel:1234567890"
+        className="bg-gray-800 hover:bg-gray-700 text-white py-3 px-6 rounded-lg font-medium"
+      >
+        Contáctanos
+      </a>
+    </div>
+  </div>
+</section>
 
       {/* Features Section */}
-      <section className="bg-blue-600 text-white py-12">
+      <section className="bg-amber-700 text-white py-12">
         <div className="max-w-screen-xl mx-auto px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
           <div>
             <h3 className="text-xl font-semibold">Ambiente Inclusivo</h3>
@@ -80,7 +89,7 @@ const App = () => {
 
       {/* Texto */}
       <div className="lg:col-span-3">
-        <h2 className="text-sm text-blue-600 font-semibold uppercase">
+        <h2 className="text-sm text-amber-700 font-semibold uppercase">
           Quiénes Somos
         </h2>
         <h3 className="mt-2 text-3xl font-bold text-gray-800 leading-tight">
@@ -166,7 +175,7 @@ const App = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-16 bg-blue-600 text-white">
+      <section className="py-16 bg-amber-700 text-white">
         <div className="max-w-screen-xl mx-auto px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
             <h2 className="text-3xl font-bold">Forma Parte de DICAR</h2>
@@ -215,7 +224,7 @@ const App = () => {
               </div>
               <button
                 type="submit"
-                className="bg-blue-600 text-white py-3 px-6 rounded-lg font-medium"
+                className="bg-amber-700 text-white py-3 px-6 rounded-lg font-medium"
               >
                 Enviar Mensaje
               </button>
