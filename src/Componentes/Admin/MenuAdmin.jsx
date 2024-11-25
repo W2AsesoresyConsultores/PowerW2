@@ -119,7 +119,7 @@ function MenuAdmin() {
       { to: "/Conversaciones", icon: IoChatbubbleOutline, label: "Conversaciones" },
       { to: "/Estadisticas", icon: IoStatsChartOutline, label: "Estadísticas" },
       { to: "/AdminProfile", icon: RxAvatar, label: "Mi Perfil" },
-      { to: "/Pagina", icon: IoDocumentText, label: "Página" }, // Nuevo elemento
+      { to: "/Dicar", icon: IoDocumentText, label: "Mi empresa" }, // Nuevo elemento
     ],
     []
   );
