@@ -51,7 +51,7 @@ function App() {
             <Route path="/Entrevistas/:id_oferta" element={<ProtectedRoute><Entrevistas /></ProtectedRoute>} />
             <Route path="/Postulados/:id" element={<ProtectedRoute><PgPostulados /></ProtectedRoute>} />
             <Route path="/Profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-            <Route path="/Dicar" element={<ProtectedRoute><Dicar /></ProtectedRoute>} />
+            <Route path="/Dicar" element={<Dicar />} />
           </Routes>
         </JobsProvider>
       </ThemeContextProvider>
