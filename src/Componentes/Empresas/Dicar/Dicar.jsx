@@ -1,13 +1,13 @@
 import React from 'react'
-import Hero from './Hero'
-import Cta from './CTA'
-import FooterDicar from './FooterDicar'
+import ContainerDicar from './ContainerDicar'
+import NosotrosDicar from './NosotrosDicar'
 
 function Dicar() {
   return (
-    <>
-      <Hero />
-    </>
+    <div>Dicar
+    <NosotrosDicar />
+    <ContainerDicar />
+    </div>
   )
 }
 
