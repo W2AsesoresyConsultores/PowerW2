@@ -4,7 +4,7 @@ const QuestionList = ({ questions, answers, onAnswerChange, onSubmit }) => {
   return (
     <div className="max-h-[450px] overflow-y-scroll px-10">
       {questions.length === 0 ? (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center mt-4">
           <p>No hay preguntas disponibles.</p>
         </div>
       ) : (
@@ -19,8 +19,8 @@ const QuestionList = ({ questions, answers, onAnswerChange, onSubmit }) => {
           </div>
         ))
       )}
-      <div className="flex justify-between mt-4">
-        <button className="bg-gray-500 text-white font-bold py-2 px-4 rounded-full w-32" onClick={() => {}}>Atrás</button>
+      <div className="flex justify-center mt-12">
+
         <button className="bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full w-32" onClick={onSubmit}>Enviar</button>
       </div>
     </div>
