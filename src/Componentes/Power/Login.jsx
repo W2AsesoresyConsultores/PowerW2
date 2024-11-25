@@ -161,11 +161,7 @@ function Register() {
     <div className="flex justify-center min-h-screen font-dmsans">
       <HeaderPower />
       <div className="w-1/2 h-screen bg-primarygradientdark hidden md:flex justify-center items-center relative">
-        <img
-          src="https://png.pngtree.com/png-vector/20240614/ourmid/pngtree-vibrant-yellow-abstract-background-with-textured-white-lines-on-isolated-patterned-png-image_12219818.png"
-          className="opacity-40 w-full h-full object-cover"
-          alt=""
-        />
+        <img className="h-96" src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/AssetsPower/Main/BGPOWER.svg" alt="" />
        
       </div>
       <div className="md:w-1/2 h-screen py-6 bg-white flex items-center mx-auto px-4 lg:px-40 justify-center overflow-y-scroll">

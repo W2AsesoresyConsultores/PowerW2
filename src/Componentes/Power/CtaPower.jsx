@@ -1,33 +1,51 @@
 import React from 'react';
-import 'tailwindcss/tailwind.css';
 
 const CtaPower = () => {
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between w-full h-screen p-4 bg-gray-100 md:px-20 font-dmsans">
-      <div className="w-full md:w-1/2 flex flex-col text-center justify-center md:items-start md:text-left space-y-4 md:space-y-6 md:px-16">
-        <h1 className="text-2xl md:text-4xl font-bold leading-tight text-gray-800">
-          Nuestros coaches <br />
-          están listos para asesorarte <br />
-        </h1>
-        <p className="text-sm md:text-lg text-gray-600">
-        Contamos con un equipo de profesionales expertos para ayudarte a conseguir el trabajo que deseas.
+    <div className="flex flex-col md:flex-row items-center justify-between w-full h-screen p-4 bg-white md:px-20 font-dmsans">
+      <div className="w-full md:w-1/2">
+        <h1 className="text-4xl font-bold mb-4">¿Cómo empezar?</h1>
+        <p className="text-gray-600 mb-8">
+          Dedique menos tiempo a monitorear los horarios y los días libres. El sistema de tiempo y asistencia de Zoho People le permite concentrarse en la productividad de los empleados mientras realiza un seguimiento preciso de las horas de trabajo y brinda informes sin errores.
         </p>
-        <li className="my-1 flex w-1/2 items-center text-gray-600">
-               Asesoría y orientación de cv
-            </li>
-            <li className="my-1 flex w-1/2 items-center text-gray-600">
-               Preparación para la entrevista
-            </li>
-            <li className="my-1 flex w-1/2 items-center text-gray-600">
-               Desarrollo de habilidades blandas
-            </li>
-        <button className="bg-primarycolor text-white py-2 px-4 md:px-6 rounded-full font-semibold hover:bg-blue-700 transition-colors">
-          Chatear con un coach
-        </button>
+        <div className="space-y-4">
+          <div className="flex items-center">
+            <svg className="h-6 w-6 text-blue-500 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+            <span>Realice un seguimiento de la asistencia con facilidad.</span>
+          </div>
+          <div className="flex items-center">
+            <svg className="h-6 w-6 text-blue-500 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+            <span>Programe los turnos sin problemas.</span>
+          </div>
+          <div className="flex items-center">
+            <svg className="h-6 w-6 text-blue-500 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+            <span>Monitoree los días libres de forma eficiente.</span>
+          </div>
+          <div className="flex items-center">
+            <svg className="h-6 w-6 text-blue-500 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+            <span>Convierta el tiempo en planillas de horas trabajadas.</span>
+          </div>
+        </div>
       </div>
-      <div className="w-full md:w-1/2 flex justify-center items-center mt-8 md:mt-0">
-        <div className="relative w-full md:w-2/3 h-auto bg-primarycolor p-4 rounded-lg">
-          
+      <div className="w-full md:w-1/2 mt-8 md:mt-0">
+        <div className="relative">
+          <img src="https://example.com/image.jpg" alt="Woman using mobile phone" className="w-full h-auto rounded-lg shadow-lg" />
+          <div className="absolute top-4 right-4 bg-white rounded-lg px-4 py-2 shadow-md">
+            <p className="text-gray-700 font-bold">Check-Out</p>
+            <p className="text-gray-700">07:53:34 Hrs</p>
+          </div>
         </div>
       </div>
     </div>

@@ -35,7 +35,16 @@ module.exports = withMT( {
         },
         spinOut: {
           to: { transform: 'rotate(360deg)'}
+        },
+        'fade-right': {
+          '0%': { transform: 'translateX(20px)', opacity: 0 },
+          '100%': { transform: 'translateX(0)', opacity: 1 }
+        },
+        'fade-up': {
+          '0%': { transform: 'translateY(20px)', opacity: 0 },
+          '100%': { transform: 'translateY(0)', opacity: 1 }
         }
+        
       },
       animation: {
         spinIn: 'spinIn 30s linear infinite',
@@ -47,6 +56,11 @@ module.exports = withMT( {
         'secundarygradient': 'linear-gradient(0.25turn, #2563EB, #4D2EA4)',
         'primarygradientdark': 'linear-gradient(0.50turn, #013E9A, #021B79)',
         'bgpowergradient': 'linear-gradient(0.25turn, #ebf4ff  , #ffffff )',
+      },
+      animation: {
+        'fade-in': 'fade-in 0.5s ease-out',
+        'fade-right': 'fade-right 0.5s ease-out',
+        'fade-up': 'fade-up 0.5s ease-out'
       },
     },
   },  
