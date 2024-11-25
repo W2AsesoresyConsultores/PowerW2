@@ -21,6 +21,7 @@ import AdminProfile from "./Componentes/Admin/AdminProfile.jsx";
 import Proceso from "./Componentes/Entrevistas/Proceso.jsx";
 import Entrevistas from "./Componentes/Entrevistas/Entrevistas.jsx";
 import { ThemeContextProvider } from './Context/ThemeContext.jsx';
+import Pagina from "./Componentes/Admin/Pagina.jsx";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
             <Route path="/Entrevistas/:id_oferta" element={<ProtectedRoute><Entrevistas /></ProtectedRoute>} />
             <Route path="/Postulados/:id" element={<ProtectedRoute><PgPostulados /></ProtectedRoute>} />
             <Route path="/Profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+            <Route path="/Pagina" element={<ProtectedRoute><Pagina /></ProtectedRoute>} />
           </Routes>
         </JobsProvider>
       </ThemeContextProvider>
