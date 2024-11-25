@@ -1,12 +1,13 @@
 import React from 'react'
 import ContainerDicar from './ContainerDicar'
 import NosotrosDicar from './NosotrosDicar'
+import Hero from './Hero'
 
 function Dicar() {
   return (
-    <div>Dicar
-    <NosotrosDicar />
-    <ContainerDicar />
+    <div>
+    <Hero/>
+
     </div>
   )
 }

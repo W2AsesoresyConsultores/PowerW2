@@ -1,4 +1,5 @@
 import React from "react";
+import ContainerDicar from "./ContainerDicar";
 
 const App = () => {
   return (
@@ -71,7 +72,7 @@ const App = () => {
       {/* Imagen grande */}
       <div className="lg:col-span-2">
         <img
-          src="https://via.placeholder.com/600x400"
+          src="https://drogueriadicar.com.pe/wp-content/uploads/2019/10/DSC_1810-ok-SAT-2.jpg"
           alt="Trabajador en taller"
           className="rounded-lg shadow-lg object-cover"
         />
@@ -97,14 +98,14 @@ const App = () => {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
       <div className="lg:col-span-1">
         <img
-          src="https://via.placeholder.com/600x400"
+          src="https://drogueriadicar.com.pe/wp-content/uploads/2019/10/IMG_6896.jpg"
           alt="Taller mecánico"
           className="rounded-lg shadow-lg object-cover"
         />
       </div>
       <div className="lg:col-span-1">
         <img
-          src="https://via.placeholder.com/600x400"
+          src="https://drogueriadicar.com.pe/wp-content/uploads/2021/03/img20181126_16282974-1024x666.jpg"
           alt="Elevador de autos"
           className="rounded-lg shadow-lg object-cover"
         />
@@ -222,6 +223,9 @@ const App = () => {
           </div>
         </div>
       </section>
+
+    {/* Sección de ofertas */}
+    <ContainerDicar />
 
       {/* Footer */}
       <footer className="bg-gray-800 text-gray-400 py-6 text-center">
