@@ -1,128 +1,116 @@
 import React from "react";
 import jsPDF from "jspdf";
-import Agenda from "../../assets/agenda.png";
-import Maletin from "../../assets/maletin.png";
-import Estudio from "../../assets/estudio.png";
+import "jspdf-autotable";
 
-const GeneratePdfButton = ({
-  user,
-  nombre,
-  telefono,
-  email,
-  dni,
-  fechaNac,
-  distrito,
-  experiences,
-  gradoAcademico,
-  institucion,
-  ultimoAnioEstudio,
-}) => {
-  const generatePdf = async () => {
+const GeneratePDFButton = ({ formData }) => {
+  const generatePDF = async () => {
     const doc = new jsPDF();
 
-    try {
-      if (user.user_metadata.avatar_url) {
-        const response = await fetch(user.user_metadata.avatar_url);
-        if (!response.ok) throw new Error("Image failed to load");
-        const blob = await response.blob();
+    // Foto de perfil
+    if (formData.avatar_url) {
+      try {
+        const response = await fetch(formData.avatar_url);
+        const imageBlob = await response.blob();
         const reader = new FileReader();
 
-        reader.onloadend = () => {
-          try {
-            const base64data = reader.result;
-
-            doc.setFillColor(255, 255, 255);
-            doc.setDrawColor(0, 0, 0);
-            doc.circle(30, 40, 20, "FD");
-            doc.addImage(base64data, "PNG", 10, 20, 40, 40, undefined, "FAST");
-
-            doc.setFontSize(22);
-            doc.setFont("helvetica", "bold");
-            doc.setTextColor(85, 85, 85);
-            doc.text(nombre, 60, 40);
-
-            const agendaImg = new Image();
-            agendaImg.src = Agenda;
-            doc.addImage(agendaImg, "PNG", 10, 75, 10, 10);
-
-            doc.setFontSize(14);
-            doc.setFont("helvetica", "bold");
-            doc.setTextColor(85, 85, 85);
-            doc.text("CONTACTO:", 25, 80);
-
-            doc.setFontSize(12);
-            doc.setFont("helvetica", "normal");
-            doc.setTextColor(64, 64, 64);
-            doc.text(`Teléfono: ${telefono}`, 25, 90);
-            doc.text(`Email: ${email}`, 25, 98);
-            doc.text(`DNI: ${dni}`, 25, 106);
-            doc.text(`Fecha de Nacimiento: ${fechaNac}`, 25, 114);
-            doc.text(`Distrito: ${distrito}`, 25, 122);
-
-            const estudioImg = new Image();
-            estudioImg.src = Estudio;
-            doc.addImage(estudioImg, "PNG", 10, 135, 10, 10);
-
-            doc.setFontSize(14);
-            doc.setFont("helvetica", "bold");
-            doc.setTextColor(85, 85, 85);
-            doc.text("GRADO ACADÉMICO:", 25, 140);
-
-            doc.setFontSize(12);
-            doc.setFont("helvetica", "normal");
-            doc.setTextColor(64, 64, 64);
-            doc.text(`Grado Académico: ${gradoAcademico || "N/A"}`, 25, 150);
-            doc.text(`Institución: ${institucion || "N/A"}`, 25, 158);
-            doc.text(`Último Año de Estudio: ${ultimoAnioEstudio || "N/A"}`, 25, 166);
-
-            const maletinImg = new Image();
-            maletinImg.src = Maletin;
-
-            // Add more space before starting the experience section
-            doc.addImage(maletinImg, "PNG", 10, 185, 10, 10);
-
-            doc.setFontSize(14);
-            doc.setFont("helvetica", "bold");
-            doc.setTextColor(85, 85, 85);
-            doc.text("EXPERIENCIA LABORAL:", 25, 190);
-
-            doc.setFontSize(12);
-            doc.setFont("helvetica", "normal");
-            doc.setTextColor(64, 64, 64);
-            let yOffset = 200; // Increased yOffset for more space
-
-            experiences.forEach((exp, index) => {
-              doc.text(`${index + 1}. Cargo: ${exp.cargo}`, 25, yOffset);
-              yOffset += 8;
-              doc.text(`   Empresa: ${exp.empresa}`, 25, yOffset);
-              yOffset += 8;
-              doc.text(`   Tiempo: ${exp.tiempo}`, 25, yOffset);
-              yOffset += 8;
-              doc.text(`   Función: ${exp.funcion}`, 25, yOffset);
-              yOffset += 12;
-            });
-
-            doc.save("cv.pdf");
-          } catch (error) {
-            console.error("Error generating PDF:", error);
-          }
+        reader.onload = (event) => {
+          doc.addImage(event.target.result, "JPEG", 10, 10, 40, 40);
+          finalizePDF();
         };
 
-        reader.readAsDataURL(blob);
+        reader.readAsDataURL(imageBlob);
+      } catch (error) {
+        console.error("Error loading profile image:", error.message);
+        finalizePDF();
       }
-    } catch (error) {
-      console.error("Error loading image:", error);
+    } else {
+      finalizePDF();
     }
+
+    const finalizePDF = () => {
+      // Título con Nombre y Foto
+      doc.setFontSize(22);
+      doc.text(formData.nombre || "Nombre no especificado", 60, 30);
+
+      // Información Personal
+      doc.setFontSize(14);
+      doc.text("Información Personal", 10, 60);
+      doc.setFontSize(12);
+      doc.text(`Correo: ${formData.correo || "No especificado"}`, 10, 70);
+      doc.text(`Teléfono: ${formData.telefono || "No especificado"}`, 10, 80);
+      doc.text(`DNI: ${formData.dni || "No especificado"}`, 10, 90);
+      doc.text(`Distrito: ${formData.distrito || "No especificado"}`, 10, 100);
+      doc.text(
+        `Fecha de Nacimiento: ${formData.fecha_nac || "No especificado"}`,
+        10,
+        110
+      );
+
+      // Grado Académico
+      doc.setFontSize(14);
+      doc.text("Grado Académico", 10, 130);
+      doc.setFontSize(12);
+      doc.text(`Grado: ${formData.estudio || "No especificado"}`, 10, 140);
+      doc.text(
+        `Institución: ${formData.institucion || "No especificado"}`,
+        10,
+        150
+      );
+      doc.text(`Último Año: ${formData.año || "No especificado"}`, 10, 160);
+
+      // Experiencia Laboral
+      doc.setFontSize(14);
+      doc.text("Experiencia Laboral", 10, 180);
+
+      const experienciaData = [];
+
+      // Agregar experiencia 1 si existe
+      if (formData.cargo_1 || formData.empresa_1 || formData.tiempo_1 || formData.funcion_1) {
+        experienciaData.push([
+          "Exp. 1",
+          formData.cargo_1 || "No especificado",
+          formData.empresa_1 || "No especificado",
+          formData.tiempo_1 || "No especificado",
+          formData.funcion_1 || "No especificado",
+        ]);
+      }
+
+      // Agregar experiencia 2 si existe
+      if (formData.cargo_2 || formData.empresa_2 || formData.tiempo_2 || formData.funcion_2) {
+        experienciaData.push([
+          "Exp. 2",
+          formData.cargo_2 || "No especificado",
+          formData.empresa_2 || "No especificado",
+          formData.tiempo_2 || "No especificado",
+          formData.funcion_2 || "No especificado",
+        ]);
+      }
+
+      if (experienciaData.length > 0) {
+        doc.autoTable({
+          head: [["#", "Cargo", "Empresa", "Tiempo", "Funciones"]],
+          body: experienciaData,
+          startY: 190,
+        });
+      } else {
+        // Si no hay experiencia laboral
+        doc.setFontSize(12);
+        doc.text("No cuento con experiencia laboral.", 10, 190);
+      }
+
+      // Descargar el PDF
+      doc.save(`${formData.nombre || "CV"}-Curriculum.pdf`);
+    };
   };
 
   return (
     <button
-      className="bg-primarycolor text-white text-lg px-4 py-2 rounded-full"
-      onClick={generatePdf}
+      onClick={generatePDF}
+      className="px-4 py-2 bg-white text-primarycolor rounded-md hover:bg-blue-100 transition-colors duration-100 flex items-center gap-2"
     >
-      Genera tu CV
+      Descargar CV
     </button>
   );
 };
 
-export default GeneratePdfButton;
+export default GeneratePDFButton;

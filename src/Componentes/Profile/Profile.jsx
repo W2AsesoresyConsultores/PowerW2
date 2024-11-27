@@ -5,8 +5,9 @@ import { UserAuth } from "../../Context/AuthContext";
 import HeaderPowerAuth from '../PowerAuth/HeaderPowerAuth';
 import { GrEdit } from "react-icons/gr";
 import { LinearProgress } from '@mui/material';
+import GeneratePDFButton from './GeneratePDFButton';
 
-const Profile1 = () => {
+const Profile = () => {
   const { user } = UserAuth();
   const [perfil, setPerfil] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -262,6 +263,7 @@ const Profile1 = () => {
     <div className="w-full h-screen font-dmsans bg-gray-50">
       <HeaderPowerAuth />
       <div className="max-w-4xl mx-auto p-6 pt-32 rounded-lg">
+    
         <div className="flex items-center justify-between mb-6 w-full bg-primarycolor px-10 py-6 rounded-lg flex-wrap">
           <div className="flex items-center flex-wrap">
             <div className="relative">
@@ -391,14 +393,20 @@ const Profile1 = () => {
               </form>
             )}
           </div>
-          {!editMode && (
-            <button
-              onClick={() => setEditMode(true)}
-              className="ml-auto px-4 py-2 bg-white text-primarycolor rounded-md hover:bg-blue-100 transition-colors duration-100 flex items-center gap-2"
-            >
-              Editar <GrEdit />
-            </button>
-          )}
+{!editMode && (
+  <div className="ml-auto flex items-center gap-4">
+    {/* Botón de Descargar CV */}
+    <GeneratePDFButton formData={formData} />
+
+    {/* Botón de Editar */}
+    <button
+      onClick={() => setEditMode(true)}
+      className="px-4 py-2 bg-white text-primarycolor rounded-md hover:bg-blue-100 transition-colors duration-100 flex items-center gap-2"
+    >
+      Editar <GrEdit />
+    </button>
+  </div>
+)}
         </div>
 
         <div className="w-full flex">
@@ -442,4 +450,4 @@ const Profile1 = () => {
   );
 };
 
-export default Profile1;
+export default Profile;
