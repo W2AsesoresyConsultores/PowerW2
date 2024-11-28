@@ -35,8 +35,8 @@ const App = () => {
     </p>
     <div className="mt-6 flex flex-wrap gap-4">
       <a
-        href="#"
-        className="bg-amber-700 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-medium"
+        href="#Vacantes"
+        className="bg-amber-700 hover:bg-amber-700 text-white py-3 px-6 rounded-lg font-medium"
       >
         Conoce nuestras vacantes
       </a>
@@ -74,6 +74,8 @@ const App = () => {
         </div>
       </section>
 
+{/* Sección de ofertas */}
+<ContainerDicar />
       {/* About Us Section */}
       <section className="py-16 bg-white">
   <div className="max-w-screen-xl mx-auto px-6 lg:px-8">
@@ -174,70 +176,11 @@ const App = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="py-16 bg-amber-700 text-white">
-        <div className="max-w-screen-xl mx-auto px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <h2 className="text-3xl font-bold">Forma Parte de DICAR</h2>
-            <p className="mt-4">
-              Estamos buscando personas apasionadas y talentosas para que se unan a nuestra familia.
-            </p>
-            <ul className="mt-6 space-y-4">
-              <li>
-                <strong>Ubicación:</strong> Lima, Perú
-              </li>
-              <li>
-                <strong>Teléfono:</strong> 123 456 7890
-              </li>
-              <li>
-                <strong>Email:</strong> talento@dicar.com
-              </li>
-            </ul>
-          </div>
-          <div>
-            <form className="bg-white p-6 rounded-lg shadow-lg">
-              <div className="mb-4">
-                <label className="block text-gray-800 font-medium">Nombre</label>
-                <input
-                  type="text"
-                  placeholder="Tu nombre"
-                  className="w-full mt-2 p-3 border rounded-md"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-800 font-medium">Email</label>
-                <input
-                  type="email"
-                  placeholder="Tu email"
-                  className="w-full mt-2 p-3 border rounded-md"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-800 font-medium">
-                  Mensaje
-                </label>
-                <textarea
-                  placeholder="Tu mensaje"
-                  className="w-full mt-2 p-3 border rounded-md"
-                  rows="4"
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                className="bg-amber-700 text-white py-3 px-6 rounded-lg font-medium"
-              >
-                Enviar Mensaje
-              </button>
-            </form>
-          </div>
-        </div>
-      </section>
-
-    {/* Sección de ofertas */}
-    <ContainerDicar />
+      
+    
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-gray-400 py-6 text-center">
+      <footer id="Vacantes" className="bg-gray-800 text-gray-400 py-6 text-center">
         <p>© 2023 DICAR. Todos los derechos reservados.</p>
       </footer>
     </div>
