@@ -1,26 +1,65 @@
-import React from 'react'
+import React from 'react';
+import { FaLinkedin, FaInstagram, FaFacebook, FaTwitter } from "react-icons/fa";
 
 function FooterDicar() {
   return (
-    <footer class="bg-gray-500 text-white py-4 px-3 mt-16">
-    <div class="container mx-auto flex flex-wrap items-center justify-between">
-        <div class="w-full md:w-1/2 md:text-center md:mb-0 mb-8">
-        <img
-            src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/footer/cropped-logo-dicar.png"
-            alt="Dicar Logo"
-            className="w-40"
+    <div className="bg-black text-white py-8">
+      <div className="container mx-auto flex flex-col items-center md:flex-row justify-center">
+        {/* Logo y descripción */}
+        <div className="flex flex-col items-center mb-6 md:mb-0 md:mr-[300px]">
+          <img
+            src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/footer/cropped-logo-dicar.png" 
+            alt="Logo Dicar"
+            className="h-16 mb-2" // Ajustar margen inferior aquí
           />
+          <p className="text-gray-400 text-sm">Droguería & Distribuidora</p>
         </div>
-        <div class="w-full md:w-1/2 md:text-center md:mb-0 mb-8">
-            <ul class="list-reset flex justify-center flex-wrap text-xs md:text-sm gap-3">
-                <li><a href="#" class="text-gray-400 hover:text-white">Contact</a></li>
-                <li class="mx-4"><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
-                <li><a href="#" class="text-gray-400 hover:text-white">Terms of Use</a></li>
-            </ul>
+
+        {/* Información de contacto */}
+        <div className="text-center md:text-left">
+        <h1 className="text-orange-500 text-3xl font-bold mb-2">Contáctanos</h1> {/* Ajustar margen inferior aquí */}
+          <p className="text-gray-300">000 000 000</p>
+          <p className="text-gray-300">Lima, Perú</p>
+          <p className="text-gray-300">sitioweb@dicar.com</p>
+          <br></br>
+          <div className="flex space-x-4 mt-4"> {/* Ajustar margen superior aquí */}
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white text-xl"
+            >
+              <FaLinkedin />
+            </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white text-xl"
+            >
+              <FaInstagram />
+            </a>
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white text-xl"
+            >
+              <FaFacebook />
+            </a>
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white text-xl"
+            >
+              <FaTwitter />
+            </a>
+          </div>
         </div>
+      </div>
     </div>
-</footer>
-  )
+  );
 }
 
-export default FooterDicar
+export default FooterDicar;
