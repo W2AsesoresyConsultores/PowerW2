@@ -2,7 +2,7 @@ import React from "react";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 
-const GeneratePDFButton = ({ formData }) => {
+const GeneratePdfButton = ({ formData }) => {
   const generatePDF = async () => {
     const doc = new jsPDF();
 
@@ -113,4 +113,4 @@ const GeneratePDFButton = ({ formData }) => {
   );
 };
 
-export default GeneratePDFButton;
+export default GeneratePdfButton;

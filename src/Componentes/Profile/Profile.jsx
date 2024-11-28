@@ -5,7 +5,7 @@ import { UserAuth } from "../../Context/AuthContext";
 import HeaderPowerAuth from '../PowerAuth/HeaderPowerAuth';
 import { GrEdit } from "react-icons/gr";
 import { LinearProgress } from '@mui/material';
-import GeneratePDFButton from './GeneratePDFButton';
+import GeneratePDFButton from './GeneratePdfButton';
 
 const Profile = () => {
   const { user } = UserAuth();
