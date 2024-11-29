@@ -1,100 +1,97 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 
-function Beneficios2() {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
-  }, []);
+function BeneficiosGrid() {
+  const beneficios = [
+    {
+      id: 1,
+      title: "Integridad",
+      image:
+        "https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/Beneficios/10.jpg",
+    },
+    {
+      id: 2,
+      title: "Servicio",
+      image:
+        "https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/Beneficios/11.jpg",
+    },
+    {
+      id: 3,
+      title: "Confianza",
+      image:
+        "https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/Beneficios/6.jpg",
+    },
+    {
+      id: 4,
+      title: "Compromiso",
+      image:
+        "https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/Beneficios/7.jpg",
+    },
+    {
+      id: 5,
+      title: "",
+      image:
+        "https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/Beneficios/8.jpg",
+    },
+    {
+      id: 6,
+      title: "",
+      image:
+        "https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/Beneficios/9.jpg",
+    },
+  ];
 
   return (
-    <div
-      ref={sectionRef}
-      className={`w-full flex flex-col items-center text-center py-8 font-dmsans transition-transform duration-1000 ease-out ${
-        isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
-      }`}
-    >
-      <div className="flex flex-col gap-6">
-        <h2 className="text-3xl font-semibold text-gray-800">
-          ¿Por qué unirte a nuestra empresa?
-        </h2>
-        <p className="text-gray-800">
-          Conoce los beneficios de ser parte de nuestra familia laboral.
-        </p>
-      </div>
-      <div className="bg-[#133168] text-white text-left rounded-xl w-11/12 md:w-10/12 lg:w-9/12 mt-6 p-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* Planilla completa */}
-        <div className="md:p-4">
-          <div className="text-4xl mb-2">📋</div>
-          <h3 className="font-semibold text-lg">Planilla completa</h3>
-          <p className="text-sm">
-            Accede a todos los beneficios de ley desde el primer día.
-          </p>
+    <div className="w-full flex flex-col items-center p-4">
+      {/* Título */}
+      <h2 className="text-3xl font-bold text-gray-800 mb-10 mt-8">
+        ¿Por qué trabajar con Nosotros?
+      </h2>
+
+      {/* Contenedor de imágenes */}
+      <div className="grid grid-cols-1 sm:grid-cols-6 gap-4 w-full max-w-6xl">
+        {/* Imagen sin texto izquierda (más grande) */}
+        <div className="col-span-1">
+          <img
+            src={beneficios[4].image}
+            alt="Sin título"
+            className="w-full h-64 object-cover rounded-lg"
+            style={{ height: "380px"}}
+          />
         </div>
-        {/* Seguro médico */}
-        <div className="md:p-4">
-          <div className="text-4xl mb-2">🏥</div>
-          <h3 className="font-semibold text-lg">Seguro médico</h3>
-          <p className="text-sm">
-            Contamos con seguro médico privado para ti y tu familia.
-          </p>
+
+        {/* Imágenes con texto en el centro (más pequeñas) */}
+        <div className="col-span-4 grid grid-cols-2 gap-4">
+          {beneficios.slice(0, 4).map((beneficio) => (
+            <div
+              key={beneficio.id}
+              className="relative overflow-hidden rounded-lg group"
+              style={{ height: "180px" }}
+            >
+              <img
+                src={beneficio.image}
+                alt={beneficio.title}
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <p className="text-white text-lg font-bold">{beneficio.title}</p>
+              </div>
+            </div>
+          ))}
         </div>
-        {/* Desarrollo profesional */}
-        <div className="md:p-4">
-          <div className="text-4xl mb-2">🚀</div>
-          <h3 className="font-semibold text-lg">Desarrollo profesional</h3>
-          <p className="text-sm">
-            Crece con nosotros a través de capacitaciones y programas de
-            desarrollo.
-          </p>
-        </div>
-        {/* Horarios flexibles */}
-        <div className="md:p-4">
-          <div className="text-4xl mb-2">⏰</div>
-          <h3 className="font-semibold text-lg">Horarios flexibles</h3>
-          <p className="text-sm">
-            Concilia tu vida personal y laboral con horarios adaptados a tus
-            necesidades.
-          </p>
-        </div>
-        {/* Oportunidades de crecimiento */}
-        <div className="md:p-4">
-          <div className="text-4xl mb-2">📈</div>
-          <h3 className="font-semibold text-lg">Oportunidades de crecimiento</h3>
-          <p className="text-sm">
-            Accede a ascensos internos y oportunidades dentro de la empresa.
-          </p>
-        </div>
-        {/* Ambiente laboral positivo */}
-        <div className="md:p-4">
-          <div className="text-4xl mb-2">🌟</div>
-          <h3 className="font-semibold text-lg">Ambiente laboral positivo</h3>
-          <p className="text-sm">
-            Trabaja en un entorno inclusivo, colaborativo y motivador.
-          </p>
+
+        {/* Imagen sin texto derecha (más grande) */}
+        <div className="col-span-1">
+          <img
+            src={beneficios[5].image}
+            alt="Sin título"
+            className="w-full object-cover rounded-lg"
+            style={{ height: "380px"}}
+          />
         </div>
       </div>
     </div>
   );
 }
 
-export default Beneficios2;
+export default BeneficiosGrid;
+
