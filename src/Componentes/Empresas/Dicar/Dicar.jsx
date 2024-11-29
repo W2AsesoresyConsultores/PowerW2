@@ -10,7 +10,7 @@ function Dicar() {
   return (
     <div>
     <Header />
-    <About />
+    <Hero />
     <Cultura />
     <FooterDicar />
     </div>
