@@ -3,6 +3,7 @@ import Hero from './Hero'
 import FooterDicar from './FooterDicar'
 import Header from './Header'
 import Nosotros from './Nosotros'
+import Sedes from './NuestrasSedes'
 import Beneficios from './Beneficios'
 
 function Dicar() {
@@ -12,6 +13,7 @@ function Dicar() {
     <Hero />
     <Beneficios />
     <Nosotros />
+    <Sedes />
     <FooterDicar />
     </div>
   )
