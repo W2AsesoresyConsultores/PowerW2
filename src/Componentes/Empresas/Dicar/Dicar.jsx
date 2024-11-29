@@ -15,8 +15,8 @@ function Dicar() {
     <Hero />
     <h1 className='text-3xl font-semibold text-gray-800 text-center my-8' >Ofertas Laborales Dicar</h1>
     <ContainerDicar />
-    <Beneficios2 />
     <Nosotros />
+    <Beneficios2 />
     <Sedes />
     <FooterDicar />
     </div>
