@@ -5,14 +5,18 @@ import Cultura from './Cultura'
 import FooterDicar from './FooterDicar'
 import Header from './Header'
 import About from './About'
+import Beneficios from './Beneficios'
 
 function Dicar() {
   return (
     <div>
     <Header />
     <Hero />
-    <Cultura />
+    <Beneficios />
+    
+    <ContainerDicar />
     <FooterDicar />
+    
     </div>
   )
 }
