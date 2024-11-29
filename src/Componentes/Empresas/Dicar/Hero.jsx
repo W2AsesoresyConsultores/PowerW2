@@ -1,4 +1,5 @@
 import React from 'react'
+import Buscador from './Buscador'
 
 function Hero() {
   return (
@@ -16,12 +17,17 @@ function Hero() {
       {/* Contenido principal */}
       <p className="relative z-10">Conoce nuestras vacantes, beneficios y más</p>
       <h1 className='md:text-5xl text-3xl relative z-10 font-semibold'>Únete a nuestro equipo,<br /> juntos seguimos creciendo.</h1>
-      <a
+      <div className='flex gap-8 '>
+        <Buscador />
+        <a
         href="#"
-        className='relative z-10 bg-white md:px-12 md:py-4 px-8 py-2 text-md md:text-xl rounded-full text-[#2552a4] font-semibold'
+        className='relative z-10 bg-white md:px-12 flex items-center px-8 text-md md:text-xl rounded-full text-[#2552a4] font-semibold'
       >
         Postula Aquí
       </a>
+      
+      </div>
+      
     </div>
   )
 }
