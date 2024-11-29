@@ -1,30 +1,34 @@
 import React from 'react';
 import { FaLinkedin, FaInstagram, FaFacebook, FaTwitter } from "react-icons/fa";
 
-function FooterDicar() {
+const Footer = () => {
   return (
-    <div className="bg-black text-white py-8">
-      <div className="container mx-auto flex flex-col items-center md:flex-row justify-center">
-        {/* Logo y descripción */}
-        <div className="flex flex-col items-center mb-6 md:mb-0 md:mr-[300px]">
-          <img
-            src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/footer/cropped-logo-dicar.png" 
-            alt="Logo Dicar"
-            className="h-16 mb-2" // Ajustar margen inferior aquí
+    <footer className="relative bg-[#2552a4] text-white">
+      {/* Contenido del pie de página */}
+      <div className="relative z-10 max-w-screen-xl mx-auto flex flex-col items-center py-4 px-4"><br/>
+        {/* Logotipo */}
+        <div className="flex items-center mb-4">
+        <img
+            src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/footer/logo-footer-2%20(1).png"
+            alt="Cultura en el trabajo"
+            className="rounded-lg shadow-lg object-cover w-full max-w-md" // Ajusta el tamaño aquí
+            style={{ height: '50px' }} 
           />
-          <p className="text-gray-400 text-sm">Droguería & Distribuidora</p>
         </div>
 
-        {/* Información de contacto */}
-        <div className="text-center md:text-left">
-        <h1 className="text-orange-500 text-3xl font-bold mb-2">Contáctanos</h1> {/* Ajustar margen inferior aquí */}
-          <p className="text-gray-300">000 000 000</p>
-          <p className="text-gray-300">Lima, Perú</p>
-          <p className="text-gray-300">sitioweb@dicar.com</p>
-          <br></br>
-          <div className="flex space-x-4 mt-4"> {/* Ajustar margen superior aquí */}
+        {/* Enlaces y Redes Sociales */}
+        <div className="text-center mb-4">
+          <div className="flex flex-col space-y-2">
+            <div className="flex space-x-4 justify-center">
+              <a href="#" className="hover:underline">Inicio</a>
+              <a href="#" className="hover:underline">Ofertas</a>
+              <a href="#" className="hover:underline">Nosotros</a>
+              <a href="#" className="hover:underline">Beneficios</a>
+              <a href="#" className="hover:underline">Sedes</a>
+            </div>
+        <div className="flex space-x-4 mt-4 justify-center" > {/* Ajustar margen superior aquí */}
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/company/dicar-logistic/?originalSubdomain=pe"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-white text-xl"
@@ -32,7 +36,7 @@ function FooterDicar() {
               <FaLinkedin />
             </a>
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/dicarlogistic/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-white text-xl"
@@ -40,26 +44,19 @@ function FooterDicar() {
               <FaInstagram />
             </a>
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/dicarlogistic/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-white text-xl"
             >
               <FaFacebook />
             </a>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white text-xl"
-            >
-              <FaTwitter />
-            </a>
+          </div>
           </div>
         </div>
       </div>
-    </div>
+    </footer>
   );
-}
+};
 
-export default FooterDicar;
+export default Footer;
