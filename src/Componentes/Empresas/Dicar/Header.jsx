@@ -32,13 +32,13 @@ function Header() {
             key={index}
             href="#"
             onClick={() => handleLinkClick(item)}
-            className="relative transition text-gray-700 hover:text-blue-600"
+            className="relative transition text-gray-700 hover:text-[#2552a4]"
           >
             {item}
 
             {/* Línea azul debajo del texto al hacer hover */}
             <span
-              className="absolute left-0 bottom-[-2px] w-full h-[2px] bg-blue-600 scale-x-0 transition-transform duration-300 ease-out hover:scale-x-100"
+              className="absolute left-0 bottom-[-2px] w-full h-[2px] bg-[#2552a4] scale-x-0 transition-transform duration-300 ease-out hover:scale-x-100"
             ></span>
           </a>
         ))}
@@ -48,7 +48,7 @@ function Header() {
       <div className="md:hidden">
         <button
           onClick={toggleMenu}
-          className="text-primarycolor focus:outline-none"
+          className="text-[#2552a4] focus:outline-none"
         >
           {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
         </button>
@@ -63,7 +63,7 @@ function Header() {
                 key={index}
                 href="#"
                 onClick={() => handleLinkClick(item)}
-                className={`hover:text-blue-600 transition ${
+                className={`hover:text-[#2552a4] transition ${
                   activeLink === item ? "bg-blue-100 text-gray-700" : ""
                 } w-full text-center py-2`}
               >
