@@ -1,190 +1,29 @@
-import React from "react";
-import ContainerDicar from "./ContainerDicar";
+import React from 'react'
 
-const App = () => {
+function Hero() {
   return (
-    <div className="bg-gray-100 font-dmsans">
-      <section className="relative bg-gray-900 text-white">
-  {/* Fondo con imagen */}
-  <div className="absolute inset-0">
-    <img
-      src="https://drogueriadicar.com.pe/wp-content/uploads/2019/11/DSC_1604-ok-SAT-copy-1.jpg"
-      alt="Trabajo en equipo en DICAR"
-      className="w-full h-full object-cover opacity-75"
-    />
-    <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-  </div>
-
-  {/* Logo */}
-  <div className="md:absolute ml-20 mt-6 hidden md:flex">
-    <img
-      src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/footer/cropped-logo-dicar.png?t=2024-11-25T02%3A59%3A33.313Z"
-      alt="Logo DICAR"
-      className="h-12"
-    />
-  </div>
-
-  {/* Contenido */}
-  <div className="relative max-w-screen-xl mx-auto px-6 lg:px-8 py-24 flex flex-col items-start">
-    <h1 className="text-4xl lg:text-5xl font-bold leading-tight">
-      Únete a Nuestro Equipo en DICAR
-    </h1>
-    <p className="mt-4 text-lg lg:text-xl max-w-lg">
-      En DICAR, creemos en el poder del trabajo en equipo y en un entorno donde
-      cada colaborador puede crecer y aportar.
-    </p>
-    <div className="mt-6 flex flex-wrap gap-4">
-      <a
-        href="#Vacantes"
-        className="bg-amber-700 hover:bg-amber-700 text-white py-3 px-6 rounded-lg font-medium"
-      >
-        Conoce nuestras vacantes
-      </a>
-      <a
-        href="tel:1234567890"
-        className="bg-gray-800 hover:bg-gray-700 text-white py-3 px-6 rounded-lg font-medium"
-      >
-        Contáctanos
-      </a>
-    </div>
-  </div>
-</section>
-
-      {/* Features Section */}
-      <section className="bg-amber-700 text-white py-12">
-        <div className="max-w-screen-xl mx-auto px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-          <div>
-            <h3 className="text-xl font-semibold">Ambiente Inclusivo</h3>
-            <p className="mt-2 text-sm">
-              Fomentamos un entorno donde todos los colaboradores son valorados.
-            </p>
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold">Oportunidades de Crecimiento</h3>
-            <p className="mt-2 text-sm">
-              Apoyamos tu desarrollo profesional y personal en cada etapa.
-            </p>
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold">Propósito Compartido</h3>
-            <p className="mt-2 text-sm">
-              Trabajamos juntos para impactar de manera positiva en la comunidad.
-            </p>
-          </div>
-        </div>
-      </section>
-
-{/* Sección de ofertas */}
-<ContainerDicar />
-      {/* About Us Section */}
-      <section className="py-16 bg-white">
-  <div className="max-w-screen-xl mx-auto px-6 lg:px-8">
-    <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
-      {/* Imagen grande */}
-      <div className="lg:col-span-2">
-        <img
-          src="https://drogueriadicar.com.pe/wp-content/uploads/2019/10/DSC_1810-ok-SAT-2.jpg"
-          alt="Trabajador en taller"
-          className="rounded-lg shadow-lg object-cover"
-        />
-      </div>
-
-      {/* Texto */}
-      <div className="lg:col-span-3">
-        <h2 className="text-sm text-amber-700 font-semibold uppercase">
-          Quiénes Somos
-        </h2>
-        <h3 className="mt-2 text-3xl font-bold text-gray-800 leading-tight">
-          Distribución Farmacéutica DICAR
-        </h3>
-        <p className="mt-4 text-gray-600">
-          En DICAR nos especializamos en brindar soluciones logísticas para el
-          sector farmacéutico. Con años de experiencia, trabajamos para
-          garantizar la disponibilidad de medicamentos y productos de salud.
-        </p>
-      </div>
-    </div>
-
-    {/* Imágenes pequeñas */}
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-      <div className="lg:col-span-1">
-        <img
-          src="https://drogueriadicar.com.pe/wp-content/uploads/2019/10/IMG_6896.jpg"
-          alt="Taller mecánico"
-          className="rounded-lg shadow-lg object-cover"
-        />
-      </div>
-      <div className="lg:col-span-1">
-        <img
-          src="https://drogueriadicar.com.pe/wp-content/uploads/2021/03/img20181126_16282974-1024x666.jpg"
-          alt="Elevador de autos"
-          className="rounded-lg shadow-lg object-cover"
-        />
-      </div>
-    </div>
-  </div>
-</section>
-
-      {/* Services Section */}
-      <section className="py-16 bg-gray-100">
-        <div className="max-w-screen-xl mx-auto px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold">Lo Que Nos Hace Únicos</h2>
-          <p className="mt-4 text-gray-600">
-            Estas son algunas razones por las que nuestro equipo ama trabajar aquí.
-          </p>
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-              <img
-                src="https://drogueriadicar.com.pe/wp-content/uploads/2019/11/DSC_1604-ok-SAT-copy-1.jpg"
-                alt="Trabajo en equipo"
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6">
-                <h3 className="font-semibold text-lg">Trabajo en Equipo</h3>
-                <p className="mt-2 text-gray-600">
-                  Juntos logramos más. Nuestro equipo está unido por una visión compartida.
-                </p>
-              </div>
-            </div>
-            <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-              <img
-                src="https://drogueriadicar.com.pe/wp-content/uploads/2019/10/DSC_1610-ok-SAT.jpg"
-                alt="Crecimiento profesional"
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6">
-                <h3 className="font-semibold text-lg">Crecimiento Profesional</h3>
-                <p className="mt-2 text-gray-600">
-                  Ofrecemos programas de formación y desarrollo continuo.
-                </p>
-              </div>
-            </div>
-            <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-              <img
-                src="https://drogueriadicar.com.pe/wp-content/uploads/2019/10/DSC_1651-ok-SAT-1.jpg"
-                alt="Impacto en la comunidad"
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6">
-                <h3 className="font-semibold text-lg">Impacto Social</h3>
-                <p className="mt-2 text-gray-600">
-                  Hacemos una diferencia en la vida de las personas a través de nuestro trabajo.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
+    <div
+      className='w-full h-[400px] md:h-[600px] relative flex flex-col justify-center items-center md:items-start gap-10 font-dmsans text-white text-center md:text-left md:px-16 px-4'
+      style={{
+        backgroundImage: `url('https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/cultura/fondoDicar.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      {/* Fondo negro semitransparente */}
+      <div className="absolute inset-0 bg-black bg-opacity-50"></div>
       
-    
-
-      {/* Footer */}
-      <footer id="Vacantes" className="bg-gray-800 text-gray-400 py-6 text-center">
-        <p>© 2023 DICAR. Todos los derechos reservados.</p>
-      </footer>
+      {/* Contenido principal */}
+      <p className="relative z-10">We combine design, thinking and technical craft</p>
+      <h1 className='md:text-5xl text-3xl relative z-10 font-semibold'>Únete a nuestro equipo,<br /> juntos seguimos creciendo.</h1>
+      <a
+        href="#"
+        className='relative z-10 bg-white px-8 py-2 text-md md:text-xl rounded-full text-[#2552a4] font-semibold'
+      >
+        Postula Aquí
+      </a>
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default Hero
