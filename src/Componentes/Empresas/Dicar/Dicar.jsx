@@ -4,7 +4,6 @@ import FooterDicar from './FooterDicar'
 import Header from './Header'
 import Nosotros from './Nosotros'
 
-
 function Dicar() {
   return (
     <div>
@@ -12,6 +11,7 @@ function Dicar() {
     <Hero />
     <Nosotros />
     <FooterDicar />
+    
     </div>
   )
 }
