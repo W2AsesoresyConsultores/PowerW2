@@ -12,7 +12,7 @@ const Nosotros = () => {
       </div>
 
       {/* Contenido principal */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 ml-24 items-center">
         {/* Imagen */}
         <div className="image-container">
           <img
