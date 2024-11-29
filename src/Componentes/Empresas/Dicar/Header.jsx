@@ -15,7 +15,7 @@ function Header() {
   };
 
   return (
-    <header className="fixed top-0 w-full flex items-center justify-between md:justify-around px-8 py-4 bg-white shadow-md z-50">
+    <header className="fixed top-0 w-full flex items-center justify-between md:justify-around px-8 py-4 bg-white shadow-md z-50 font-dmsans">
       {/* Espacio para el logotipo */}
       <a href="#" className="text-lg font-bold">
         <img
@@ -24,25 +24,25 @@ function Header() {
           className="h-10"
         />
       </a>
+{/* Menú de navegación */}
+<nav className="hidden md:flex gap-12 text-gray-700">
+  {["¿Quiénes somos?", "Ofertas", "Beneficios", "Nosotros", "Sedes"].map((item, index) => (
+    <a
+      key={index}
+      href="#"
+      onClick={() => handleLinkClick(item)}
+      className="relative group transition text-gray-700 hover:text-[#2552a4]"
+    >
+      {item}
 
-      {/* Menú de navegación */}
-      <nav className="hidden md:flex gap-12 text-gray-700 font-semibold">
-        {["¿Quiénes somos?", "Ofertas", "Beneficios", "Nosotros", "Sedes"].map((item, index) => (
-          <a
-            key={index}
-            href="#"
-            onClick={() => handleLinkClick(item)}
-            className="relative transition text-gray-700 hover:text-[#2552a4]"
-          >
-            {item}
+      {/* Línea azul debajo del texto al hacer hover */}
+      <span
+        className="absolute left-0 bottom-[-2px] w-full h-[2px] bg-[#2552a4] scale-x-0 transition-transform duration-300 group-hover:scale-x-100"
+      ></span>
+    </a>
+  ))}
+</nav>
 
-            {/* Línea azul debajo del texto al hacer hover */}
-            <span
-              className="absolute left-0 bottom-[-2px] w-full h-[2px] bg-[#2552a4] scale-x-0 transition-transform duration-300 ease-out hover:scale-x-100"
-            ></span>
-          </a>
-        ))}
-      </nav>
 
       {/* Menú hamburguesa para dispositivos móviles */}
       <div className="md:hidden">

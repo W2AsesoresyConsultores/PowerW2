@@ -2,7 +2,7 @@ import React from 'react';
 
 const CultureSection = () => {
   return (
-    <section className="bg-orange-500 text-white py-16 flex flex-col items-center">
+    <section className="bg-[#ffffff] text-white py-16 flex flex-col items-center">
       <div className="max-w-screen-xl mx-auto flex flex-col lg:flex-row items-center">
         {/* Imagen */}
         <div className="lg:w-1/2 mb-6 lg:mb-0 flex justify-center">
