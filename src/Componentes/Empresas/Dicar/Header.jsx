@@ -26,7 +26,7 @@ function Header() {
       </a>
 {/* Menú de navegación */}
 <nav className="hidden md:flex gap-12 text-gray-700">
-  {["¿Quiénes somos?", "Ofertas", "Beneficios", "Nosotros", "Sedes"].map((item, index) => (
+  {["¿Quiénes somos?", "Ofertas", "Beneficios", "Sedes"].map((item, index) => (
     <a
       key={index}
       href="#"
@@ -58,7 +58,7 @@ function Header() {
       {isOpen && (
         <div className="absolute top-16 left-0 w-full bg-white shadow-md z-10">
           <nav className="flex flex-col items-center gap-6 py-4 text-gray-700 font-semibold">
-            {["¿Quiénes somos?", "Ofertas", "Beneficios", "Nosotros", "Sedes"].map((item, index) => (
+            {["¿Quiénes somos?", "Ofertas", "Beneficios", "Sedes"].map((item, index) => (
               <a
                 key={index}
                 href="#"
