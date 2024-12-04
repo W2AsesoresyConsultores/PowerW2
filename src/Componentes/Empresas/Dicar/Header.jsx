@@ -31,7 +31,7 @@ function Header() {
       key={index}
       href="#"
       onClick={() => handleLinkClick(item)}
-      className="relative group transition text-gray-700 hover:text-[#2552a4]"
+      className="relative group transition text-gray-900 hover:text-[#2552a4]"
     >
       {item}
 

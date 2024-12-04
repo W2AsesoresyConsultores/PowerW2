@@ -7,15 +7,16 @@ import Sedes from './NuestrasSedes'
 import Beneficios from './Beneficios'
 import Beneficios2 from './Beneficios2'
 import ContainerDicar from './ContainerDicar'
+import Testimonios from './Testimonios'
 
 function Dicar() {
   return (
     <div>
     <Header />
     <Hero />
-    <h1 className='text-3xl font-semibold text-gray-800 text-center my-8' >Ofertas Laborales Dicar</h1>
     <ContainerDicar />
     <Nosotros />
+    <Testimonios />
     <Beneficios2 />
     <Sedes />
     <FooterDicar />

@@ -43,8 +43,10 @@ function BeneficiosGrid() {
   return (
     <div className="w-full flex flex-col items-center p-4">
       {/* Título */}
-      <h2 className="text-3xl font-bold text-gray-800 mb-10 mt-8">
-        ¿Por qué trabajar con Nosotros?
+      <h2 className="text-3xl font-semibold text-gray-900 sm:text-4xl xl:text-5xl my-8">
+        ¿Por qué trabajar con <span class="underline decoration-primarycolor underline-offset-4">
+                    Nosotros
+                </span>?
       </h2>
 
       {/* Contenedor de imágenes */}

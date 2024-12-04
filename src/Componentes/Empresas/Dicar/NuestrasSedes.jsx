@@ -1,82 +1,122 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-const sedes = [
-  {
-    id: 1,
-    nombre: "SEDE LIMA CENTRO",
-    direccion: "Av. Uruguay 514 Cerrado de Lima",
-    imagen: "https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/sedes/sede1.jpg",
-    mapa: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15608.867979462078!2d-77.013269!3d-12.0285769!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105cf582a17fa43%3A0x83b92ceaf0d841f2!2sSelecci%C3%B3n%20de%20Personal%20%7C%20W2%20Consultores%20%7C%20Head%20Huntig!5e0!3m2!1ses-419!2spe!4v1724678046398!5m2!1ses-419!2spe"
-  },
-  {
-    id: 2,
-    nombre: "SEDE CALLAO",
-    direccion: "Av. Mariscal Óscar R. Benavides 3866-4470 (Mall Plaza)",
-    imagen: "https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/sedes/sede3.jpg",
-    mapa: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d...tu_mapa_callao"
-  },
-  {
-    id: 3,
-    nombre: "SEDE SAN JUAN DE LURIGANCHO",
-    direccion: "Av. Próceres De la Independencia 3023-3043",
-    imagen: "https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/sedes/sede1.jpg",
-    mapa: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d...tu_mapa_san_juan"
-  }
-];
+function Sedes() {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedMap, setSelectedMap] = useState("");
 
-const Sedes = () => {
-  const [selectedSede, setSelectedSede] = useState(null);
-
-  const handleOpenMap = (map) => {
-    setSelectedSede(map);
-  };
-
-  const handleCloseMap = () => {
-    setSelectedSede(null);
-  };
+  const sedes = [
+    {
+      title: "Sede Lima Centro",
+      address: "Av. Uruguay 514 Cerrado de Lima",
+      image:
+        "https://www.infobae.com/resizer/v2/MOIUY4X42REJ5JYDG4MAK6LMRI.jpg?auth=a8aead889d4bd3edcd9254c7422f4b9d455897766b17b0bf5bd6cad2e5865f71&smart=true&width=1200&height=900&quality=85",
+      mapLink:
+        "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15608.867979462078!2d-77.013269!3d-12.0285769!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105cf582a17fa43%3A0x83b92ceaf0d841f2!2sSelecci%C3%B3n%20de%20Personal%20%7C%20W2%20Consultores%20%7C%20Head%20Huntig!5e0!3m2!1ses-419!2spe!4v1724678046398!5m2!1ses-419!2spe",
+    },
+    {
+      title: "Sede Miraflores",
+      address: "Av. Pardo 1234, Miraflores, Lima",
+      image:
+        "https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/sedes/sede3.jpg",
+      mapLink:
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.587812345919!2d-77.0368614!3d-12.1198875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c862a17e5b43%3A0x91b34cf5fd8b476f!5e0!3m2!1ses-419!2spe!4v1724678046398!5m2!1ses-419!2spe",
+    },
+    {
+      title: "Sede San Isidro",
+      address: "Calle Los Sauces 765, San Isidro",
+      image:
+        "https://cloudfront-us-east-1.images.arcpublishing.com/copesa/RTSKIE7VL5ADLPQK25U4GIY6VE.jpg",
+      mapLink:
+        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.687812345919!2d-77.0378614!3d-12.0998875!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c862a18e5b43%3A0x91b34cf5fd8b476f!5e0!3m2!1ses-419!2spe!4v1724678046398!5m2!1ses-419!2spe",
+    },
+  ];
 
   return (
-    <div className="container mx-auto my-10 p-4">
-      <h2 className="text-4xl font-bold text-center mb-6">Conoce nuestras sedes</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {sedes.map(sede => (
-          <div key={sede.id} className="border rounded-lg overflow-hidden shadow-lg transition-transform transform hover:scale-105">
-            <img src={sede.imagen} alt={sede.nombre} className="w-full h-60 object-cover" />
-            <div className="p-4 bg-white-100">
-              <h3 className="text-2xl font-semibold">{sede.nombre}</h3>
-              <p className="text-gray-700">{sede.direccion}</p>
-              <button 
-                onClick={() => handleOpenMap(sede.mapa)} 
-                className="mt-4 bg-[#2552a4] text-white px-4 py-2 rounded hover:bg-blue-700 transition"
-              >
-                Explora esta sede
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {selectedSede && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75">
-          <div className="bg-white p-4 rounded-lg shadow-lg max-w-lg w-full">
-            <iframe 
-              src={selectedSede} 
-              width="100%" 
-              height="400" 
-              className="rounded-lg"
-              title="Mapa de ubicación"
-            ></iframe>
-            <button 
-              onClick={handleCloseMap} 
-              className="mt-4 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
+    <>
+      <section className="flex flex-col gap-8 py-12 2xl:py-16 max-w-screen-2xl m-auto w-full px-3 sm:px-8 lg:px-16 xl:px-32 font-dmsans">
+        <h3 className="text-3xl font-semibold text-gray-900 sm:text-4xl xl:text-5xl my-8 text-center">Nuestras <span class="underline decoration-primarycolor underline-offset-4">
+                    Sedes
+                </span></h3>
+        <div className="grid w-full grid-flow-row gap-x-0 gap-y-6 sm:max-md:justify-items-center md:grid-cols-2 md:justify-items-start md:gap-6 lg:grid-cols-3">
+          {sedes.map((sede, index) => (
+            <div
+              key={index}
+              className="group flex flex-col w-80 items-start mx-auto gap-6 overflow-hidden rounded-xl border border-slate-200 min-h-[400px] transition-transform duration-300 hover:scale-105 hover:shadow-xl"
             >
-              Cerrar
+              <div
+                className="w-full h-64 bg-cover bg-center bg-no-repeat transition-transform duration-300 group-hover:scale-110"
+                style={{ backgroundImage: `url(${sede.image})` }}
+              ></div>
+              <div className="flex flex-col items-start justify-between gap-4 px-4 py-6 md:gap-6 md:px-8">
+                <p className="text-xl text-gray-900 font-medium tracking-tight">{sede.title}</p>
+                <p className="text-base text-gray-800 h-12">{sede.address}</p>
+                <button
+                  type="button"
+                  className="group-hover:bg-blue-100 px-2 group-hover:text-blue-900 group-hover:stroke-blue-900 group-hover:scale-105 inline-flex items-center justify-center whitespace-nowrap rounded-lg align-middle text-sm font-semibold leading-none transition-all duration-300 ease-in-out stroke-blue-700 text-blue-700 h-[42px] min-w-[42px] gap-2 self-end"
+                  onClick={() => {
+                    setSelectedMap(sede.mapLink);
+                    setShowModal(true);
+                  }}
+                >
+                  <div>Abrir Ubicación</div>
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="size-6 stroke-inherit"
+                  >
+                    <path
+                      d="M11 16L15 12L11 8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></path>
+                    <circle cx="12" cy="12" r="9"></circle>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Modal */}
+      <div
+        className={`fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-300 ${
+          showModal ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <div
+          className={`bg-white rounded-lg shadow-lg h-[80%] w-11/12 max-w-3xl transform transition-transform duration-300 ${
+            showModal ? "scale-100" : "scale-90"
+          }`}
+        >
+          <div className="flex justify-between items-center px-6 py-4 border-b">
+            <h4 className="text-xl font-semibold">Ubicación</h4>
+            <button
+              onClick={() => setShowModal(false)}
+              className="text-gray-500 hover:text-gray-700"
+            >
+              ✕
             </button>
           </div>
+          <div className="p-6 h-[90%]">
+            <iframe
+              src={selectedMap}
+              width="100%"
+              height="300"
+              allowFullScreen=""
+              loading="lazy"
+              className="border rounded-md w-full h-full"
+            ></iframe>
+          </div>
         </div>
-      )}
-    </div>
+      </div>
+    </>
   );
-};
+}
 
 export default Sedes;

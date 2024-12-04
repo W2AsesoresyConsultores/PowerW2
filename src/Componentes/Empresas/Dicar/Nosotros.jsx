@@ -5,7 +5,9 @@ const Nosotros = () => {
     <div className="bg-white py-16 px-4 md:px-16">
       {/* Título general */}
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-gray-800">¿Quiénes Somos?</h1>
+        <h1 className="text-3xl font-semibold text-gray-900 sm:text-4xl xl:text-5xl">¿Quiénes <span class="underline decoration-primarycolor underline-offset-4">
+                    Somos
+                </span>?</h1>
       </div>
 
       <div className="flex flex-col md:flex-row justify-center items-center">
