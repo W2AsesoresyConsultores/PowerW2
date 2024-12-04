@@ -1,5 +1,8 @@
 import React from 'react';
+import Slider from 'react-slick';
 import TestimonioCard from './TestimonioCard';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 function Testimonios() {
   const testimonios = [
@@ -13,7 +16,7 @@ function Testimonios() {
       nombre: 'Jesus Martínez',
       titulo: 'Supervisor de Operaciones',
       avatar: 'https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-male-2.png',
-      mensaje: '“Lo que más me motiva en Dicar es el ambiente laboral. Somos una familia que trabaja unida para superar los retos y marcar la diferencia en la logística farmacéutica.”',
+      mensaje: '“Lo que más me motiva en Dicar es el ambiente laboral. Somos una familia que trabaja unida para superar los retos y marcar la diferencia.”',
     },
     {
       nombre: 'Valeria Lujan Carrion',
@@ -21,23 +24,71 @@ function Testimonios() {
       avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg6g4NLS8zft75H_K0Wa-bwNS0bPAPGX33Og&s',
       mensaje: '“En Dicar encuentro un equilibrio perfecto entre desarrollo profesional y personal. La empresa fomenta el aprendizaje constante y reconoce nuestro esfuerzo.”',
     },
+    {
+      nombre: 'Carlos Pérez',
+      titulo: 'Gerente de Operaciones',
+      avatar: 'https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-male-3.png',
+      mensaje: '“Trabajar aquí ha sido muy enriquecedor. Dicar me ha brindado las herramientas para mejorar mis habilidades y avanzar en mi carrera profesional.”',
+    },
+    {
+      nombre: 'Marta González',
+      titulo: 'Directora de Logística',
+      avatar: 'https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-female-1.png',
+      mensaje: '“La cultura en Dicar es impresionante, lo que más valoro es la confianza que nos brindan para asumir nuevas responsabilidades y proyectos.”',
+    },
+    {
+      nombre: 'Juan Rodríguez',
+      titulo: 'Asistente de Logística',
+      avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7rhk86OXf2FvDAlcau1iHSTO8I0XaPnFN_Q&s',
+      mensaje: '“Mi experiencia en Dicar ha sido excelente. La empresa tiene un ambiente positivo que promueve el aprendizaje y el trabajo en equipo.”',
+    },
   ];
 
+  const settings = {
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    arrows: true,
+    dots: true,
+    cssEase: 'linear',
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
   return (
-    <section className="py-8 bg-gray-50 sm:py-8 lg:py-20 font-dmsans">
+    <section className="py-8 bg-gray-50 sm:py-8 lg:py-14 font-dmsans">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="text-center">
           <p className="text-lg font-medium text-gray-600">Historias que reflejan nuestra cultura</p>
           <h2 className="mt-4 text-3xl font-semibold text-gray-900 sm:text-4xl xl:text-5xl">
-            Lo que dicen nuestros <span class="underline decoration-primarycolor underline-offset-4">
-                    Colaboradores
-                </span>
+            Lo que dicen nuestros <span className="underline decoration-primarycolor underline-offset-4">
+              Colaboradores
+            </span>
           </h2>
         </div>
-        <div className="grid grid-cols-1 gap-6 mt-10 md:grid-cols-3 lg:gap-10">
-          {testimonios.map((testimonio, index) => (
-            <TestimonioCard key={index} {...testimonio} />
-          ))}
+
+        <div className="mt-10">
+          <Slider {...settings}>
+            {testimonios.map((testimonio, index) => (
+              <TestimonioCard key={index} {...testimonio} />
+            ))}
+          </Slider>
         </div>
       </div>
     </section>

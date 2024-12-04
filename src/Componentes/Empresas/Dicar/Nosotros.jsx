@@ -12,7 +12,7 @@ const Nosotros = () => {
 
       <div className="flex flex-col md:flex-row justify-center items-center">
         {/* Imagen con el testimonio */}
-        <div className="relative w-full ">
+        <div className="relative w-full flex justify-center ">
           {/* <img
             src="https://www.guiadesaludccl.com/uploads/dicar-logistic/dicar-logistic-1.jpg" // Reemplaza con la URL de tu imagen
             alt="Dicar Logistic"
@@ -34,7 +34,7 @@ const Nosotros = () => {
                 </p>
               </div>
             </div> */}
-          <video autoplay controls className="rounded-xl w-full" src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/footer/defontana.mp4?t=2024-11-29T20%3A39%3A48.338Z"></video>
+          <video autoplay controls className="rounded-xl md:w-[70%] w-full outline-none border-none" src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/sedes/talanaremu.mp4?t=2024-12-04T22%3A25%3A53.063Z"></video>
         </div>
 
         {/* Contenido del texto

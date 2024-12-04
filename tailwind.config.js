@@ -63,6 +63,7 @@ module.exports = withMT( {
         'fade-up': 'fade-up 0.5s ease-out'
       },
     },
+    
   },  
   plugins: [
   ],

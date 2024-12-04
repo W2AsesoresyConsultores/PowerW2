@@ -50,25 +50,28 @@ function Buscador() {
   };
 
   return (
-    <div className="relative w-full max-w-md flex items-center">
-      {/* Input del buscador */}
+    <div className="relative w-full  flex items-center">
+      <div className='flex md:w-1/2 w-full'>
       <input
         type="text"
         placeholder="Buscar Ofertas Laborales"
         value={searchInput}
         onChange={handleInputChange}
         onKeyDown={handleKeyDown} // Asegúrate de tener este manejador
-        className="w-full px-4 py-2 rounded-l-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 text-black"
+        className="w-full px-6 py-4 rounded-l-full border border-gray-300 focus:outline-none text-black"
       />
 
       {/* Botón de buscar */}
       <button
         onClick={handleSearch}
-        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-r-full flex items-center justify-center"
+        className="bg-white hover:bg-gray-50 text-[#133168] px-8 py-2 rounded-r-full flex items-center justify-center"
       >
         <FaSearch className="text-lg" />
       </button>
 
+      </div>
+      {/* Input del buscador */}
+      
       {/* Resultados del buscador */}
       {filteredJobs.length > 0 && (
         <div

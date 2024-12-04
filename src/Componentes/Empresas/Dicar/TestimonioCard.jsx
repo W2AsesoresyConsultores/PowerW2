@@ -2,7 +2,7 @@ import React from 'react';
 
 function TestimonioCard({ nombre, titulo, avatar, mensaje }) {
   return (
-    <div className="flex flex-col overflow-hidden shadow-xl">
+    <div className="flex flex-col overflow-hidden shadow-xl mx-4">
       <div className="flex flex-col justify-between flex-1 p-6 bg-white lg:py-8 lg:px-7">
         <div className="flex-1">
           <div className="flex items-center">

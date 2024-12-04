@@ -49,14 +49,8 @@ function Hero() {
       {/* Contenido principal */}
       <p className="relative z-10">Conoce nuestras vacantes, beneficios y más</p>
       <h1 className='md:text-5xl text-3xl relative z-10 font-semibold'>Únete a nuestro equipo,<br /> juntos seguimos creciendo.</h1>
-      <div className='flex gap-8 '>
+      <div className='flex gap-8 w-full'>
         <Buscador />
-        <a
-          href="#"
-          className='relative z-10 bg-white md:px-12 flex items-center px-8 text-md md:text-xl rounded-full text-[#2552a4] font-semibold'
-        >
-          Postula Aquí
-        </a>
       </div>
 
       {/* Puntos de navegación */}
