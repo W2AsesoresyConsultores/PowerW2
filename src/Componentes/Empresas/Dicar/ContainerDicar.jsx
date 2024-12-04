@@ -5,7 +5,7 @@ import JobsContext from '../../../Context/JobsContext';
 import { useNavigate, useParams } from 'react-router-dom';
 
 function ContainerDicar() {
-  const { allActiveJobs } = useContext(JobsContext);
+  const { allActiveJobs, searchTerm } = useContext(JobsContext);
   const [selectedJob, setSelectedJob] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const navigate = useNavigate();
@@ -23,26 +23,19 @@ function ContainerDicar() {
   }, []);
 
   useEffect(() => {
-    // Restaurar el trabajo seleccionado desde localStorage al montar el componente
-    const storedJobId = localStorage.getItem('selectedJobId');
-    const filteredResults = allActiveJobs
-      .sort((a, b) => new Date(b.fecha_publicacion) - new Date(a.fecha_publicacion));
+    // Filtrar trabajos por el término de búsqueda
+    const filteredResults = searchTerm
+      ? allActiveJobs.filter(job => job.puesto.toLowerCase().includes(searchTerm.toLowerCase()))
+      : allActiveJobs;
 
-    if (storedJobId) {
-      const storedJob = filteredResults.find(job => job.id_oferta === parseInt(storedJobId, 10));
-      setSelectedJob(storedJob || filteredResults[0]);
-    } else {
-      setSelectedJob(filteredResults[0] || null);
-    }
-  }, [allActiveJobs]);
+    setSelectedJob(filteredResults[0] || null);
+  }, [searchTerm, allActiveJobs]);
 
   useEffect(() => {
     if (id_oferta && allActiveJobs.length > 0) {
       const foundJob = allActiveJobs.find(job => job.id_oferta === parseInt(id_oferta, 10));
       if (foundJob) {
         setSelectedJob(foundJob);
-        // Guardar el trabajo seleccionado en localStorage
-        localStorage.setItem('selectedJobId', foundJob.id_oferta);
       } else {
         navigate('/PowerAuth');
       }
@@ -54,8 +47,6 @@ function ContainerDicar() {
       navigate(`/info-job-movil/${job.id_oferta}`);
     } else {
       setSelectedJob(job);
-      // Guardar el trabajo seleccionado en localStorage
-      localStorage.setItem('selectedJobId', job.id_oferta);
     }
   };
 
@@ -70,16 +61,27 @@ function ContainerDicar() {
             scrollbarWidth: 'none'
           }}
         >
-          {allActiveJobs
-            .sort((a, b) => new Date(b.fecha_publicacion) - new Date(a.fecha_publicacion))
-            .map(job => (
-              <CardTrabajoDicar
-                key={job.id_oferta}
-                job={job}
-                onSelectJob={() => handleCardClick(job)}
-                isSelected={selectedJob === job}
-              />
-            ))}
+          {searchTerm && selectedJob ? (
+            // Mostrar solo el trabajo buscado
+            <CardTrabajoDicar
+              key={selectedJob.id_oferta}
+              job={selectedJob}
+              onSelectJob={() => handleCardClick(selectedJob)}
+              isSelected={true}
+            />
+          ) : (
+            // Mostrar todos los trabajos si no hay búsqueda
+            allActiveJobs
+              .sort((a, b) => new Date(b.fecha_publicacion) - new Date(a.fecha_publicacion))
+              .map(job => (
+                <CardTrabajoDicar
+                  key={job.id_oferta}
+                  job={job}
+                  onSelectJob={() => handleCardClick(job)}
+                  isSelected={selectedJob === job}
+                />
+              ))
+          )}
         </div>
         {selectedJob && !isMobile && (
           <InfoDicar selectedJob={selectedJob} />
