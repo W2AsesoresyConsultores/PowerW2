@@ -24,19 +24,28 @@ function Buscador() {
   };
 
   const handleSearch = () => {
-    if (searchInput === '') {
-      // Si el buscador está vacío, mostrar todos los trabajos
+    if (searchInput.trim() === '') {
+      // Mostrar todos los trabajos
       setSearchTerm('');
     } else {
       // Buscar según el término ingresado
       setSearchTerm(searchInput);
+      const targetSection = document.getElementById('ofertas'); // Seleccionar el contenedor de trabajos
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: 'smooth' }); // Desplazar suavemente hacia el contenedor
+      }
     }
     setFilteredJobs([]); // Limpiar las sugerencias al buscar
+  };
+  
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch(); // Ejecutar la búsqueda al presionar Enter
+    }
   };
 
   const handleSuggestionClick = (job) => {
     setSearchInput(job.puesto); // Colocar el texto en el buscador
-    setSearchTerm(job.puesto); // Actualizar el término de búsqueda global
     setFilteredJobs([]); // Limpiar las sugerencias
   };
 
@@ -44,12 +53,13 @@ function Buscador() {
     <div className="relative w-full max-w-md flex items-center">
       {/* Input del buscador */}
       <input
-        type="text"
-        placeholder="Buscar Ofertas Laborales"
-        value={searchInput}
-        onChange={handleInputChange}
-        className="w-full px-4 py-2 rounded-l-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
-      />
+  type="text"
+  placeholder="Buscar Ofertas Laborales"
+  value={searchInput}
+  onChange={handleInputChange}
+  onKeyDown={handleKeyDown} // Asegúrate de tener este manejador
+  className="w-full px-4 py-2 rounded-l-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
+/>
 
       {/* Botón de buscar */}
       <button
