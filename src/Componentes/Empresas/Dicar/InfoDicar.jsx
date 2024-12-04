@@ -132,6 +132,14 @@ function InfoDicar({ selectedJob }) {
   const timeAgo = dayjs(selectedJob.fecha_publicacion).fromNow();
   const capitalizedTimeAgo = timeAgo.charAt(0).toUpperCase() + timeAgo.slice(1);
 
+  const handleApplyClick = () => {
+    if (!user) {
+      navigate("/Login");
+    } else {
+      setIsQuestionsModalOpen(true); // Mostrar el modal de preguntas
+    }
+  };
+
   return (
     <div
       className="selected-job-info w-full sm:w-3/5 rounded-lg md:flex flex-col px-8 py-4 mx-8 bg-[#ffffff] hidden transition-all duration-500 font-dmsans"
@@ -178,7 +186,7 @@ function InfoDicar({ selectedJob }) {
               ? "bg-yellow-200 text-primarycolor cursor-not-allowed"
               : "bg-[#0057c2] text-white"
           }`}
-          onClick={hasApplied ? null : () => setIsQuestionsModalOpen(true)} // Mostrar el modal de preguntas
+          onClick={handleApplyClick} // Manejar clic en el botón
           disabled={hasApplied}
         >
           {hasApplied ? "Ya has postulado" : "Postularme"}
@@ -210,7 +218,7 @@ function InfoDicar({ selectedJob }) {
               ? "bg-gray-500 text-white cursor-not-allowed"
               : "bg-[#0057c2] text-white"
           }`}
-          onClick={hasApplied ? null : () => setIsQuestionsModalOpen(true)} // Mostrar el modal de preguntas
+          onClick={handleApplyClick} // Manejar clic en el botón
           disabled={hasApplied}
         >
           {hasApplied ? "YA HAS POSTULADO" : "POSTULARME"}
