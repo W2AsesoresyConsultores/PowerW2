@@ -53,13 +53,13 @@ function Buscador() {
     <div className="relative w-full max-w-md flex items-center">
       {/* Input del buscador */}
       <input
-  type="text"
-  placeholder="Buscar Ofertas Laborales"
-  value={searchInput}
-  onChange={handleInputChange}
-  onKeyDown={handleKeyDown} // Asegúrate de tener este manejador
-  className="w-full px-4 py-2 rounded-l-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
-/>
+        type="text"
+        placeholder="Buscar Ofertas Laborales"
+        value={searchInput}
+        onChange={handleInputChange}
+        onKeyDown={handleKeyDown} // Asegúrate de tener este manejador
+        className="w-full px-4 py-2 rounded-l-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 text-black"
+      />
 
       {/* Botón de buscar */}
       <button
@@ -71,11 +71,14 @@ function Buscador() {
 
       {/* Resultados del buscador */}
       {filteredJobs.length > 0 && (
-        <div className="absolute z-10 w-full bg-white border border-gray-300 rounded-lg shadow-md mt-1">
+        <div
+          className="absolute z-50 w-full bg-white border border-gray-300 rounded-lg shadow-md mt-2"
+          style={{ top: '100%' }} // Asegura que las sugerencias estén debajo del input
+        >
           {filteredJobs.map((job) => (
             <div
               key={job.id_oferta}
-              className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+              className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-black"
               onClick={() => handleSuggestionClick(job)}
             >
               {job.puesto}
