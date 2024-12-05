@@ -1,0 +1,38 @@
+/* Cambiar el color de los botones en estado normal */
+.plyr__controls button {
+    color: #fff !important; /* Color principal de los íconos */
+  }
+  
+  /* Cambiar el color de los botones al pasar el mouse (hover) */
+  .plyr__controls button:hover,
+  .plyr__controls button:focus {
+    color: #2f4daa !important; /* Color del hover */
+    background-color: rgba(47, 77, 170, 0.1) !important; /* Fondo del hover */
+  }
+  
+  /* Cambia el color del botón de reproducción grande */
+  .plyr__control--overlaid {
+    background-color: #2f4daa !important; /* Fondo del botón grande */
+    color: #fff !important; /* Color del ícono */
+  }
+  
+  /* Cambia el color del botón de reproducción grande en hover */
+  .plyr__control--overlaid:hover {
+    background-color: #25408a !important; /* Fondo más oscuro en hover */
+    color: #fff !important; /* Ícono sigue blanco */
+  }
+  
+  /* Cambiar el fondo del contenedor de controles */
+  .plyr__controls {
+    background-color: rgba(47, 77, 170, 0.1) !important; /* Fondo semitransparente */
+  }
+  
+  /* Cambiar el color del control de progreso */
+  .plyr--full-ui input[type="range"] {
+    color: #2f4daa !important; /* Cambia el color del control de progreso */
+  }
+  
+  /* Cambiar el color del control de volumen */
+  .plyr__volume input[type="range"] {
+    color: #2f4daa !important; /* Cambia el color del control de volumen */
+  }
