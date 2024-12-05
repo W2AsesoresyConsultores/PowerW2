@@ -1,5 +1,34 @@
 import React, { useState } from "react";
 
+const ImageSlide = ({ image, title, address, onButtonClick }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <div
+      className="relative w-full max-w-md overflow-hidden"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <img
+        src={image}
+        alt={title}
+        className={`w-full h-[250px] transition-transform duration-700 ease-in-out ${isHovered ? 'translate-x-[100%] translate-y-[-100%]' : 'translate-x-0 translate-y-0'}`}
+      />
+      <div className={`absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex flex-col items-center justify-center transition-opacity duration-700 ease-in-out ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
+        <p className="text-white text-xl font-bold">{title}</p>
+        <p className="text-white text-base">{address}</p>
+        <button
+          type="button"
+          className="mt-4 bg-blue-100 text-blue-900 px-4 py-2 rounded-lg"
+          onClick={onButtonClick}
+        >
+          Abrir Ubicación
+        </button>
+      </div>
+    </div>
+  );
+};
+
 function Sedes() {
   const [showModal, setShowModal] = useState(false);
   const [selectedMap, setSelectedMap] = useState("");
@@ -34,74 +63,32 @@ function Sedes() {
   return (
     <>
       <section className="flex flex-col gap-8 py-12 2xl:py-16 max-w-screen-2xl m-auto w-full px-3 sm:px-8 lg:px-16 xl:px-32 font-dmsans">
-        <h3 className="text-3xl font-semibold text-gray-900 sm:text-4xl xl:text-5xl my-8 text-center">Nuestras <span class="underline decoration-primarycolor underline-offset-4">
-                    Sedes
-                </span></h3>
+        <h3 className="text-3xl font-semibold text-gray-900 sm:text-4xl xl:text-5xl my-8 text-center">
+          Nuestras <span className="underline decoration-primarycolor underline-offset-4">Sedes</span>
+        </h3>
         <div className="grid w-full grid-flow-row gap-x-0 gap-y-6 sm:max-md:justify-items-center md:grid-cols-2 md:justify-items-start md:gap-6 lg:grid-cols-3">
           {sedes.map((sede, index) => (
-            <div
-              key={index}
-              className="group flex flex-col w-80 items-start mx-auto gap-6 overflow-hidden rounded-xl border border-slate-200 min-h-[400px] transition-transform duration-300 hover:scale-105 hover:shadow-xl"
-            >
-              <div
-                className="w-full h-64 bg-cover bg-center bg-no-repeat transition-transform duration-300 group-hover:scale-110"
-                style={{ backgroundImage: `url(${sede.image})` }}
-              ></div>
-              <div className="flex flex-col items-start justify-between gap-4 px-4 py-6 md:gap-6 md:px-8">
-                <p className="text-xl text-gray-900 font-medium tracking-tight">{sede.title}</p>
-                <p className="text-base text-gray-800 h-12">{sede.address}</p>
-                <button
-                  type="button"
-                  className="group-hover:bg-blue-100 px-2 group-hover:text-blue-900 group-hover:stroke-blue-900 group-hover:scale-105 inline-flex items-center justify-center whitespace-nowrap rounded-lg align-middle text-sm font-semibold leading-none transition-all duration-300 ease-in-out stroke-blue-700 text-blue-700 h-[42px] min-w-[42px] gap-2 self-end"
-                  onClick={() => {
-                    setSelectedMap(sede.mapLink);
-                    setShowModal(true);
-                  }}
-                >
-                  <div>Abrir Ubicación</div>
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="size-6 stroke-inherit"
-                  >
-                    <path
-                      d="M11 16L15 12L11 8"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    ></path>
-                    <circle cx="12" cy="12" r="9"></circle>
-                  </svg>
-                </button>
-              </div>
+            <div key={index} className="flex flex-col w-80 items-start mx-auto gap-6 overflow-hidden rounded-xl border border-slate-200 max-h-[250px] transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+              <ImageSlide 
+                image={sede.image} 
+                title={sede.title} 
+                address={sede.address} 
+                onButtonClick={() => {
+                  setSelectedMap(sede.mapLink);
+                  setShowModal(true);
+                }} 
+              />
             </div>
           ))}
         </div>
       </section>
 
       {/* Modal */}
-      <div
-        className={`fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-300 ${
-          showModal ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
-      >
-        <div
-          className={`bg-white rounded-lg shadow-lg h-[80%] w-11/12 max-w-3xl transform transition-transform duration-300 ${
-            showModal ? "scale-100" : "scale-90"
-          }`}
-        >
+      <div className={`fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-300 ${showModal ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
+        <div className={`bg-white rounded-lg shadow-lg h-[80%] w-11/12 max-w-3xl transform transition-transform duration-300 ${showModal ? "scale-100" : "scale-90"}`}>
           <div className="flex justify-between items-center px-6 py-4 border-b">
             <h4 className="text-xl font-semibold">Ubicación</h4>
-            <button
-              onClick={() => setShowModal(false)}
-              className="text-gray-500 hover:text-gray-700"
-            >
-              ✕
-            </button>
+            <button onClick={() => setShowModal(false)} className="text-gray-500 hover:text-gray-700">✕</button>
           </div>
           <div className="p-6 h-[90%]">
             <iframe
