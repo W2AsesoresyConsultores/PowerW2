@@ -15,11 +15,11 @@ const ImageSlide = ({ image, title, address, onButtonClick }) => {
         className={`w-full h-[250px] transition-transform duration-700 ease-in-out ${isHovered ? 'translate-x-[100%] translate-y-[-100%]' : 'translate-x-0 translate-y-0'}`}
       />
       <div className={`absolute top-0 left-0 w-full h-full bg-[#2f4daa] flex flex-col items-center justify-center transition-opacity duration-700 ease-in-out ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
-        <p className="text-white text-xl font-bold">{title}</p>
-        <p className="text-white text-base font-inter">{address}</p>
+        <p className=" text-white text-xl font-bold align-center">{title}</p>
+        <p className="mt-6 text-white text-base font-inter">{address}</p>
         <button
           type="button"
-          className="mt-4 bg-white text-[#2f4daa] px-4 py-2 rounded-lg font-source font-semibold"
+          className="mt-8 bg-white text-[#2f4daa] px-4 py-2 rounded-lg font-source font-semibold"
           onClick={onButtonClick}
         >
           Abrir Ubicación
