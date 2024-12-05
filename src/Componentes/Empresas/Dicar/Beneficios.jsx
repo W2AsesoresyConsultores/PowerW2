@@ -30,9 +30,9 @@ function Beneficios() {
   };
 
   return (
-    <div className="w-full h-auto py-10 flex">
+    <div className="w-full h-auto py-10 flex flex-wrap">
       {/* Texto y botones */}
-      <div className="w-full md:w-1/2 h-full pt-28 pl-24 pr-10">
+      <div className="w-full md:w-1/2 h-full md:pt-28 px-4 md:md:pl-24 pr-10">
         <h2 className="font-source font-bold text-5xl text-[#2f4daa]">Lo que nos mueve en Dicar</h2>
         <p className="font-inter my-8 text-xl text-gray-800">
         En Dicar, fomentamos una cultura laboral basada en la confianza y la innovación, asegurando soluciones logísticas eficientes que impactan positivamente en el bienestar de las personas.
@@ -58,7 +58,7 @@ function Beneficios() {
         </div>
       </div>
       {/* Imagen con transición */}
-      <div className="w-full md:w-1/2 h-full py-10 px-24 flex justify-center items-center">
+      <div className="w-full md:w-1/2 h-full py-10 md:px-24 flex justify-center items-center">
         <img
           className={`w-[90%] transition-opacity duration-500 ${fade ? "opacity-0" : "opacity-100"}`}
           src={images[activeImage]}

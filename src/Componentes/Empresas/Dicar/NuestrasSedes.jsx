@@ -14,12 +14,12 @@ const ImageSlide = ({ image, title, address, onButtonClick }) => {
         alt={title}
         className={`w-full h-[250px] transition-transform duration-700 ease-in-out ${isHovered ? 'translate-x-[100%] translate-y-[-100%]' : 'translate-x-0 translate-y-0'}`}
       />
-      <div className={`absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex flex-col items-center justify-center transition-opacity duration-700 ease-in-out ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
+      <div className={`absolute top-0 left-0 w-full h-full bg-[#2f4daa] flex flex-col items-center justify-center transition-opacity duration-700 ease-in-out ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
         <p className="text-white text-xl font-bold">{title}</p>
-        <p className="text-white text-base">{address}</p>
+        <p className="text-white text-base font-inter">{address}</p>
         <button
           type="button"
-          className="mt-4 bg-blue-100 text-blue-900 px-4 py-2 rounded-lg"
+          className="mt-4 bg-white text-[#2f4daa] px-4 py-2 rounded-lg font-source font-semibold"
           onClick={onButtonClick}
         >
           Abrir Ubicación
@@ -63,8 +63,8 @@ function Sedes() {
   return (
     <>
       <section className="flex flex-col gap-8 py-12 2xl:py-16 max-w-screen-2xl m-auto w-full px-3 sm:px-8 lg:px-16 xl:px-32 font-dmsans">
-        <h3 className="text-3xl font-semibold text-gray-900 sm:text-4xl xl:text-5xl my-8 text-center">
-          Nuestras <span className="underline decoration-primarycolor underline-offset-4">Sedes</span>
+        <h3 className="text-3xl font-bold text-[#2f4eab] sm:text-4xl xl:text-5xl font-source text-center">
+          Conoce Nuestras Sedes
         </h3>
         <div className="grid w-full grid-flow-row gap-x-0 gap-y-6 sm:max-md:justify-items-center md:grid-cols-2 md:justify-items-start md:gap-6 lg:grid-cols-3">
           {sedes.map((sede, index) => (
