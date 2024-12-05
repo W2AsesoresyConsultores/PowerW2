@@ -8,12 +8,8 @@ const Nosotros = () => {
     <div className="bg-white py-16 px-4 md:px-16">
       {/* Título general */}
       <div className="text-center mb-12">
-        <h1 className="text-3xl font-semibold text-gray-900 sm:text-4xl xl:text-5xl">
-          ¿Quiénes{" "}
-          <span className="underline decoration-[#2f4daa] underline-offset-4">
-            Somos
-          </span>
-          ?
+        <h1 className="text-3xl font-bold text-[#2f4eab] sm:text-4xl xl:text-5xl font-source">
+            El éxito se construye con el mejor talento
         </h1>
       </div>
 

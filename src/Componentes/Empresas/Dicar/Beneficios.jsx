@@ -34,8 +34,8 @@ function Beneficios() {
       {/* Texto y botones */}
       <div className="w-full md:w-1/2 h-full pt-28 pl-24 pr-10">
         <h2 className="font-source font-bold text-5xl text-[#2f4daa]">Lo que nos mueve en Dicar</h2>
-        <p className="font-inter my-4 text-xl">
-        En Dicar, aseguramos que los medicamentos lleguen de forma segura y puntual, fortaleciendo la confianza en la logística farmacéutica con soluciones innovadoras que impactan el bienestar de las personas.
+        <p className="font-inter my-8 text-xl text-gray-800">
+        En Dicar, fomentamos una cultura laboral basada en la confianza y la innovación, asegurando soluciones logísticas eficientes que impactan positivamente en el bienestar de las personas.
         </p>
         <div className="font-inter flex w-full flex-wrap gap-2">
           {[
@@ -48,8 +48,8 @@ function Beneficios() {
             <button
               key={index}
               onClick={() => handleImageChange(index)}
-              className={`px-4 py-2 bg-[#d9e3fc] hover:bg-[#2f4daa] hover:text-white transition-all duration-500 rounded-full text-lg ${
-                activeImage === index ? "bg-[#2f4daa] text-white" : "text-[#2f4daa]"
+              className={`px-4 py-2  hover:bg-[#2f4daa] hover:text-white transition-all duration-500 rounded-full text-lg ${
+                activeImage === index ? "bg-[#2f4daa] text-white" : "text-[#2f4daa] bg-[#d9e3fc]"
               }`}
             >
               {text}

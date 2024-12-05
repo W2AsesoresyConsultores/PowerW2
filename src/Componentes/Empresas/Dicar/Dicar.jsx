@@ -1,5 +1,5 @@
 import React from 'react'
-import Hero from './Hero'
+import Hero2 from './Hero2'
 import FooterDicar from './FooterDicar'
 import Header from './Header'
 import Nosotros from './Nosotros'
@@ -9,17 +9,16 @@ import Beneficios2 from './Beneficios2'
 import ContainerDicar from './ContainerDicar'
 import Testimonios from './Testimonios'
 import Esperando from './Esperando'
+import Testimonial from './Testimonial'
 
 function Dicar() {
   return (
     <div>
     <Header />
-    <Hero />
-    <Beneficios/>
-    
-    <ContainerDicar />
+    <Hero2 />
     <Nosotros />
-    <Beneficios2 />
+    <Beneficios/>
+    <Esperando />
     <Testimonios />
     <Sedes />
     <FooterDicar />

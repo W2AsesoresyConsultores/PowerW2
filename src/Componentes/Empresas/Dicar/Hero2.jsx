@@ -1,0 +1,23 @@
+import React from 'react';
+import Buscador from './Buscador';
+
+function Hero2() {
+  return (
+    <div className="relative pt-20 h-screen flex items-center flex-col bg-[#2f4eab] ">
+      <h1 className="font-source font-extrabold text-6xl text-white text-center mt-20 mb-10">
+        Únete a #Dicar,
+        <br /> juntos seguimos creciendo.
+      </h1>
+      <Buscador />
+
+      {/* Imagen detrás del contenido */}
+      <img
+        className="absolute bottom-0 w-full object-cover z-10 h-[450px]"
+        src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/sedes/download-removebg-preview.png?t=2024-12-05T19%3A18%3A27.462Z"
+        alt="Decoración Detrás"
+      />
+    </div>
+  );
+}
+
+export default Hero2;

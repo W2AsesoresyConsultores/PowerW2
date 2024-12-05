@@ -2,14 +2,14 @@ import React from 'react';
 
 function TestimonioCard({ nombre, titulo, avatar, mensaje }) {
   return (
-    <div className="flex flex-col overflow-hidden shadow-xl mx-4">
+    <div className="flex flex-col overflow-hidden font-source mx-4">
       <div className="flex flex-col justify-between flex-1 p-6 bg-white lg:py-8 lg:px-7">
         <div className="flex-1">
           <div className="flex items-center">
             {[...Array(5)].map((_, index) => (
               <svg
                 key={index}
-                className="w-5 h-5 text-[#FDB241]"
+                className="w-5 h-5 text-primarycolor"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 fill="currentColor"
@@ -22,7 +22,7 @@ function TestimonioCard({ nombre, titulo, avatar, mensaje }) {
           </div>
 
           <blockquote className="flex-1 mt-8">
-            <p className="text-lg leading-relaxed text-gray-900">{mensaje}</p>
+            <p className="text-lg leading-relaxed text-gray-900 text-balance">{mensaje}</p>
           </blockquote>
         </div>
 

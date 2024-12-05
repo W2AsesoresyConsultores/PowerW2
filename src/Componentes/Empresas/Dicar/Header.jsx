@@ -15,7 +15,7 @@ function Header() {
   };
 
   return (
-    <header className="fixed top-0 w-full flex items-center justify-between md:justify-around px-8 py-4 bg-white shadow-md z-50 font-dmsans">
+    <header className="fixed top-0 w-full flex items-center justify-between md:justify-around px-8 py-4 bg-white shadow-md z-50 font-inter text-md font-light">
       {/* Espacio para el logotipo */}
       <a href="#" className="text-lg font-bold">
         <img

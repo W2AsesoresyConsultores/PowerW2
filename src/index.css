@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+
 /* Define the keyframes for the heartbeat animation */
 @keyframes heartbeat {
   0%, 100% {
@@ -515,3 +518,4 @@
   background: #e7f3ff; /* Color de fondo al pasar el mouse */
   cursor: pointer;
 }
+
