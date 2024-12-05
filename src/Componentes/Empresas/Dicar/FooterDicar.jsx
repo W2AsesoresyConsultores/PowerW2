@@ -14,7 +14,7 @@ const Footer = () => {
         />
       </div>
 {/* Información de contacto */}
-    <div className="text-center md:text-center">
+    <div className="text-start text-inter">
       <a href=""><p className="text-gray-300">¿Quiénes somos?</p></a>
       <a href="#ofertas"><p className="text-gray-300">Ofertas</p></a>
       <a href=""><p className="text-gray-300">Beneficios</p></a>
