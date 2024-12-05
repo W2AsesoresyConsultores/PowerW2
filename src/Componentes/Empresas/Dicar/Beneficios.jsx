@@ -30,7 +30,7 @@ function Beneficios() {
   };
 
   return (
-    <div className="w-full h-auto py-10 flex flex-wrap">
+    <div id="beneficios" className="w-full h-auto py-10 flex flex-wrap">
       {/* Texto y botones */}
       <div className="w-full md:w-1/2 h-full md:pt-28 px-4 md:md:pl-24 pr-10">
         <h2 className="font-source font-bold text-5xl text-[#2f4daa] text-center md:text-start">Lo que nos mueve en Dicar</h2>
