@@ -15,7 +15,8 @@ function Dicar() {
     <div>
     <Header />
     <Hero />
-    <Esperando />
+    <Beneficios/>
+    
     <ContainerDicar />
     <Nosotros />
     <Beneficios2 />

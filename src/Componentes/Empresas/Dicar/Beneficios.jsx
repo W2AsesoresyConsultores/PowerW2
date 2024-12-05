@@ -1,145 +1,72 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 
 function Beneficios() {
+  const [activeImage, setActiveImage] = useState(0); // Imagen activa
+  const [fade, setFade] = useState(false); // Estado para manejar el efecto de transición
+
+  const images = [
+    "https://www.buk.pe/hubfs/2024/nosotros/Somos%20cercanos%20y%20lo%20pasamos%20bien.jpg",
+    "https://www.buk.pe/hubfs/2024/nosotros/El%20cliente%20es%20nuestro%20centro.jpg",
+    "https://www.buk.pe/hubfs/Nos%20mueve%20la%20excelencia.jpg",
+    "https://www.buk.pe/hubfs/2024/nosotros/Lo%20que%20nos%20mueve/Los-pensamos-lo-hacemos.webp",
+    "https://www.buk.pe/hubfs/2024/nosotros/Vamos%20al%20infinito%20y%20m%C3%A1s%20all%C3%A1.webp",
+  ];
+
+  // Cambiar la imagen automáticamente cada 2 segundos
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleImageChange((activeImage + 1) % images.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [activeImage, images.length]);
+
+  // Manejo del cambio de imagen con transición
+  const handleImageChange = (index) => {
+    setFade(true); // Inicia la transición
+    setTimeout(() => {
+      setActiveImage(index); // Cambia la imagen
+      setFade(false); // Finaliza la transición
+    }, 300); // Duración de la transición (en milisegundos)
+  };
+
   return (
-    <>
-    <h2 className="text-3xl font-semibold text-gray-900 sm:text-4xl xl:text-5xl my-8 text-center">
-        ¿Por qué trabajar con <span className="underline decoration-primarycolor underline-offset-4">
-                    Nosotros
-                </span>?
-      </h2>
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <div className="grid gap-4">
-        <div className="relative overflow-hidden group">
-          <img
-            className="h-auto max-w-full rounded-lg transition-transform duration-300 group-hover:scale-110 object-cover"
-            src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg"
-            alt="Descripción 1"
-          />
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span className="text-white text-xl font-bold">Texto 1</span>
-          </div>
-        </div>
-        <div className="relative overflow-hidden group">
-          <img
-            className="h-auto max-w-full rounded-lg transition-transform duration-300 group-hover:scale-110 object-cover"
-            src="https://lh3.googleusercontent.com/proxy/0rHeD6Zv7Cqhs-hEjVZmOh4OGeXR6J1hzfGer_Apr6v4nhDIRuivY-ogA3tBMAThaABbcSTfb9PKHsx0Qvnwprqq2-86M_J0XIGxIGBdyCb9elKMq99bvD1KVbu_hhWy278UqE8KuQ"
-            alt="Descripción 2"
-          />
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span className="text-white text-xl font-bold">Texto 2</span>
-          </div>
-        </div>
-        <div className="relative overflow-hidden group">
-          <img
-            className="h-auto max-w-full rounded-lg transition-transform duration-300 group-hover:scale-110 object-cover"
-            src="https://lh3.googleusercontent.com/proxy/0rHeD6Zv7Cqhs-hEjVZmOh4OGeXR6J1hzfGer_Apr6v4nhDIRuivY-ogA3tBMAThaABbcSTfb9PKHsx0Qvnwprqq2-86M_J0XIGxIGBdyCb9elKMq99bvD1KVbu_hhWy278UqE8KuQ"
-            alt="Descripción 3"
-          />
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span className="text-white text-xl font-bold">Texto 3</span>
-          </div>
+    <div className="w-full h-auto py-10 flex">
+      {/* Texto y botones */}
+      <div className="w-full md:w-1/2 h-full pt-28 pl-24 pr-10">
+        <h2 className="font-source font-bold text-5xl text-[#2f4daa]">Lo que nos mueve en Dicar</h2>
+        <p className="font-inter my-4 text-xl">
+        En Dicar, aseguramos que los medicamentos lleguen de forma segura y puntual, fortaleciendo la confianza en la logística farmacéutica con soluciones innovadoras que impactan el bienestar de las personas.
+        </p>
+        <div className="font-inter flex w-full flex-wrap gap-2">
+          {[
+            "El cliente es nuestro centro",
+            "Lo pensamos lo hacemos",
+            "Vamos al infinito y más allá",
+            "Somos cercanos y lo pasamos bien",
+            "Nos mueve la excelencia",
+          ].map((text, index) => (
+            <button
+              key={index}
+              onClick={() => handleImageChange(index)}
+              className={`px-4 py-2 bg-[#d9e3fc] hover:bg-[#2f4daa] hover:text-white transition-all duration-500 rounded-full text-lg ${
+                activeImage === index ? "bg-[#2f4daa] text-white" : "text-[#2f4daa]"
+              }`}
+            >
+              {text}
+            </button>
+          ))}
         </div>
       </div>
-      <div className="grid gap-4">
-        <div className="relative overflow-hidden group">
-          <img
-            className="h-auto max-w-full rounded-lg transition-transform duration-300 group-hover:scale-110 object-cover"
-            src="https://lh3.googleusercontent.com/proxy/0rHeD6Zv7Cqhs-hEjVZmOh4OGeXR6J1hzfGer_Apr6v4nhDIRuivY-ogA3tBMAThaABbcSTfb9PKHsx0Qvnwprqq2-86M_J0XIGxIGBdyCb9elKMq99bvD1KVbu_hhWy278UqE8KuQ"
-            alt="Descripción 4"
-          />
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span className="text-white text-xl font-bold">Texto 4</span>
-          </div>
-        </div>
-        <div className="relative overflow-hidden group">
-          <img
-            className="h-auto max-w-full rounded-lg transition-transform duration-300 group-hover:scale-110 object-cover"
-            src="https://lh3.googleusercontent.com/proxy/0rHeD6Zv7Cqhs-hEjVZmOh4OGeXR6J1hzfGer_Apr6v4nhDIRuivY-ogA3tBMAThaABbcSTfb9PKHsx0Qvnwprqq2-86M_J0XIGxIGBdyCb9elKMq99bvD1KVbu_hhWy278UqE8KuQ"
-            alt="Descripción 5"
-          />
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span className="text-white text-xl font-bold">Texto 5</span>
-          </div>
-        </div>
-        <div className="relative overflow-hidden group">
-          <img
-            className="h-auto max-w-full rounded-lg transition-transform duration-300 group-hover:scale-110 object-cover"
-            src="https://lh3.googleusercontent.com/proxy/0rHeD6Zv7Cqhs-hEjVZmOh4OGeXR6J1hzfGer_Apr6v4nhDIRuivY-ogA3tBMAThaABbcSTfb9PKHsx0Qvnwprqq2-86M_J0XIGxIGBdyCb9elKMq99bvD1KVbu_hhWy278UqE8KuQ"
-            alt="Descripción 6"
-          />
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span className="text-white text-xl font-bold">Texto 6</span>
-          </div>
-        </div>
-      </div>
-      <div className="grid gap-4">
-        <div className="relative overflow-hidden group">
-          <img
-            className="h-auto max-w-full rounded-lg transition-transform duration-300 group-hover:scale-110 object-cover"
-            src="https://lh3.googleusercontent.com/proxy/0rHeD6Zv7Cqhs-hEjVZmOh4OGeXR6J1hzfGer_Apr6v4nhDIRuivY-ogA3tBMAThaABbcSTfb9PKHsx0Qvnwprqq2-86M_J0XIGxIGBdyCb9elKMq99bvD1KVbu_hhWy278UqE8KuQ"
-            alt="Descripción 7"
-          />
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span className="text-white text-xl font-bold">Texto 7</span>
-          </div>
-        </div>
-        <div className="relative overflow-hidden group">
-          <img
-            className="h-auto max-w-full rounded-lg transition-transform duration-300 group-hover:scale-110 object-cover"
-            src="https://lh3.googleusercontent.com/proxy/0rHeD6Zv7Cqhs-hEjVZmOh4OGeXR6J1hzfGer_Apr6v4nhDIRuivY-ogA3tBMAThaABbcSTfb9PKHsx0Qvnwprqq2-86M_J0XIGxIGBdyCb9elKMq99bvD1KVbu_hhWy278UqE8KuQ"
-            alt="Descripción 8"
-          />
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span className="text-white text-xl font-bold">Texto 8</span>
-          </div>
-        </div>
-        <div className="relative overflow-hidden group">
-          <img
-            className="h-auto max-w-full rounded-lg transition-transform duration-300 group-hover:scale-110 object-cover"
-            src="https://lh3.googleusercontent.com/proxy/0rHeD6Zv7Cqhs-hEjVZmOh4OGeXR6J1hzfGer_Apr6v4nhDIRuivY-ogA3tBMAThaABbcSTfb9PKHsx0Qvnwprqq2-86M_J0XIGxIGBdyCb9elKMq99bvD1KVbu_hhWy278UqE8KuQ"
-            alt="Descripción 9"
-          />
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span className="text-white text-xl font-bold">Texto 9</span>
-          </div>
-        </div>
-      </div>
-      <div className="grid gap-4">
-        <div className="relative overflow-hidden group">
-          <img
-            className="h-auto max-w-full rounded-lg transition-transform duration-300 group-hover:scale-110 object-cover"
-            src="https://informacionlogistica.com/wp-content/uploads/2023/02/el-puerto-de-long-beach-bate-records-de-contenedores-en-marzo-15060.jpg"
-            alt="Descripción 10"
-          />
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span className="text-white text-xl font-bold">Texto 10</span>
-          </div>
-        </div>
-        <div className="relative overflow-hidden group">
-          <img
-            className="h-auto max-w-full rounded-lg transition-transform duration-300 group-hover:scale-110 object-cover"
-            src="https://lh3.googleusercontent.com/proxy/0rHeD6Zv7Cqhs-hEjVZmOh4OGeXR6J1hzfGer_Apr6v4nhDIRuivY-ogA3tBMAThaABbcSTfb9PKHsx0Qvnwprqq2-86M_J0XIGxIGBdyCb9elKMq99bvD1KVbu_hhWy278UqE8KuQ"
-            alt="Descripción 11"
-          />
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span className="text-white text-xl font-bold">Texto 11</span>
-          </div>
-        </div>
-        <div className="relative overflow-hidden group object-cover">
-          <img
-            className="h-auto max-w-full rounded-lg transition-transform duration-300 group-hover:scale-110 object-cover"
-            src="https://mascontainer.com/wp-content/uploads/2022/05/Contenedores.jpg"
-            alt="Descripción 12"
-          />
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span className="text-white text-xl font-bold">Texto 12</span>
-          </div>
-        </div>
+      {/* Imagen con transición */}
+      <div className="w-full md:w-1/2 h-full py-10 px-24 flex justify-center items-center">
+        <img
+          className={`w-[90%] transition-opacity duration-500 ${fade ? "opacity-0" : "opacity-100"}`}
+          src={images[activeImage]}
+          alt={`Imagen ${activeImage}`}
+        />
       </div>
     </div>
-    </>
-  )
+  );
 }
 
-export default Beneficios
+export default Beneficios;
