@@ -27,7 +27,9 @@ module.exports = withMT( {
       },
       fontFamily: {
         'dmsans': ['"Poppins", sans-serif'],
-        'lato' : ['"Lato", sans-serif']
+        'lato' : ['"Lato", sans-serif'],
+        'source' : ['"Source Sans 3", sans-serif'],
+        'inter' : ['"Inter", sans-serif']
       },
       keyframes: {
         spinIn: {

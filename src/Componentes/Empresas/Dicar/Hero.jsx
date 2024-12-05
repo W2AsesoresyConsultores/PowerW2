@@ -23,7 +23,7 @@ function Hero() {
   };
 
   return (
-    <div className='w-full h-[500px] pt-20 md:pt-0 md:h-[600px] relative flex flex-col justify-center items-center md:items-start gap-10 font-dmsans text-white text-center md:text-left md:px-16 px-4 overflow-hidden'>
+    <div className='w-full h-[500px] pt-20 md:pt-0 md:h-[600px] relative flex flex-col justify-center items-center md:items-start gap-10 font-source text-white text-center md:text-left md:px-16 px-4 overflow-hidden'>
       {/* Contenedor de imágenes */}
       <div className="absolute inset-0 w-full h-full flex transition-transform duration-700 ease-in-out"
         style={{
