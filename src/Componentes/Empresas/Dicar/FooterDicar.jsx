@@ -15,10 +15,10 @@ const Footer = () => {
       </div>
 {/* Información de contacto */}
     <div className="text-center md:text-center">
-      <p className="text-gray-300">¿Quiénes somos?</p>
-      <p className="text-gray-300">Ofertas</p>
-      <p className="text-gray-300">Beneficios</p>
-      <p className="text-gray-300">Sedes</p>
+      <a href=""><p className="text-gray-300">¿Quiénes somos?</p></a>
+      <a href="#ofertas"><p className="text-gray-300">Ofertas</p></a>
+      <a href=""><p className="text-gray-300">Beneficios</p></a>
+      <a href=""><p className="text-gray-300">Sedes</p></a>
     </div>
 
     {/* Iconos de redes sociales */}

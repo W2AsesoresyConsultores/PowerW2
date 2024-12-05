@@ -10,7 +10,7 @@ const TeEsperando = () => {
             </p>
           </div>
           <a
-            href="/Login"
+            href="#ofertas"
             className="mt-4 md:mt-0 bg-[#2f4daa] border-2 border-white text-white  font-bold py-3 px-8 rounded-full hover:bg-gray-200 hover:text-[#2f4daa] transition font-source text-xl"
           >
             Postula Aquí

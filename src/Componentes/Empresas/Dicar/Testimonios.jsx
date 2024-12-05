@@ -72,11 +72,11 @@ function Testimonios() {
   };
 
   return (
-    <section id="testimonios" className="py-8 bg-gray-50 sm:py-8 lg:py-14 font-dmsans">
+    <section className="py-8 bg-gray-50 sm:py-8 lg:py-14 mx-auto font-dmsans overflow-x-hidden">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="text-center">
           <p className="text-lg font-regular font-inter text-gray-600">Historias que reflejan nuestra cultura</p>
-          <h2 className="text-3xl font-bold text-[#2f4eab] sm:text-4xl xl:text-5xl font-source">
+          <h2 className="font-source font-bold text-5xl text-[#2f4daa] text-center">
             Lo que dicen nuestros Colaboradores
           </h2>
         </div>

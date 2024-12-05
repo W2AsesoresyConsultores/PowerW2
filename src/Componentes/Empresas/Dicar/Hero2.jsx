@@ -3,7 +3,7 @@ import Buscador from './Buscador';
 
 function Hero2() {
   return (
-    <div className="relative pt-20 h-screen flex items-center flex-col bg-[#2f4eab] px-2">
+    <div className="relative pt-20 h-screen flex items-center flex-col bg-[#2552a4] px-2">
       <h1 className="font-source font-extrabold text-6xl text-white text-center mt-20 mb-10 z-20">
         Únete a #Dicar,
         <br /> juntos seguimos creciendo.
