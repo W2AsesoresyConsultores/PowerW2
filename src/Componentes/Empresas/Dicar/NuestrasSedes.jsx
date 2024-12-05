@@ -4,7 +4,7 @@ const ImageSlide = ({ image, title, address, onButtonClick }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div
+    <div id="sedes"
       className="relative w-full max-w-md overflow-hidden"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

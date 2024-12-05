@@ -5,7 +5,7 @@ import "../../../Nosotros.css";
 
 const Nosotros = () => {
   return (
-    <div className="bg-white py-16 px-4 md:px-16">
+    <div id="nosotros" className="bg-white py-16 px-4 md:px-16">
       {/* Título general */}
       <div className="text-center mb-12">
         <h1 className="text-3xl font-bold text-[#2f4eab] sm:text-4xl xl:text-5xl font-source">
