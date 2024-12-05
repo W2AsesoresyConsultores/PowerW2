@@ -17,36 +17,35 @@ const Nosotros = () => {
         </h1>
       </div>
 
-      <div className="flex flex-col md:flex-row justify-center items-center">
-        {/* Imagen con el testimonio */}
-        <div className="relative w-full flex justify-center ">
-        <Plyr
-            source={{
-              type: "video",
-              sources: [
-                {
-                  src: "https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/sedes/talanaremu.mp4?t=2024-12-04T22%3A25%3A53.063Z",
-                  type: "video/mp4",
-                },
-              ],
-            }}
-            options={{
-              controls: [
-                "play-large", // Botón grande de reproducción
-                "play",
-                "progress",
-                "current-time",
-                "mute",
-                "volume",
-                "settings",
-                "fullscreen",
-              ],
-              settings: ["quality", "speed"], // Opciones de configuración
-              theme: { primary: "#FF5733" }, // Cambiar el color principal
-            }}
-          />
-        </div>
-      </div>
+      <div className="relative w-full flex justify-center">
+  <div className="player-wrapper rounded-lg overflow-hidden shadow-lg">
+    <Plyr
+      source={{
+        type: "video",
+        sources: [
+          {
+            src: "https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/sedes/talanaremu.mp4?t=2024-12-04T22%3A25%3A53.063Z",
+            type: "video/mp4",
+          },
+        ],
+      }}
+      options={{
+        controls: [
+          "play-large", // Botón grande de reproducción
+          "play",
+          "progress",
+          "current-time",
+          "mute",
+          "volume",
+          "settings",
+          "fullscreen",
+        ],
+        settings: ["quality", "speed"], // Opciones de configuración
+        theme: { primary: "#FF5733" }, // Cambiar el color principal
+      }}
+    />
+  </div>
+</div>
     </div>
   );
 };
