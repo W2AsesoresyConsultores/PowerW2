@@ -8,12 +8,15 @@ import Beneficios from './Beneficios'
 import Beneficios2 from './Beneficios2'
 import ContainerDicar from './ContainerDicar'
 import Testimonios from './Testimonios'
+import Esperando from './Esperando'
 
 function Dicar() {
   return (
     <div>
     <Header />
     <Hero />
+    <Beneficios/>
+    
     <ContainerDicar />
     <Nosotros />
     <Beneficios2 />
