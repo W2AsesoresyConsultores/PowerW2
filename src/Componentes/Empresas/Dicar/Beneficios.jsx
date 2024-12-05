@@ -33,7 +33,7 @@ function Beneficios() {
     <div className="w-full h-auto py-10 flex flex-wrap">
       {/* Texto y botones */}
       <div className="w-full md:w-1/2 h-full md:pt-28 px-4 md:md:pl-24 pr-10">
-        <h2 className="font-source font-bold text-5xl text-[#2f4daa]">Lo que nos mueve en Dicar</h2>
+        <h2 className="font-source font-bold text-5xl text-[#2f4daa] text-center md:text-start">Lo que nos mueve en Dicar</h2>
         <p className="font-inter my-8 text-xl text-gray-800">
         En Dicar, fomentamos una cultura laboral basada en la confianza y la innovación, asegurando soluciones logísticas eficientes que impactan positivamente en el bienestar de las personas.
         </p>

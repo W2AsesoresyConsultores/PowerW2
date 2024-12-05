@@ -63,7 +63,7 @@ function Sedes() {
   return (
     <>
       <section className="flex flex-col gap-8 py-12 2xl:py-16 max-w-screen-2xl m-auto w-full px-3 sm:px-8 lg:px-16 xl:px-32 font-dmsans">
-        <h3 className="text-3xl font-bold text-[#2f4eab] sm:text-4xl xl:text-5xl font-source text-center">
+        <h3 className="font-source font-bold text-5xl text-[#2f4daa] text-center">
           Conoce Nuestras Sedes
         </h3>
         <div className="grid w-full grid-flow-row gap-x-0 gap-y-6 sm:max-md:justify-items-center md:grid-cols-2 md:justify-items-start md:gap-6 lg:grid-cols-3">
