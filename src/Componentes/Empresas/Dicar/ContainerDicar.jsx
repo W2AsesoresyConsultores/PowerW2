@@ -3,9 +3,11 @@ import CardTrabajoDicar from './CardTrabajoDicar';
 import InfoDicar from './InfoDicar';
 import JobsContext from '../../../Context/JobsContext';
 import { useNavigate, useParams } from 'react-router-dom';
+import { supabase } from "../../../supabase/supabase.config";
 
 function ContainerDicar() {
-  const { allActiveJobs, searchTerm } = useContext(JobsContext);
+  const { searchTerm } = useContext(JobsContext);
+  const [allActiveJobs, setAllActiveJobs] = useState([]);
   const [selectedJob, setSelectedJob] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const navigate = useNavigate();
@@ -20,6 +22,24 @@ function ContainerDicar() {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
+  }, []);
+
+  // Obtener trabajos filtrados de Supabase
+  useEffect(() => {
+    const fetchJobs = async () => {
+      const { data, error } = await supabase
+        .from('Oferta')
+        .select('*')
+        .eq('id_empresa', 5); // Solo los trabajos de id_empresa = 5
+
+      if (error) {
+        console.error('Error fetching jobs:', error);
+      } else {
+        setAllActiveJobs(data || []);
+      }
+    };
+
+    fetchJobs();
   }, []);
 
   useEffect(() => {
@@ -42,14 +62,6 @@ function ContainerDicar() {
     }
   }, [id_oferta, allActiveJobs, navigate]);
 
-  const handleCardClick = (job) => {
-    if (isMobile) {
-      navigate(`/info-job-movil/${job.id_oferta}`);
-    } else {
-      setSelectedJob(job);
-    }
-  };
-
   return (
     <div id='ofertas' className='w-full flex flex-col items-center font-dmsans pt-4 px-4 justify-center pb-6 bg-[#f8fafc]'>
       <h1 className="text-3xl font-bold text-[#2f4eab] sm:text-4xl xl:text-5xl font-source my-8">Sé parte de #Dicar</h1>
@@ -66,7 +78,7 @@ function ContainerDicar() {
             <CardTrabajoDicar
               key={selectedJob.id_oferta}
               job={selectedJob}
-              onSelectJob={() => handleCardClick(selectedJob)}
+              onSelectJob={() => setSelectedJob(selectedJob)}
               isSelected={true}
             />
           ) : (
@@ -77,7 +89,7 @@ function ContainerDicar() {
                 <CardTrabajoDicar
                   key={job.id_oferta}
                   job={job}
-                  onSelectJob={() => handleCardClick(job)}
+                  onSelectJob={() => setSelectedJob(job)}
                   isSelected={selectedJob === job}
                 />
               ))
