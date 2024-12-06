@@ -64,8 +64,8 @@ function TrabajosContainer() {
   };
 
   return (
-    <div id='ofertas' className='w-full flex flex-col items-center font-dmsans pt-6 px-4 justify-center pb-10 bg-[#F5F7F9]'>
-      <h1 className='text-3xl font-bold mb-4'> OFERTAS <span className="text-primarycolor xl:inline"> LABORALES </span></h1>
+    <div id='ofertas' className='w-full flex flex-col items-center pt-6 px-4 md:px-40 justify-center pb-10 bg-[#F5F7F9]'>
+      {/* <h1 className='text-3xl font-bold mb-4'> OFERTAS <span className="text-primarycolor xl:inline"> LABORALES </span></h1> */}
       <div className='flex w-full justify-center items-center'>
         <div
           className='flex flex-col w-full md:w-1/2 justify-start items-center gap-4 h-[650px] overflow-auto'

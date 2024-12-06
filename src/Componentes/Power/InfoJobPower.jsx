@@ -124,7 +124,7 @@ function InfoJobPower({ selectedJob }) {
 
     return (
         <div
-            className="selected-job-info w-full sm:w-3/5 rounded-lg md:flex flex-col p-8 mx-8 bg-white hidden transition-all duration-500 font-dmsans"
+            className="selected-job-info w-full sm:w-3/5 rounded-lg md:flex flex-col p-8 mx-8 bg-white hidden transition-all duration-500 font-dmsans border"
             style={{ height: "650px", overflowY: "auto", }}
         >
             <p className="text-gray-500 text-sm">{capitalizedTimeAgo}</p>

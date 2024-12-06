@@ -17,8 +17,9 @@ const Footer = () => {
     <div className="text-start text-inter">
       <a href=""><p className="text-gray-300">¿Quiénes somos?</p></a>
       <a href="#ofertas"><p className="text-gray-300">Ofertas</p></a>
-      <a href=""><p className="text-gray-300">Beneficios</p></a>
-      <a href=""><p className="text-gray-300">Sedes</p></a>
+      <a href="#beneficios"><p className="text-gray-300">Beneficios</p></a>
+      <a href="#testimonios"><p className="text-gray-300">Testimonios</p></a>
+      <a href="#sedes"><p className="text-gray-300">Sedes</p></a>
     </div>
 
     {/* Iconos de redes sociales */}

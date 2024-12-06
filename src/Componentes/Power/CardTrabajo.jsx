@@ -46,7 +46,7 @@ function CardTrabajo({ job, onSelectJob, isSelected }) {
 
 
   return (
-    <div className="w-full flex justify-center font-dmsans">
+    <div className="w-full flex justify-center">
       <button
         onClick={() => onSelectJob(job)}
         className={`w-full md:w-[90%] text-left border hover:shadow-sm hover:transition-all hover:duration-200 rounded-lg p-6 overflow-hidden flex justify-between items-center ${
@@ -61,24 +61,24 @@ function CardTrabajo({ job, onSelectJob, isSelected }) {
                 <img src={empresa_img_url} className="w-full h-full rounded-lg" alt="" />
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-gray-800">
+                <h3 className="text-md font-semibold text-gray-800 font-source">
                   {empresa}
                 </h3>
-                <p className="text-xs text-gray-500">{nombreReclutador}</p>{" "}
+                <p className="text-sm text-gray-500 font-inter">{nombreReclutador}</p>{" "}
                 {/* Aquí se muestra el nombre del reclutador */}
               </div>
               </div>
               <FaBookmark size={20} />
             </div>
           </div>
-          <h4 className="font-bold text-lg leading-tight text-gray-800">
+          <h4 className="font-bold text-lg leading-tight text-gray-900 font-source">
             {puesto}
           </h4>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-600 font-inter">
             {descripcion} <span className="text-blue-500">Ver más</span>
           </p>
           <div className="flex space-x-2 justify-between">
-            <div className="flex space-x-2">
+            <div className="flex space-x-2 font-inter">
               {modalidad && (
               <span className="bg-blue-50 text-gray-700 py-1 px-3 text-xs rounded-full font-regular tracking-wide gap-1 flex items-center">
                 <MdOutlineMapsHomeWork /> {modalidad}
