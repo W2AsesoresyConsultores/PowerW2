@@ -63,9 +63,10 @@ function ContainerDicar() {
   }, [id_oferta, allActiveJobs, navigate]);
 
   return (
-    <div id='ofertas' className='w-full flex flex-col items-center font-dmsans pt-4 px-4 justify-center pb-6 bg-[#f8fafc]'>
+    <div id='ofertas' className='w-full flex flex-col items-center pt-6 px-4 md:px-40 justify-center pb-10 bg-[#F5F7F9]'>
       <h1 className="text-3xl font-bold text-[#2f4eab] sm:text-4xl xl:text-5xl font-source my-8">Sé parte de #Dicar</h1>
       <div className='flex w-full justify-center items-center'>
+        
         <div
           className='flex flex-col w-full md:w-1/2 justify-start items-center gap-4 h-[620px] overflow-auto'
           style={{
