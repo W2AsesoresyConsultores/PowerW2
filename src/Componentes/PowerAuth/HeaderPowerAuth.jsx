@@ -52,7 +52,7 @@ function HeaderPowerAuth() {
     <header className="bg-newprimarycolor fixed w-full z-10 transition-shadow flex justify-center duration-300">
       <div className="container md:mx-auto md:px-8 flex justify-between items-center py-2">
         <div className="md:flex items-center hidden">
-        <Link className='text-white' to="/">
+        <Link className='text-white' to="/PowerAuth">
             <img src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/AssetsPower/Main/LogoPower.svg?t=2024-11-12T22%3A38%3A36.881Z" alt="" />
           </Link>
         </div>
