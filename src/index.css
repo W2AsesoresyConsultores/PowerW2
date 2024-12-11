@@ -77,6 +77,12 @@
   object-fit: cover;
 }
 
+.text-wrap {
+  word-wrap: break-word; /* Para romper palabras largas */
+  overflow-wrap: break-word; /* Para compatibilidad */
+  white-space: normal; /* Permite el salto de línea */
+}
+
 .video-container {
   position: relative;
   width: 100%;
@@ -125,43 +131,6 @@
     animation: gradientChange 4s ease infinite;
   }
 }
-
-/* marcas slider */
-.slider {
-  background: #ffffff;
-  height: 100px;
-  width: 90%;
-  overflow: hidden;
-}
-
-.slider .move {
-  display: flex;
-  width: calc(200px * 20);
-  animation: animacion 50s linear infinite;
-}
-
-@keyframes animacion {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(-200px * 10));
-  }
-}
-
-.slider .box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100px;
-  width: 250px;
-}
-
-.img-marca {
-  width: 65%;
-  height: 60%;
-}
-
 /* Start Animations */
 @-webkit-keyframes animatetop {
   from {
@@ -381,23 +350,6 @@
   object-fit: cover;
 }
 
-
-::-webkit-scrollbar {
-  width: 12px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #ffffff;
-  border-radius: 5px;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #b8b8b8;
-  border-radius: 3px;
-}
-
 /* Handle on hover */
 /* ::-webkit-scrollbar-thumb:hover {
   background: #ffffff;
@@ -519,3 +471,33 @@
   cursor: pointer;
 }
 
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #b8b8b8;
+  border-radius: 3px;
+}
+
+/* Scrollbar específico para un componente */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #d8d8d8;
+  border-radius: 4px;
+}

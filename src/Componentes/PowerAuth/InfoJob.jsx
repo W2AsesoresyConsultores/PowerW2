@@ -134,7 +134,7 @@ function InfoJob({ selectedJob }) {
 
   return (
     <div
-      className="selected-job-info w-full sm:w-3/5 rounded-lg md:flex flex-col px-8 py-4 mx-8 bg-[#ffffff] hidden transition-all duration-500 font-dmsans"
+      className="selected-job-info w-full custom-scrollbar sm:w-3/5 rounded-lg md:flex flex-col px-8 py-4 mx-8 bg-[#ffffff] hidden transition-all duration-500 font-dmsans"
       style={{ height: "610px", overflowY: "auto" }}
     >
       <div className="flex gap-4">
@@ -191,7 +191,7 @@ function InfoJob({ selectedJob }) {
       </div>
 
       <div className="mb-4">
-        <div className="text-gray-700 text-sm leading-relaxed">
+        <div className="text-gray-700 text-sm leading-relaxed text-wrap">
           <h3 className="font-semibold text-lg text-gray-800">Descripción</h3>
           <p>{selectedJob.descripcion}</p>
           {jobDetails.map((detail, index) => (
