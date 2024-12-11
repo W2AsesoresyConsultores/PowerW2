@@ -191,7 +191,7 @@ function InfoJob({ selectedJob }) {
       </div>
 
       <div className="mb-4">
-        <div className="text-gray-700 text-sm leading-relaxed">
+        <div className="text-gray-700 text-sm leading-relaxed text-wrap">
           <h3 className="font-semibold text-lg text-gray-800">Descripción</h3>
           <p>{selectedJob.descripcion}</p>
           {jobDetails.map((detail, index) => (
