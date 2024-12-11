@@ -64,11 +64,11 @@ function TrabajosContainer() {
   };
 
   return (
-    <div id='ofertas' className='w-full flex flex-col items-center pt-6 px-4 md:px-40 justify-center pb-10 bg-[#F5F7F9]'>
+    <div id='ofertas' className='md:w-[80%] w-full mx-auto flex flex-col items-center pt-6 px-4 rounded-2xl justify-center pb-10 bg-white'>
       {/* <h1 className='text-3xl font-bold mb-4'> OFERTAS <span className="text-primarycolor xl:inline"> LABORALES </span></h1> */}
       <div className='flex w-full justify-center items-center'>
         <div
-          className='flex flex-col w-full md:w-1/2 justify-start items-center gap-4 h-[650px] overflow-auto'
+          className='flex flex-col w-full md:w-1/2 justify-start items-center gap-4 md:h-[650px] md:overflow-auto h-auto'
           style={{
             msOverflowStyle: 'none',
             scrollbarWidth: 'none'
