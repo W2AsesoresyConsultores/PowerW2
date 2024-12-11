@@ -19,7 +19,13 @@ const Step1 = ({ data, handleChange, nextStep }) => {
         setSueldoDesde(''); // Restablece los campos de sueldo
         setSueldoHasta('');
     };
-
+    const handleKeyDown = (event, name) => {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Evita el comportamiento por defecto de Enter
+            const newText = data[name] ? data[name] + '.\n' : '.\n'; // Añade un punto y salto de línea
+            handleChange({ target: { name, value: newText } }); // Actualiza el estado
+        }
+    };
     // Función para manejar el cambio en el campo de sueldo fijo
     const handleSueldoFijoChange = (event) => {
         handleChange(event);
@@ -65,6 +71,7 @@ const Step1 = ({ data, handleChange, nextStep }) => {
                 name="descripcion"
                 value={data.descripcion}
                 onChange={handleChange}
+                onKeyDown={(event) => handleKeyDown(event, 'descripcion')}
                 fullWidth
                 required
                 multiline

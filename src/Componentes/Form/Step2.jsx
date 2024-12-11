@@ -2,15 +2,23 @@ import React from 'react';
 import { TextField, Button, Typography, Box } from '@mui/material';
 
 const Step2 = ({ data, handleChange, nextStep, prevStep }) => {
+    const handleKeyDown = (event, name) => {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Evita el comportamiento por defecto de Enter
+            const newText = data[name] ? data[name] + '.\n' : '.\n'; // Añade un punto y salto de línea
+            handleChange({ target: { name, value: newText } }); // Actualiza el estado
+        }
+    };
+
     return (
         <Box sx={{ maxWidth: 600, mx: 'auto', mt: 0, p: 3, bgcolor: 'background.paper', borderRadius: 2, boxShadow: 1 }}>
-            
             <TextField
                 label="Requisitos"
                 variant="outlined"
                 name="requisitos"
                 value={data.requisitos}
                 onChange={handleChange}
+                onKeyDown={(event) => handleKeyDown(event, 'requisitos')}
                 fullWidth
                 required
                 multiline
@@ -24,6 +32,7 @@ const Step2 = ({ data, handleChange, nextStep, prevStep }) => {
                 name="funciones"
                 value={data.funciones}
                 onChange={handleChange}
+                onKeyDown={(event) => handleKeyDown(event, 'funciones')}
                 fullWidth
                 required
                 multiline
@@ -37,6 +46,7 @@ const Step2 = ({ data, handleChange, nextStep, prevStep }) => {
                 name="beneficios"
                 value={data.beneficios}
                 onChange={handleChange}
+                onKeyDown={(event) => handleKeyDown(event, 'beneficios')}
                 fullWidth
                 required
                 multiline
