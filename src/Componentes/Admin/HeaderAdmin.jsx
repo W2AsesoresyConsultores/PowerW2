@@ -79,12 +79,12 @@ function HeaderAdmin() {
   };
 
   return (
-    <div className="flex items-center pl-72 justify-between p-4 bg-white dark:bg-[#141a21] shadow-sm fixed w-full z-10 font-lato">
+    <div className="flex items-center pl-72 justify-between p-4 bg-white dark:bg-[#141a21] shadow-sm fixed w-full z-10 ">
       <div className="text-gray-800 dark:text-gray-200">
-        <span className="text-lg font-semibold">
+        <span className="text-lg font-semibold font-jakarta">
           Hola, {getFirstName(profile.nombre)} 👋
         </span>
-        <div className="text-sm text-gray-600 dark:text-gray-300">
+        <div className="text-sm text-gray-600 dark:text-gray-300 font-jakarta">
           Echemos un vistazo a tu actividad hoy.
         </div>
       </div>
@@ -126,12 +126,12 @@ function HeaderAdmin() {
           </div>
         ) : (
           <>
-            <span className="text-gray-800 dark:text-gray-200 text-base font-medium w-44 truncate">
+            <span className="text-gray-800 dark:text-gray-200 text-base font-medium font-jakarta w-44 truncate">
               {profile.nombre}
             </span>
             <img
               src={profile.avatar_url || 'https://static-00.iconduck.com/assets.00/user-avatar-happy-icon-2048x2048-ssmbv1ou.png'}
-              alt="User Avatar"
+              alt="Foto de perfil del reclutador"
               className="w-10 h-10 rounded-full"
             />
           </>

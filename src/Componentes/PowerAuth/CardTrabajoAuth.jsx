@@ -48,7 +48,7 @@ function CardTrabajo2({ job, onSelectJob, isSelected }) {
 
 
   return (
-    <div className="w-full flex justify-center font-dmsans">
+    <div className="w-full flex justify-center">
        <button
         onClick={() => onSelectJob(job)}
         className={`w-full md:w-[90%] text-left border hover:shadow-sm hover:transition-all hover:duration-200 rounded-lg p-6 overflow-hidden flex justify-between items-center ${
@@ -63,30 +63,30 @@ function CardTrabajo2({ job, onSelectJob, isSelected }) {
                 <img src={job.empresa_img_url} className="w-full h-full rounded-lg" alt="" />
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-gray-800">
+                <h3 className="text-md font-semibold text-gray-900 font-source">
                   {empresa}
                 </h3>
-                <p className="text-xs text-gray-600">{nombreReclutador}</p>{" "}
+                <p className="text-sm text-gray-700 font-inter">{nombreReclutador}</p>{" "}
                 {/* Aquí se muestra el nombre del reclutador */}
               </div>
               </div>
               <FaBookmark size={20} />
             </div>
           </div>
-          <h4 className="font-bold text-lg leading-tight text-gray-800">
+          <h4 className="font-bold text-xl leading-tight text-newprimarycolor font-source">
             {puesto}
           </h4>
-          <p className="text-sm text-gray-700">
-            {descripcion} <span className="text-blue-500">Ver más</span>
+          <p className="text-sm font-light text-gray-800 font-inter">
+            {descripcion} 
           </p>
           <div className="flex space-x-2 justify-between">
             <div className="flex space-x-2">
               {modalidad && (
-              <span className="bg-blue-50 text-gray-700 py-1 px-3 text-xs rounded-full font-medium tracking-wide gap-1 flex items-center">
+              <span className="bg-primarycolor/70 text-white py-1 px-3 text-xs rounded-full font-medium tracking-wide gap-1 flex items-center font-inter">
                 <MdOutlineMapsHomeWork /> {modalidad}
               </span>
             )}
-            <span className="bg-purple-50 text-gray-700 py-1 px-3 text-xs rounded-full font-medium tracking-wide flex items-center gap-1">
+            <span className="bg-yellowprimary/70 text-primarycolor py-1 px-3 text-xs rounded-full font-medium tracking-wide gap-1 flex items-center font-inter">
             <IoLocationOutline />{ubicacion}
             </span>
             </div>
@@ -97,7 +97,7 @@ function CardTrabajo2({ job, onSelectJob, isSelected }) {
           }`}
         />
           </div>
-          <div className="text-md flex items-center justify-between text-gray-600 gap-1">
+          <div className="text-md flex items-center justify-between text-gray-600 gap-1 font-inter">
               <span className="text-[12px]">{capitalizedTimeAgo}</span> 
               </div>
         </div>
