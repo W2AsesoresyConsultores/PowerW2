@@ -28,39 +28,42 @@ const GeneratePdfButton = ({ formData }) => {
     }
 
     const finalizePDF = () => {
-      // Título con Nombre y Foto
+      // Título con Nombre y Correo
       doc.setFontSize(22);
       doc.text(formData.nombre || "Nombre no especificado", 60, 30);
-
-      // Información Personal
-      doc.setFontSize(14);
-      doc.text("Información Personal", 10, 60);
       doc.setFontSize(12);
-      doc.text(`Correo: ${formData.correo || "No especificado"}`, 10, 70);
-      doc.text(`Teléfono: ${formData.telefono || "No especificado"}`, 10, 80);
-      doc.text(`DNI: ${formData.dni || "No especificado"}`, 10, 90);
-      doc.text(`Distrito: ${formData.distrito || "No especificado"}`, 10, 100);
-      doc.text(
-        `Fecha de Nacimiento: ${formData.fecha_nac || "No especificado"}`,
-        10,
-        110
-      );
+      doc.text(`${formData.correo || "No especificado"}`, 60, 40);
 
-      // Grado Académico
+// Información Personal con icono
+doc.setFontSize(14);
+// Incrementamos ligeramente la posición Y
+doc.text("Información Personal", 10, 65);
+doc.setFontSize(12);
+doc.text(`Teléfono: ${formData.telefono || "No especificado"}`, 20, 75);
+doc.text(`DNI: ${formData.dni || "No especificado"}`, 20, 85);
+doc.text(`Distrito: ${formData.distrito || "No especificado"}`, 20, 95);
+doc.text(
+  `Fecha de Nacimiento: ${formData.fecha_nac || "No especificado"}`,
+  20,
+  105
+);
+
+
+      // Grado Académico con icono
       doc.setFontSize(14);
-      doc.text("Grado Académico", 10, 130);
+      doc.text("Grado Académico", 10, 125);
       doc.setFontSize(12);
-      doc.text(`Grado: ${formData.estudio || "No especificado"}`, 10, 140);
+      doc.text(`Grado: ${formData.estudio || "No especificado"}`, 20, 135);
       doc.text(
         `Institución: ${formData.institucion || "No especificado"}`,
-        10,
-        150
+        20,
+        145
       );
-      doc.text(`Último Año: ${formData.año || "No especificado"}`, 10, 160);
+      doc.text(`Último Año: ${formData.año || "No especificado"}`, 20, 155);
 
-      // Experiencia Laboral
+      // Experiencia Laboral con icono
       doc.setFontSize(14);
-      doc.text("Experiencia Laboral", 10, 180);
+      doc.text("Experiencia Laboral", 10, 175);
 
       const experienciaData = [];
 
@@ -90,12 +93,13 @@ const GeneratePdfButton = ({ formData }) => {
         doc.autoTable({
           head: [["#", "Cargo", "Empresa", "Tiempo", "Funciones"]],
           body: experienciaData,
-          startY: 190,
+          startY: 180,
+          styles: { fontSize: 9 }, // Reducir el tamaño del texto
         });
       } else {
         // Si no hay experiencia laboral
         doc.setFontSize(12);
-        doc.text("No cuento con experiencia laboral.", 10, 190);
+        doc.text("No cuento con experiencia laboral.", 20, 180);
       }
 
       // Descargar el PDF
