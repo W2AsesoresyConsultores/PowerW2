@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { supabase } from '../../supabase/supabase.config';
 
-const Step3 = ({ data, handleChange, prevStep, onSubmit }) => {
+const Step3 = ({ data, handleChange, nextStep, prevStep, onSubmit }) => {
   const [questions, setQuestions] = useState([""]);
   const [isModalOpen, setModalOpen] = useState(false);
   const [updatedData, setUpdatedData] = useState(null);
@@ -54,6 +54,9 @@ const Step3 = ({ data, handleChange, prevStep, onSubmit }) => {
       preg_5: questions[4] || "",
       preg_6: questions[5] || "",
     };
+
+    // Llama a la función onSubmit para pasar los datos al componente padre
+    onSubmit(newData); // Cambia el flujo aquí
 
     const { data: ofertaData, error: ofertaError } = await supabase
       .from("Oferta")
@@ -94,7 +97,6 @@ const Step3 = ({ data, handleChange, prevStep, onSubmit }) => {
 
     setUpdatedData(ofertaData[0]);
     setModalOpen(true);
-    onSubmit(ofertaData[0]);
   };
 
   return (
@@ -219,7 +221,7 @@ const Step3 = ({ data, handleChange, prevStep, onSubmit }) => {
         <Button variant="contained" color="secondary" onClick={prevStep}>
           Anterior
         </Button>
-        <Button variant="contained" color="primary" onClick={handleSubmit}>
+        <Button variant="contained" color="primary" onClick={nextStep}>
           Enviar
         </Button>
       </Box>

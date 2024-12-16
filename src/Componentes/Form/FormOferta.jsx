@@ -4,6 +4,7 @@ import { UserAuth } from '../../Context/AuthContext';
 import Step1 from './Step1';
 import Step2 from './Step2';
 import Step3 from './Step3';
+import Preview from './Preview';
 import HeaderAdmin from '../Admin/HeaderAdmin';
 import MenuAdmin from '../Admin/MenuAdmin';
 import { Box, Stepper, Step, StepLabel } from '@mui/material';
@@ -19,8 +20,8 @@ const FormOferta = () => {
         sueldo: '',
         funciones: '',
         horario: '',
-        empresa: '', // Este campo se actualizará con el nombre de la empresa
-        id_empresa: null, // Nuevo campo para almacenar el id_empresa
+        empresa: '',
+        id_empresa: null,
         beneficios: '',
         modalidad: '',
         preg_1: '',
@@ -60,7 +61,7 @@ const FormOferta = () => {
                 const { data: empresaData, error: empresaError } = await supabase
                     .from('Empresa')
                     .select('nombre_empresa')
-                    .eq('id_empresa', idEmpresa) // Asegúrate de que 'id' es la columna correcta
+                    .eq('id_empresa', idEmpresa)
                     .single();
 
                 if (empresaError) {
@@ -69,8 +70,8 @@ const FormOferta = () => {
                     setNombreEmpresa(empresaData?.nombre_empresa);
                     setFormData(prevState => ({
                         ...prevState,
-                        empresa: empresaData?.nombre_empresa, // Actualiza el campo 'empresa'
-                        id_empresa: idEmpresa // Actualiza el nuevo campo 'id_empresa'
+                        empresa: empresaData?.nombre_empresa,
+                        id_empresa: idEmpresa
                     }));
                 }
             }
@@ -88,7 +89,8 @@ const FormOferta = () => {
     };
 
     const handleQuestionsChange = (questions) => {
-        setFormData({ ...formData, 
+        setFormData({ 
+            ...formData, 
             preg_1: questions[0] || '',
             preg_2: questions[1] || '',
             preg_3: questions[2] || '',
@@ -113,8 +115,8 @@ const FormOferta = () => {
                 sueldo: '',
                 funciones: '',
                 horario: '',
-                empresa: '', // Resetea el campo 'empresa'
-                id_empresa: null, // Resetea el campo 'id_empresa'
+                empresa: '',
+                id_empresa: null,
                 beneficios: '',
                 modalidad: '',
                 preg_1: '',
@@ -125,7 +127,20 @@ const FormOferta = () => {
                 preg_6: '',
                 id_reclutador: user?.id || null,
             });
+            setStep(1); // Regresa al primer paso
         }
+    };
+
+    const handlePreview = () => {
+        setStep(4); // Cambia al paso de previsualización
+    };
+
+    const handleConfirm = async () => {
+        await handleSubmit(formData); // Envía los datos
+    };
+
+    const handleCancel = () => {
+        setStep(3); // Regresa al paso anterior
     };
 
     return (
@@ -144,6 +159,9 @@ const FormOferta = () => {
                         </Step>
                         <Step>
                             <StepLabel>Información adicional</StepLabel>
+                        </Step>
+                        <Step>
+                            <StepLabel>Previsualización</StepLabel>
                         </Step>
                     </Stepper>
                     <form onSubmit={(e) => e.preventDefault()}>
@@ -166,8 +184,19 @@ const FormOferta = () => {
                             <Step3 
                                 data={formData} 
                                 handleChange={handleChange} 
-                                prevStep={prevStep} 
-                                onSubmit={handleSubmit} 
+                                nextStep={nextStep} 
+                                prevStep={prevStep}  
+                                onSubmit={handlePreview} 
+                                handleQuestionsChange={handleQuestionsChange}
+                            />
+                        )}
+                        {step === 4 && (
+                            <Preview
+                                step1Data={formData}
+                                step2Data={formData}
+                                step3Data={formData}
+                                onConfirm={handleConfirm}
+                                onCancel={handleCancel}
                             />
                         )}
                     </form>

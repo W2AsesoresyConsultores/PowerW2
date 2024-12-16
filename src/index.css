@@ -77,6 +77,12 @@
   object-fit: cover;
 }
 
+.text-wrap {
+  word-wrap: break-word; /* Para romper palabras largas */
+  overflow-wrap: break-word; /* Para compatibilidad */
+  white-space: normal; /* Permite el salto de línea */
+}
+
 .video-container {
   position: relative;
   width: 100%;
