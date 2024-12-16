@@ -12,7 +12,6 @@ function Power() {
 
     <HeaderPower />
     <HeroPower />
-    
     <Cta />
     </>
   )

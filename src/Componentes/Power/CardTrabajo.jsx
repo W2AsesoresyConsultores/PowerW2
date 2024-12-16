@@ -61,30 +61,30 @@ function CardTrabajo({ job, onSelectJob, isSelected }) {
                 <img src={empresa_img_url} className="w-full h-full rounded-lg" alt="" />
               </div>
               <div>
-                <h3 className="text-md font-semibold text-gray-800 font-source">
+                <h3 className="text-md font-semibold text-gray-900 font-source">
                   {empresa}
                 </h3>
-                <p className="text-sm text-gray-500 font-inter">{nombreReclutador}</p>{" "}
+                <p className="text-sm text-gray-700 font-inter">{nombreReclutador}</p>{" "}
                 {/* Aquí se muestra el nombre del reclutador */}
               </div>
               </div>
               <FaBookmark size={20} />
             </div>
           </div>
-          <h4 className="font-bold text-lg leading-tight text-gray-900 font-source">
+          <h4 className="font-bold text-xl leading-tight text-newprimarycolor font-source">
             {puesto}
           </h4>
-          <p className="text-sm text-gray-600 font-inter">
-            {descripcion} <span className="text-blue-500">Ver más</span>
+          <p className="text-sm font-light text-gray-800 font-inter">
+            {descripcion} <span className="text-primarycolor font-semibold">Ver más</span>
           </p>
           <div className="flex space-x-2 justify-between">
             <div className="flex space-x-2 font-inter">
               {modalidad && (
-              <span className="bg-blue-50 text-gray-700 py-1 px-3 text-xs rounded-full font-regular tracking-wide gap-1 flex items-center">
+              <span className="bg-primarycolor/70 text-white py-1 px-3 text-xs rounded-full font-medium tracking-wide gap-1 flex items-center font-inter">
                 <MdOutlineMapsHomeWork /> {modalidad}
               </span>
             )}
-            <span className="bg-purple-50 text-gray-700 py-1 px-3 text-xs rounded-full font-regular tracking-wide flex items-center gap-1">
+            <span className="bg-yellowprimary/70 text-primarycolor py-1 px-3 text-xs rounded-full font-medium tracking-wide gap-1 flex items-center font-inter">
             <IoLocationOutline />{ubicacion}
             </span>
             </div>

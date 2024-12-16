@@ -71,7 +71,7 @@ const JobList = () => {
   };
 
   return (
-    <div className="w-full bg-transparent px-6 pb-6 rounded-lg font-dmsans">
+    <div className="w-full bg-transparent px-6 pb-6 rounded-lg font-jakarta">
       {loading ? (
         <div className="flex pt-40 justify-center h-screen">
           <div className="w-3/4 md:w-1/2">
@@ -122,7 +122,7 @@ const JobList = () => {
                     <Link to={`/Postulados/${job.id_oferta}`}>
                       <h3 className="text-md font-medium hover:underline">{job.puesto}</h3>
                     </Link>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-gray-700">
                       Publicado: {formatDate(job.fecha_publicacion)}
                     </p>
                   </div>
@@ -132,7 +132,7 @@ const JobList = () => {
                   </div>
                   <hr className="mb-2 border-t-2 border-gray-300 dark:border-gray-800 border-dotted" />
 
-                  <div className="text-gray-500 grid grid-cols-3 gap-4 mb-4 text-xs font-light">
+                  <div className="text-gray-700 grid grid-cols-3 gap-4 mb-4 text-xs font-light">
                     <div className="flex items-center gap-2">
                       <FaLocationDot />
                       <p>{job.ubicacion}</p>

@@ -1,97 +1,69 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function Beneficios() {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
+  const [activeImage, setActiveImage] = useState(0); // Imagen activa
+  const [fade, setFade] = useState(false); // Estado para manejar el efecto de transición
 
+  const images = [
+    "https://www.buk.pe/hubfs/2024/nosotros/Somos%20cercanos%20y%20lo%20pasamos%20bien.jpg",
+    "https://www.buk.pe/hubfs/2024/nosotros/El%20cliente%20es%20nuestro%20centro.jpg",
+    "https://www.buk.pe/hubfs/Nos%20mueve%20la%20excelencia.jpg",
+    "https://www.buk.pe/hubfs/2024/nosotros/Lo%20que%20nos%20mueve/Los-pensamos-lo-hacemos.webp",
+    "https://www.buk.pe/hubfs/2024/nosotros/Vamos%20al%20infinito%20y%20m%C3%A1s%20all%C3%A1.webp",
+  ];
+
+  // Cambiar la imagen automáticamente cada 2 segundos
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.2 }
-    );
+    const interval = setInterval(() => {
+      handleImageChange((activeImage + 1) % images.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [activeImage, images.length]);
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
-  }, []);
+  // Manejo del cambio de imagen con transición
+  const handleImageChange = (index) => {
+    setFade(true); // Inicia la transición
+    setTimeout(() => {
+      setActiveImage(index); // Cambia la imagen
+      setFade(false); // Finaliza la transición
+    }, 300); // Duración de la transición (en milisegundos)
+  };
 
   return (
-    <div
-      ref={sectionRef}
-      className={`w-full flex flex-col items-center text-center py-8 transition-transform duration-1000 ease-out ${
-        isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
-      }`}
-    >
-      <div className="flex flex-col gap-6">
-        <h2 className="text-5xl font-bold text-newprimarycolor source">
-          ¿Por qué unirte a nuestra empresa?
-        </h2>
-        <p className="text-gray-800">
-          Conoce los beneficios de ser parte de nuestra familia laboral.
+    <div id="beneficios" className="w-full h-auto py-10 flex flex-wrap">
+      {/* Texto y botones */}
+      <div className="w-full md:w-1/2 h-full md:pt-28 px-4 md:md:pl-24 pr-10">
+        <h2 className="font-source font-bold text-5xl text-[#2f4daa] text-center md:text-start">Lo que nos mueve en Dicar</h2>
+        <p className="font-inter my-8 text-xl text-gray-800">
+        En Dicar, fomentamos una cultura laboral basada en la confianza y la innovación, asegurando soluciones logísticas eficientes que impactan positivamente en el bienestar de las personas.
         </p>
+        <div className="font-inter flex w-full flex-wrap gap-2">
+          {[
+            "El cliente es nuestro centro",
+            "Lo pensamos lo hacemos",
+            "Vamos al infinito y más allá",
+            "Somos cercanos y lo pasamos bien",
+            "Nos mueve la excelencia",
+          ].map((text, index) => (
+            <button
+              key={index}
+              onClick={() => handleImageChange(index)}
+              className={`px-4 py-2  hover:bg-[#2f4daa] hover:text-white transition-all duration-500 rounded-full text-lg ${
+                activeImage === index ? "bg-[#2f4daa] text-white" : "text-[#2f4daa] bg-[#d9e3fc]"
+              }`}
+            >
+              {text}
+            </button>
+          ))}
+        </div>
       </div>
-      <div className="bg-white border text-[#133168] text-left rounded-xl w-11/12 md:w-10/12 lg:w-9/12 mt-6 p-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* Planilla completa */}
-        <div className="md:p-4">
-          <div className="text-4xl mb-2">📋</div>
-          <h3 className="font-semibold text-lg">Planilla completa</h3>
-          <p className="text-sm">
-            Accede a todos los beneficios de ley desde el primer día.
-          </p>
-        </div>
-        {/* Seguro médico */}
-        <div className="md:p-4">
-          <div className="text-4xl mb-2">🏥</div>
-          <h3 className="font-semibold text-lg">Seguro médico</h3>
-          <p className="text-sm">
-            Contamos con seguro médico privado para ti y tu familia.
-          </p>
-        </div>
-        {/* Desarrollo profesional */}
-        <div className="md:p-4">
-          <div className="text-4xl mb-2">🚀</div>
-          <h3 className="font-semibold text-lg">Desarrollo profesional</h3>
-          <p className="text-sm">
-            Crece con nosotros a través de capacitaciones y programas de
-            desarrollo.
-          </p>
-        </div>
-        {/* Horarios flexibles */}
-        <div className="md:p-4">
-          <div className="text-4xl mb-2">⏰</div>
-          <h3 className="font-semibold text-lg">Horarios flexibles</h3>
-          <p className="text-sm">
-            Concilia tu vida personal y laboral con horarios adaptados a tus
-            necesidades.
-          </p>
-        </div>
-        {/* Oportunidades de crecimiento */}
-        <div className="md:p-4">
-          <div className="text-4xl mb-2">📈</div>
-          <h3 className="font-semibold text-lg">Oportunidades de crecimiento</h3>
-          <p className="text-sm">
-            Accede a ascensos internos y oportunidades dentro de la empresa.
-          </p>
-        </div>
-        {/* Ambiente laboral positivo */}
-        <div className="md:p-4">
-          <div className="text-4xl mb-2">🌟</div>
-          <h3 className="font-semibold text-lg">Ambiente laboral positivo</h3>
-          <p className="text-sm">
-            Trabaja en un entorno inclusivo, colaborativo y motivador.
-          </p>
-        </div>
+      {/* Imagen con transición */}
+      <div className="w-full md:w-1/2 h-full py-10 md:px-24 flex justify-center items-center">
+        <img
+          className={`w-[90%] transition-opacity duration-500 ${fade ? "opacity-0" : "opacity-100"}`}
+          src={images[activeImage]}
+          alt={`Imagen ${activeImage}`}
+        />
       </div>
     </div>
   );

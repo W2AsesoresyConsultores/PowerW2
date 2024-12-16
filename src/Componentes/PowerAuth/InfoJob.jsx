@@ -137,43 +137,42 @@ function InfoJob({ selectedJob }) {
       className="selected-job-info w-full custom-scrollbar sm:w-3/5 rounded-lg md:flex flex-col px-8 py-4 mx-8 bg-[#ffffff] hidden transition-all duration-500 font-dmsans"
       style={{ height: "610px", overflowY: "auto" }}
     >
-      <div className="flex gap-4">
-        <img src={selectedJob.empresa_img_url} alt="" className="w-16" />
-        <div className="">
-          <p className="text-gray-500 text-sm">{capitalizedTimeAgo}</p>
-          <h2 className="font-bold text-2xl mb-3 text-gray-800">
-            {selectedJob.puesto}
-          </h2>
+       <p className="text-gray-500 text-xs font-inter">{capitalizedTimeAgo}</p>
+      <h2 className="font-bold text-3xl  text-newprimarycolor font-source">
+        {selectedJob.puesto}
+      </h2>
+      <div className="flex items-center justify-between mb-4">
+        
+        <div className="flex items-center gap-4">
+          <div className="rounded-lg w-12 h-12">
+            <img
+              src={selectedJob.empresa_img_url}
+              className="w-full h-full rounded-lg"
+              alt=""
+            />
+          </div>
+          <div>
+            <p className="text-sm font-medium text-gray-800 font-inter">
+              {selectedJob.empresa}
+            </p>
+            <p className="text-xs text-gray-600 font-inter">{nombreReclutador}</p>
+          </div>
         </div>
       </div>
 
-      <div className="flex items-center space-x-2 my-4">
-        <span className="bg-purple-50 text-gray-700 py-1 px-3 text-xs rounded-full font-regular tracking-wide flex items-center gap-1">
+      <div className="flex items-center space-x-2 mb-4">
+        <span className="bg-yellowprimary text-primarycolor py-1 px-3 text-xs rounded-full font-medium tracking-wide flex items-center gap-1 font-inter">
           <IoLocationOutline />
           {selectedJob.ubicacion}
         </span>
-        <span className="bg-green-50 text-gray-700 py-1 px-3 text-xs rounded-full font-regular tracking-wide gap-1 flex items-center">
+        <span className="bg-primarycolor text-white py-1 px-3 text-xs rounded-full font-medium tracking-wide gap-1 flex items-center font-inter">
           S/. {selectedJob.sueldo}
         </span>
       </div>
 
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center">
-          <div className="bg-primarycolor p-2 rounded-lg mr-2">
-            <MdOutlineVerifiedUser className="text-white text-xl" />
-          </div>
-          <div>
-            <p className="text-sm font-medium text-gray-800">
-              {selectedJob.empresa}
-            </p>
-            <p className="text-xs text-gray-500">{nombreReclutador}</p>
-          </div>
-        </div>
-      </div>
-
-      <div className="flex justify-between mb-4">
+      <div className="flex mb-4 gap-4">
         <button
-          className={`font-bold py-2 px-4 rounded-full w-48 ${
+          className={`font-bold py-2 px-4 rounded-full w-64 font-source text-lg ${
             hasApplied
               ? "bg-yellow-200 text-primarycolor cursor-not-allowed"
               : "bg-[#0057c2] text-white"
@@ -185,27 +184,27 @@ function InfoJob({ selectedJob }) {
         </button>
 
         {/* Replace the old share button with ShareButton */}
-        <div className="mr-60">
+        <div className="">
           <ShareButton selectedJob={selectedJob} />
         </div>
       </div>
 
       <div className="mb-4">
-        <div className="text-gray-700 text-sm leading-relaxed">
-          <h3 className="font-semibold text-lg text-gray-800">Descripción</h3>
-          <p>{selectedJob.descripcion}</p>
-          {jobDetails.map((detail, index) => (
-            <div key={index} className="py-2">
-              <div className="font-semibold ">{detail.title}</div>
-              <div className="mt-2">{detail.content}</div>
-            </div>
-          ))}
-        </div>
+        <h3 className="font-semibold text-black font-inter text-lg">Descripción</h3>
+        <p className="text-gray-800 text-base font-inter ml-2">
+          {selectedJob.descripcion}
+        </p>
+        {jobDetails.map((detail, index) => (
+          <div key={index} className="py-2">
+            <div className="font-semibold text-black font-inter text-lg">{detail.title}</div>
+            <div className="mt-2 text-gray-800 text-base font-inter ml-2">{detail.content}</div>
+          </div>
+        ))}
       </div>
 
       <div className="flex justify-center mt-4">
         <button
-          className={`font-bold py-2 px-4 rounded-full mr-4 ${
+          className={`font-bold py-2 px-4 rounded-full w-64 font-source text-lg ${
             hasApplied
               ? "bg-gray-500 text-white cursor-not-allowed"
               : "bg-[#0057c2] text-white"
@@ -213,7 +212,7 @@ function InfoJob({ selectedJob }) {
           onClick={hasApplied ? null : () => setIsQuestionsModalOpen(true)} // Mostrar el modal de preguntas
           disabled={hasApplied}
         >
-          {hasApplied ? "YA HAS POSTULADO" : "POSTULARME"}
+          {hasApplied ? "Ya has postulado" : "Postularme"}
         </button>
       </div>
       <QuestionsModal

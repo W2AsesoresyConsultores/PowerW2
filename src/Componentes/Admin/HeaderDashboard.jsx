@@ -41,7 +41,7 @@ function HeaderDashboard() {
   }, [user]);
 
   return (
-    <div className="flex w-full gap-8 px-6 items-center py-8">
+    <div className="flex w-full h-24 gap-8 px-6 items-center">
         <BuscadorJob />
         <AddButton />
     </div>
