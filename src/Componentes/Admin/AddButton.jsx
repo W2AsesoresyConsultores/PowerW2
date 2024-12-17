@@ -6,7 +6,7 @@ import { Button, Box } from '@mui/material';
 function AddButton() {
   return (
     <Box 
-      className="rounded-full bg-newprimarycolor items-center  w-36 h-14 p-2 flex justify-center"
+      className="rounded-full bg-primarytext items-center  w-36 h-14 p-2 flex justify-center"
     >
       <Link to="/AdminForm" className="no-underline w-full">
         <Button
