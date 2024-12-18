@@ -15,11 +15,34 @@ const Preview = ({
     nombreReclutador, 
     onCancel 
 }) => {
+    const { user } = UserAuth();
+    const [idEmpresa, setIdEmpresa] = useState(null); // Estado para id_empresa
     const [jobDetails, setJobDetails] = useState([]);
-    const [isShareModalOpen, setIsShareModalOpen] = useState(false); // Estado para controlar el ShareModal
-    const [isSubmitting, setIsSubmitting] = useState(false); // Estado para el proceso de envío
-    const [createdJob, setCreatedJob] = useState(null); // Datos de la oferta recién creada
- const { user } = UserAuth();
+    const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [createdJob, setCreatedJob] = useState(null);
+
+    // Efecto para obtener id_empresa basado en user.id
+    useEffect(() => {
+        const fetchIdEmpresa = async () => {
+            if (user?.id) {
+                const { data: perfilData, error: perfilError } = await supabase
+                    .from('perfiles')
+                    .select('id_empresa')
+                    .eq('user_id', user.id)
+                    .single();
+
+                if (perfilError) {
+                    console.error('Error al obtener el id_empresa:', perfilError);
+                } else {
+                    setIdEmpresa(perfilData?.id_empresa);
+                }
+            }
+        };
+
+        fetchIdEmpresa();
+    }, [user]);
+
     useEffect(() => {
         const details = [
             {
@@ -69,7 +92,7 @@ const Preview = ({
 
     // Manejar la confirmación y subida de datos a Supabase
     const handleConfirm = async () => {
-        setIsSubmitting(true); // Indicar que se está procesando la solicitud
+        setIsSubmitting(true);
         try {
             // Combinar datos de Step1 y Step3
             const newJobData = {
@@ -80,6 +103,7 @@ const Preview = ({
                 ubicacion: step1Data.ubicacion,
                 sueldo: step1Data.sueldo,
                 empresa: step1Data.empresa,
+                id_empresa: idEmpresa, // Usar id_empresa obtenido
                 empresa_img_url: step1Data.empresa_img_url || null,
                 modalidad: step3Data.modalidad,
                 horario: step3Data.horario,
@@ -104,15 +128,14 @@ const Preview = ({
                 return;
             }
 
-            // Obtener los datos de la oferta creada
             const createdJobData = data[0];
-            setCreatedJob(createdJobData); // Guardar los datos de la oferta creada
-            setIsShareModalOpen(true); // Abrir el ShareModal
+            setCreatedJob(createdJobData);
+            setIsShareModalOpen(true);
         } catch (err) {
             console.error("Error inesperado:", err);
             alert("Ocurrió un error inesperado. Inténtalo de nuevo.");
         } finally {
-            setIsSubmitting(false); // Finalizar el proceso de envío
+            setIsSubmitting(false);
         }
     };
 
@@ -178,7 +201,7 @@ const Preview = ({
                     onClick={handleConfirm} 
                     fullWidth 
                     sx={{ ml: 1 }}
-                    disabled={isSubmitting} // Deshabilitar mientras se está enviando
+                    disabled={isSubmitting}
                 >
                     {isSubmitting ? "Enviando..." : "Confirmar y Enviar"}
                 </Button>
