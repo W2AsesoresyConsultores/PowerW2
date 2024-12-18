@@ -24,6 +24,7 @@ import Entrevistas from "./Componentes/Entrevistas/Entrevistas.jsx";
 import { ThemeContextProvider } from './Context/ThemeContext.jsx';
 import Dicar from "./Componentes/Empresas/Dicar/Dicar.jsx";
 import OfertasCompartidas from "./Componentes/Admin/OfertasCompartidas.jsx";
+import Juniors from './Componentes/Empresas/Juniors/Juniors.jsx'
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <JobsProvider>       {/* Proveedor para los trabajos */}
           <JobsProviderCompartido> {/* Proveedor para ofertas compartidas */}
             <Routes>
+            <Route path="/Juniors" element={<Juniors />} />
               {/* Rutas Públicas */}
               <Route path="/" element={<Power />} />
               <Route path="/Login" element={<Login />} />

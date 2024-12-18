@@ -28,7 +28,7 @@ const MenuItem = ({ to, icon: Icon, label, themeMode, empresaId }) => {
       case 4:
         return "bg-[#ee3123] text-white font-semibold";
       case 5:
-        return "bg-white text-[#2f4daa] font-semibold";
+        return "bg-[#2f4daa] text-white font-semibold";
       case 6:
         return "bg-white text-[#06038d] font-semibold";
       default:
@@ -144,7 +144,7 @@ function MenuAdmin() {
       case 4:
         return "bg-white";
       case 5:
-        return "bg-[#2f4daa]";
+        return "bg-white";
       case 6:
         return "bg-[#06038d]";
       default:

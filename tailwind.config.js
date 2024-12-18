@@ -33,6 +33,10 @@ module.exports = withMT( {
         'jakarta' : ['"Plus Jakarta Sans", sans-serif']
       },
       keyframes: {
+        fadeInOut: {
+          "0%, 100%": { opacity: 0 },
+          "50%": { opacity: 1 },
+        },
         spinIn: {
           to: { transform: 'rotate(18deg)'}
         },
