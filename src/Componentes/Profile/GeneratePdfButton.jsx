@@ -13,7 +13,7 @@ const GeneratePdfButton = ({ formData }) => {
         const reader = new FileReader();
 
         reader.onload = (event) => {
-          doc.addImage(event.target.result, "JPEG", 140, 10, 50, 50);
+          doc.addImage(event.target.result, "JPEG", 140, 20, 50, 50); // Cambiamos el y de 10 a 30
           finalizePDF();
         };
 
@@ -71,18 +71,18 @@ const GeneratePdfButton = ({ formData }) => {
       doc.setFontSize(12);
       doc.setFont("helvetica", "normal");
 
-      if (formData.cargo_1 || formData.empresa_1 || formData.tiempo_1 || formData.funcion_1) {
-        doc.text(`Cargo: ${formData.cargo_1 || "No especificado"}`, 10, 185);
-        doc.text(`Empresa: ${formData.empresa_1 || "No especificado"}`, 10, 195);
+      if (formData.empresa_1 || formData.cargo_1 || formData.tiempo_1 || formData.funcion_1) {
+        doc.text(`Empresa: ${formData.empresa_1 || "No especificado"}`, 10, 185);
+        doc.text(`Cargo: ${formData.cargo_1 || "No especificado"}`, 10, 195);
         doc.text(`Tiempo: ${formData.tiempo_1 || "No especificado"}`, 10, 205);
         doc.text(`Funciones: ${formData.funcion_1 || "No especificado"}`, 10, 215);
       } else {
         doc.text("No cuento con experiencia laboral.", 10, 185);
       }
 
-      if (formData.cargo_2 || formData.empresa_2 || formData.tiempo_2 || formData.funcion_2) {
-        doc.text(`Cargo: ${formData.cargo_2 || "No especificado"}`, 10, 225);
-        doc.text(`Empresa: ${formData.empresa_2 || "No especificado"}`, 10, 235);
+      if (formData.empresa_2 || formData.cargo_2 || formData.tiempo_2 || formData.funcion_2) {
+        doc.text(`Empresa: ${formData.empresa_2 || "No especificado"}`, 10, 225);
+        doc.text(`Cargo: ${formData.cargo_2 || "No especificado"}`, 10, 235);
         doc.text(`Tiempo: ${formData.tiempo_2 || "No especificado"}`, 10, 245);
         doc.text(`Funciones: ${formData.funcion_2 || "No especificado"}`, 10, 255);
       }
@@ -103,3 +103,4 @@ const GeneratePdfButton = ({ formData }) => {
 };
 
 export default GeneratePdfButton;
+

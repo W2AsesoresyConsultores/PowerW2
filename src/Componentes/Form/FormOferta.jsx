@@ -35,6 +35,7 @@ const FormOferta = () => {
     const [idEmpresa, setIdEmpresa] = useState(null);
     const [nombreEmpresa, setNombreEmpresa] = useState('');
 
+    // Fetch empresa id based on user
     useEffect(() => {
         const fetchIdEmpresa = async () => {
             if (user?.id) {
@@ -55,6 +56,7 @@ const FormOferta = () => {
         fetchIdEmpresa();
     }, [user]);
 
+    // Fetch empresa name based on idEmpresa
     useEffect(() => {
         const fetchNombreEmpresa = async () => {
             if (idEmpresa) {
@@ -80,14 +82,17 @@ const FormOferta = () => {
         fetchNombreEmpresa();
     }, [idEmpresa]);
 
+    // Step navigation
     const nextStep = () => setStep(step + 1);
     const prevStep = () => setStep(step - 1);
 
+    // Handle form data changes
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
+    // Handle question-specific changes
     const handleQuestionsChange = (questions) => {
         setFormData({ 
             ...formData, 
@@ -100,6 +105,7 @@ const FormOferta = () => {
         });
     };
 
+    // Submit data to Supabase
     const handleSubmit = async (submittedData) => {
         const { data, error } = await supabase.from("Oferta").insert([submittedData]);
 
@@ -107,40 +113,42 @@ const FormOferta = () => {
             console.error('Error al insertar:', error);
         } else {
             console.log('Oferta creada:', data);
-            setFormData({
-                puesto: '',
-                descripcion: '',
-                requisitos: '',
-                ubicacion: '',
-                sueldo: '',
-                funciones: '',
-                horario: '',
-                empresa: '',
-                id_empresa: null,
-                beneficios: '',
-                modalidad: '',
-                preg_1: '',
-                preg_2: '',
-                preg_3: '',
-                preg_4: '',
-                preg_5: '',
-                preg_6: '',
-                id_reclutador: user?.id || null,
-            });
-            setStep(1); // Regresa al primer paso
+            resetForm(); // Reset form data after submission
         }
     };
 
-    const handlePreview = () => {
-        setStep(4); // Cambia al paso de previsualización
+    const resetForm = () => {
+        setFormData({
+            puesto: '',
+            descripcion: '',
+            requisitos: '',
+            ubicacion: '',
+            sueldo: '',
+            funciones: '',
+            horario: '',
+            empresa: '',
+            id_empresa: null,
+            beneficios: '',
+            modalidad: '',
+            preg_1: '',
+            preg_2: '',
+            preg_3: '',
+            preg_4: '',
+            preg_5: '',
+            preg_6: '',
+            id_reclutador: user?.id || null,
+        });
+        setStep(1); // Return to the first step
     };
 
+    // Confirm data submission from Preview
     const handleConfirm = async () => {
-        await handleSubmit(formData); // Envía los datos
+        await handleSubmit(formData); // Submit all form data
     };
 
+    // Cancel preview and return to Step 3
     const handleCancel = () => {
-        setStep(3); // Regresa al paso anterior
+        setStep(3); // Return to the previous step
     };
 
     return (
@@ -186,7 +194,6 @@ const FormOferta = () => {
                                 handleChange={handleChange} 
                                 nextStep={nextStep} 
                                 prevStep={prevStep}  
-                                onSubmit={handlePreview} 
                                 handleQuestionsChange={handleQuestionsChange}
                             />
                         )}

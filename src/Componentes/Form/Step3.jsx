@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 import { MdDeleteForever } from "react-icons/md";
-import ShareModal from "./ShareModal";
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import {
   Box,
@@ -13,90 +12,40 @@ import {
   MenuItem,
   IconButton,
 } from "@mui/material";
-import { supabase } from '../../supabase/supabase.config';
 
-const Step3 = ({ data, handleChange, nextStep, prevStep, onSubmit }) => {
+const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }) => {
   const [questions, setQuestions] = useState([""]);
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [updatedData, setUpdatedData] = useState(null);
   const [companyImage, setCompanyImage] = useState(null);
 
+  // Manejar los cambios en las preguntas
   const handleQuestionChange = (index, e) => {
     const newQuestions = [...questions];
     newQuestions[index] = e.target.value;
     setQuestions(newQuestions);
   };
 
+  // Agregar una nueva pregunta
   const addQuestion = () => {
     if (questions.length < 6) {
       setQuestions([...questions, ""]);
     }
   };
 
+  // Eliminar una pregunta específica
   const removeQuestion = (index) => {
     const newQuestions = questions.filter((_, i) => i !== index);
     setQuestions(newQuestions);
   };
 
+  // Manejar cambios en la imagen de la empresa
   const handleImageChange = (e) => {
     setCompanyImage(e.target.files[0]);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const newData = {
-      ...data,
-      preg_1: questions[0] || "",
-      preg_2: questions[1] || "",
-      preg_3: questions[2] || "",
-      preg_4: questions[3] || "",
-      preg_5: questions[4] || "",
-      preg_6: questions[5] || "",
-    };
-
-    // Llama a la función onSubmit para pasar los datos al componente padre
-    onSubmit(newData); // Cambia el flujo aquí
-
-    const { data: ofertaData, error: ofertaError } = await supabase
-      .from("Oferta")
-      .insert([newData])
-      .select();
-
-    if (ofertaError) {
-      console.error("Error al crear la oferta:", ofertaError);
-      return;
-    }
-
-    const ofertaId = ofertaData[0].id_oferta;
-
-    if (companyImage) {
-      const { data: imageData, error: imageError } = await supabase.storage
-        .from("empresa_img")
-        .upload(`${ofertaId}/${companyImage.name}`, companyImage);
-
-      if (imageError) {
-        console.error("Error al subir la imagen:", imageError);
-        return;
-      }
-
-      const { data: publicUrlData } = supabase.storage
-        .from("empresa_img")
-        .getPublicUrl(`${ofertaId}/${companyImage.name}`);
-
-      const { error: updateError } = await supabase
-        .from("Oferta")
-        .update({ empresa_img_url: publicUrlData.publicUrl })
-        .eq("id_oferta", ofertaId);
-
-      if (updateError) {
-        console.error("Error al actualizar la URL de la imagen:", updateError);
-        return;
-      }
-    }
-
-    setUpdatedData(ofertaData[0]);
-    setModalOpen(true);
+  // Navegar al preview y actualizar las preguntas en el estado global
+  const handlePreview = () => {
+    handleQuestionsChange(questions); // Actualiza las preguntas en el estado global
+    nextStep(); // Navega al siguiente paso (Preview)
   };
 
   return (
@@ -175,7 +124,16 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, onSubmit }) => {
             color="primary"
             aria-label="upload picture"
             component="span"
-            sx={{ width: '100%', height: 'auto', border: '1px solid #ccc', padding: '16px', borderRadius: '4px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+            sx={{
+              width: '100%',
+              height: 'auto',
+              border: '1px solid #ccc',
+              padding: '16px',
+              borderRadius: '4px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
           >
             <PhotoCamera fontSize="large" />
           </IconButton>
@@ -194,7 +152,7 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, onSubmit }) => {
               onChange={(e) => handleQuestionChange(index, e)}
               fullWidth
               placeholder={`Pregunta ${index + 1}`}
-              required={index === 0}
+              required={index === 0} // Solo la primera pregunta es obligatoria
               variant="outlined"
               margin="normal"
               sx={{ bgcolor: 'background.default', color: 'text.primary' }}
@@ -221,18 +179,10 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, onSubmit }) => {
         <Button variant="contained" color="secondary" onClick={prevStep}>
           Anterior
         </Button>
-        <Button variant="contained" color="primary" onClick={nextStep}>
-          Enviar
+        <Button variant="contained" color="primary" onClick={handlePreview}>
+          Preview
         </Button>
       </Box>
-
-      {/* Modal */}
-      {isModalOpen && updatedData && (
-        <ShareModal
-          selectedJob={updatedData}
-          onClose={() => setModalOpen(false)}
-        />
-      )}
     </Box>
   );
 };
