@@ -12,6 +12,7 @@ function Power() {
 
     <HeaderPower />
     <HeroPower />
+    <TrabajosContainer />
     <Cta />
     </>
   )

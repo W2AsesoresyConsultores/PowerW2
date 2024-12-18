@@ -7,7 +7,7 @@ function AddButton() {
   return (
     <Box className="flex space-x-4">
       {/* Botón para crear oferta */}
-      <Box className="rounded-md bg-primarycolor items-center w-36 h-16 p-2 flex justify-center">
+      <Box className="rounded-md bg-primarytext items-center w-36 h-16 p-2 flex justify-center">
         <Link to="/AdminForm" className="no-underline w-full">
           <Button
             sx={{

@@ -1,23 +1,27 @@
-import React, { useState, useEffect, useContext, useMemo } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaSignOutAlt } from "react-icons/fa";
+import { useContext, useEffect, useMemo, useState } from "react";
 import {
-  IoChatbubbleOutline,
   IoCalendarClearOutline,
+  IoChatbubbleOutline,
   IoStatsChartOutline,
   IoDocumentText,
 } from "react-icons/io5";
-import { RxAvatar, RxDashboard } from "react-icons/rx";
-import { RxDesktop } from "react-icons/rx";
-import { supabase } from "../../supabase/supabase.config";
-import { ThemeContext } from "../../Context/ThemeContext";
-import { UserAuth } from "../../Context/AuthContext";
+import { RxDashboard, RxDesktop, RxAvatar } from "react-icons/rx";
+import { FaSignOutAlt } from "react-icons/fa";
 import classNames from "classnames";
+import { UserAuth } from "../../context/AuthContext";
+import { ThemeContext } from "../../context/ThemeContext";
+import { supabase } from "../../supabase/supabase.config";
 
-const MenuItem = ({ to, icon: Icon, label, themeMode, empresaId }) => {
-  const location = useLocation();
-  const isActive = location.pathname === to;
-
+const MenuItem = ({
+  to,
+  icon: Icon,
+  label,
+  themeMode,
+  empresaId,
+  isActive,
+  subItems = [],
+}) => {
   const activeColorClass = useMemo(() => {
     switch (empresaId) {
       case 1:
@@ -31,34 +35,53 @@ const MenuItem = ({ to, icon: Icon, label, themeMode, empresaId }) => {
       case 5:
         return "bg-[#2f4daa] text-white font-semibold";
       case 6:
-        return "bg-white text-[#06038d] font-semibold";
+        return "bg-[#06038d] text-white font-semibold";
       default:
         return themeMode === "light"
-          ? "bg-gray-200 text-gray-700 font-semibold"
+          ? "bg-transparent text-gray-700 font-semibold"
           : "bg-gray-700 text-white font-semibold";
     }
   }, [empresaId, themeMode]);
 
   return (
-    <div
-      className={classNames(
-        "rounded-full py-3 px-6 flex items-center transition-all duration-300 ease-in-out",
-        {
-          [activeColorClass]: isActive,
-          "text-gray-500": !isActive && themeMode === "light",
-          "text-gray-300": !isActive && themeMode === "dark",
-        }
+    <div>
+      <div
+        className={classNames(
+          "rounded-full py-3 px-6 flex items-center transition-all duration-50 ease-in-out",
+          {
+            [activeColorClass]: isActive,
+            "text-gray-700": !isActive && themeMode === "light",
+            "text-gray-300": !isActive && themeMode === "dark",
+          }
+        )}
+      >
+        <Link to={to} className="flex items-center">
+          <Icon className="mr-4 text-lg" /> {label}
+        </Link>
+      </div>
+      {subItems.length > 0 && (
+        <ul className="pl-10 space-y-2 mt-2">
+          {subItems.map((subItem) => (
+            <li key={subItem.to}>
+              <MenuItem
+                to={subItem.to}
+                icon={subItem.icon}
+                label={subItem.label}
+                themeMode={themeMode}
+                empresaId={empresaId}
+                isActive={isActive}
+              />
+            </li>
+          ))}
+        </ul>
       )}
-    >
-      <Link to={to} className="flex items-center">
-        <Icon className="mr-4 text-lg" /> {label}
-      </Link>
     </div>
   );
 };
 
 function MenuAdmin() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { user } = UserAuth();
   const { themeMode } = useContext(ThemeContext);
 
@@ -106,7 +129,7 @@ function MenuAdmin() {
     if (user?.id) {
       fetchProfileAndEmpresaUrl(user.id);
     }
-  }, [user?.id]); // Solo depende de user.id
+  }, [user?.id]);
 
   const handleLogout = async () => {
     try {
@@ -124,8 +147,8 @@ function MenuAdmin() {
 
   const menuItems = useMemo(
     () => [
-      { to: "/Admin", icon: RxDashboard, label: "Ofertas Personales" },
-      { to: "/ofertascompartidas", icon: RxDesktop, label: "Ofertas Compartidas" },
+      { to: "/Admin", icon: RxDashboard, label: "Mis Ofertas" },
+      { to: "/ofertascompartidas", icon: RxDesktop, label: "Ofertas Equipo" },
       { to: "/Programa", icon: IoCalendarClearOutline, label: "Programación" },
       { to: "/Conversaciones", icon: IoChatbubbleOutline, label: "Conversaciones" },
       { to: "/Estadisticas", icon: IoStatsChartOutline, label: "Estadísticas" },
@@ -138,17 +161,17 @@ function MenuAdmin() {
   const menuBackgroundClass = useMemo(() => {
     switch (empresaId) {
       case 1:
-        return "bg-primarytext";
+        return "bg-white";
       case 2:
         return "bg-white";
       case 3:
-        return "bg-[#5e4aa0]";
+        return "bg-white";
       case 4:
         return "bg-white";
       case 5:
         return "bg-white";
       case 6:
-        return "bg-[#06038d]";
+        return "bg-white";
       default:
         return themeMode === "light" ? "bg-white" : "bg-[#141a21]";
     }
@@ -158,12 +181,12 @@ function MenuAdmin() {
     <div
       className={`w-60 h-screen z-10 font-jakarta dark:border-r dark:border-gray-800 ${menuBackgroundClass} text-gray-300 px-4 shadow-sm flex flex-col justify-between pt-2 fixed`}
     >
-      <div className="flex flex-col items-center px-6 w-full h-24 justify-center">
+      <div className="flex flex-col items-center px-6 py-6 w-full h-auto justify-center">
         {empresaUrl ? (
           <img
             src={empresaUrl}
             alt="Empresa Logo"
-            className="w-auto h-full mb-2 "
+            className="w-auto max-h-20 mb-2"
           />
         ) : (
           <h2 className="text-2xl font-semibold font-dmsans text-primarycolor dark:text-white text-center">
@@ -173,14 +196,16 @@ function MenuAdmin() {
       </div>
 
       <ul className="space-y-2 font-jakarta text-sm font-normal">
-        {menuItems.map(({ to, icon, label }) => (
-          <li key={to}>
+        {menuItems.map(({ to, icon, label, subItems }) => (
+          <li key={to || label}>
             <MenuItem
               to={to}
               icon={icon}
               label={label}
               themeMode={themeMode}
               empresaId={empresaId}
+              isActive={location.pathname === to || subItems?.some((item) => location.pathname === item.to)}
+              subItems={subItems}
             />
           </li>
         ))}

@@ -55,6 +55,12 @@ function LoginAdmin() {
           item
           md={6}
           className="hidden md:flex flex-col gap-8 items-center justify-center overflow-hidden bg-newprimarycolor"
+          style={{
+            backgroundImage: "url('https://www.digitalocean.com/_next/static/media/hero-background.a9bcc858.svg')",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+          }}
         >
           <Box sx={{ padding: "40px", textAlign: "center" }}>
             <Typography

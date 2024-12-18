@@ -2,7 +2,14 @@ import React from 'react';
 
 const CallToAction = () => {
   return (
-    <div className="bg-newprimarycolor my-10 w-[90%] md:w-full max-w-[900px] h-[auto] mx-auto p-4 rounded-2xl  flex flex-col md:flex-row items-center">
+    <div className="bg-newprimarycolor my-10 w-[90%] md:w-full max-w-[900px] h-[auto] mx-auto p-4 rounded-2xl  flex flex-col md:flex-row items-center"
+    style={{
+      backgroundImage: "url('https://www.digitalocean.com/_next/static/media/hero-background.a9bcc858.svg')",
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+      backgroundSize: "cover",
+    }}
+    >
       <div className="flex-1 px-2 md:px-8">
         <h2 className="text-white text-3xl font-bold font-source">¿Quieres comenzar con Power?</h2>
         <p className="text-white text-md mt-2 font-inter font-light">Ingresa a nuestra plataforma y encuentra tu trabajo ideal</p>
