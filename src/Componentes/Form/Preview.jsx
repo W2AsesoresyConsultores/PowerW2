@@ -1,22 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { IoLocationOutline } from "react-icons/io5";
-import ShareButton from "../PowerAuth/ShareButton"; // Asegúrate de ajustar la ruta
-import QuestionsModal from "../PowerAuth/QuestionsModal"; // Asegúrate de ajustar la ruta
+import ShareButton from "../PowerAuth/ShareButton"; // Ajusta la ruta según tu estructura
+import ShareModal from "./ShareModal"; // Importa el componente ShareModal
+import { UserAuth } from '../../Context/AuthContext';
 import dayjs from "dayjs";
-import "dayjs/locale/es"; // Importar el idioma español
+import "dayjs/locale/es"; // Importar idioma español
 import relativeTime from "dayjs/plugin/relativeTime";
-import { Box, Button } from '@mui/material'; // Importar Box y Button de MUI
+import { supabase } from "../../supabase/supabase.config"; // Ajusta la ruta según tu estructura
+import { Box, Button } from "@mui/material";
 
-const Preview = ({ step1Data, step3Data, hasApplied, setIsQuestionsModalOpen, isQuestionsModalOpen, nombreReclutador, onConfirm, onCancel }) => {
+const Preview = ({ 
+    step1Data, 
+    step3Data, 
+    nombreReclutador, 
+    onCancel 
+}) => {
     const [jobDetails, setJobDetails] = useState([]);
-
+    const [isShareModalOpen, setIsShareModalOpen] = useState(false); // Estado para controlar el ShareModal
+    const [isSubmitting, setIsSubmitting] = useState(false); // Estado para el proceso de envío
+    const [createdJob, setCreatedJob] = useState(null); // Datos de la oferta recién creada
+ const { user } = UserAuth();
     useEffect(() => {
         const details = [
             {
                 title: "¿Por qué deberías unirte a nosotros?",
                 content: (
                     <ul>
-                        {step3Data.beneficios.split(".").map((beneficio, index) => 
+                        {step3Data.beneficios?.split(".").map((beneficio, index) => 
                             beneficio.trim() && <li key={index}>{beneficio.trim()}</li>
                         )}
                     </ul>
@@ -26,7 +36,7 @@ const Preview = ({ step1Data, step3Data, hasApplied, setIsQuestionsModalOpen, is
                 title: "¿Qué buscamos?",
                 content: (
                     <ul>
-                        {step1Data.requisitos.split(".").map((requisito, index) => 
+                        {step1Data.requisitos?.split(".").map((requisito, index) => 
                             requisito.trim() && <li key={index}>{requisito.trim()}</li>
                         )}
                     </ul>
@@ -36,7 +46,7 @@ const Preview = ({ step1Data, step3Data, hasApplied, setIsQuestionsModalOpen, is
                 title: "¿Qué es lo que harás?",
                 content: (
                     <ul>
-                        {step1Data.funciones.split(".").map((funcion, index) => 
+                        {step1Data.funciones?.split(".").map((funcion, index) => 
                             funcion.trim() && <li key={index}>{funcion.trim()}</li>
                         )}
                     </ul>
@@ -56,6 +66,55 @@ const Preview = ({ step1Data, step3Data, hasApplied, setIsQuestionsModalOpen, is
     dayjs.locale("es");
     const timeAgo = dayjs(step1Data.fecha_publicacion).fromNow();
     const capitalizedTimeAgo = timeAgo.charAt(0).toUpperCase() + timeAgo.slice(1);
+
+    // Manejar la confirmación y subida de datos a Supabase
+    const handleConfirm = async () => {
+        setIsSubmitting(true); // Indicar que se está procesando la solicitud
+        try {
+            // Combinar datos de Step1 y Step3
+            const newJobData = {
+                puesto: step1Data.puesto,
+                descripcion: step1Data.descripcion,
+                requisitos: step1Data.requisitos,
+                funciones: step1Data.funciones,
+                ubicacion: step1Data.ubicacion,
+                sueldo: step1Data.sueldo,
+                empresa: step1Data.empresa,
+                empresa_img_url: step1Data.empresa_img_url || null,
+                modalidad: step3Data.modalidad,
+                horario: step3Data.horario,
+                beneficios: step3Data.beneficios,
+                preg_1: step3Data.preg_1 || "",
+                preg_2: step3Data.preg_2 || "",
+                preg_3: step3Data.preg_3 || "",
+                preg_4: step3Data.preg_4 || "",
+                preg_5: step3Data.preg_5 || "",
+                preg_6: step3Data.preg_6 || "",
+                fecha_publicacion: new Date().toISOString(),
+                id_reclutador: user?.id || null,
+            };
+
+            // Subir los datos a la tabla "Oferta" en Supabase
+            const { data, error } = await supabase.from("Oferta").insert([newJobData]).select();
+
+            if (error) {
+                console.error("Error al subir la oferta:", error);
+                alert("Ocurrió un error al subir la oferta. Inténtalo de nuevo.");
+                setIsSubmitting(false);
+                return;
+            }
+
+            // Obtener los datos de la oferta creada
+            const createdJobData = data[0];
+            setCreatedJob(createdJobData); // Guardar los datos de la oferta creada
+            setIsShareModalOpen(true); // Abrir el ShareModal
+        } catch (err) {
+            console.error("Error inesperado:", err);
+            alert("Ocurrió un error inesperado. Inténtalo de nuevo.");
+        } finally {
+            setIsSubmitting(false); // Finalizar el proceso de envío
+        }
+    };
 
     return (
         <div
@@ -95,24 +154,6 @@ const Preview = ({ step1Data, step3Data, hasApplied, setIsQuestionsModalOpen, is
                 </span>
             </div>
 
-            <div className="flex mb-4 gap-4">
-                <button
-                    className={`font-bold py-2 px-4 rounded-full w-64 font-source text-lg ${
-                        hasApplied
-                            ? "bg-yellow-200 text-primarycolor cursor-not-allowed"
-                            : "bg-[#0057c2] text-white"
-                    }`}
-                    onClick={hasApplied ? null : () => setIsQuestionsModalOpen(true)}
-                    disabled={hasApplied}
-                >
-                    {hasApplied ? "Ya has postulado" : "Postularme"}
-                </button>
-
-                <div className="">
-                    <ShareButton selectedJob={step1Data} />
-                </div>
-            </div>
-
             <div className="mb-4">
                 <h3 className="font-semibold text-black font-inter text-lg">Descripción</h3>
                 <p className="text-gray-800 text-base font-inter ml-2">
@@ -126,35 +167,30 @@ const Preview = ({ step1Data, step3Data, hasApplied, setIsQuestionsModalOpen, is
                 ))}
             </div>
 
-            <div className="flex justify-center mt-4">
-                <button
-                    className={`font-bold py-2 px-4 rounded-full w-64 font-source text-lg ${
-                        hasApplied
-                            ? "bg-gray-500 text-white cursor-not-allowed"
-                            : "bg-[#0057c2] text-white"
-                    }`}
-                    onClick={hasApplied ? null : () => setIsQuestionsModalOpen(true)}
-                    disabled={hasApplied}
-                >
-                    {hasApplied ? "Ya has postulado" : "Postularme"}
-                </button>
-            </div>
-
             {/* Botones de confirmación y cancelación */}
             <Box display="flex" justifyContent="space-between" mt={3}>
                 <Button variant="outlined" color="secondary" onClick={onCancel} fullWidth sx={{ mr: 1 }}>
                     Cancelar
                 </Button>
-                <Button variant="contained" color="primary" onClick={onConfirm} fullWidth sx={{ ml: 1 }}>
-                    Confirmar y Enviar
+                <Button 
+                    variant="contained" 
+                    color="primary" 
+                    onClick={handleConfirm} 
+                    fullWidth 
+                    sx={{ ml: 1 }}
+                    disabled={isSubmitting} // Deshabilitar mientras se está enviando
+                >
+                    {isSubmitting ? "Enviando..." : "Confirmar y Enviar"}
                 </Button>
             </Box>
 
-            <QuestionsModal
-                isOpen={isQuestionsModalOpen}
-                onClose={() => setIsQuestionsModalOpen(false)}
-                selectedJob={step1Data}
-            />
+            {/* ShareModal */}
+            {isShareModalOpen && createdJob && (
+                <ShareModal
+                    selectedJob={createdJob}
+                    onClose={() => setIsShareModalOpen(false)}
+                />
+            )}
         </div>
     );
 };
