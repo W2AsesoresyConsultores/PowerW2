@@ -44,7 +44,7 @@ const Compartido = () => {
         .from('Oferta')
         .select('*')
         .eq('id_empresa', idEmpresa) // Filtrar por id_empresa
-        .eq('id_compartida', 1) // Filtrar por id_compartida
+        //.eq('id_compartida', 1) Filtrar por id_compartida
 
       if (error) {
         console.error('Error fetching jobs:', error);
