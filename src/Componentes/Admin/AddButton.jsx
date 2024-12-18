@@ -25,26 +25,6 @@ function AddButton() {
           </Button>
         </Link>
       </Box>
-
-      {/* Nuevo botón para Ofertas Compartidas */}
-      <Box className="rounded-md bg-primarycolor items-center w-36 h-16 p-2 flex justify-center">
-        <Link to="/OfertasCompartidas" className="no-underline w-full">
-          <Button
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              color: 'white',
-              width: '100%',
-              textTransform: 'none',
-            }}
-            aria-label="Ofertas Compartidas"
-          >
-            <FaPlus size={20} />
-            <p className='font-semibold text-sm font-dmsans'>Ofertas Compartidas</p>
-          </Button>
-        </Link>
-      </Box>
     </Box>
   );
 }
