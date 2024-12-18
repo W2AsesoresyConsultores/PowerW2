@@ -61,6 +61,28 @@ const JobList = () => {
     setLoading(false);
   };
 
+  const handleChangeStatuscd = async (index, newStatus) => {
+    setLoading(true);
+    const jobToUpdate = jobs[index];
+  
+    const { error } = await supabase
+      .from('Oferta')
+      .update({ id_compartida: newStatus })
+      .eq('id_oferta', jobToUpdate.id_oferta);
+  
+    if (error) {
+      console.error('Error updating job status:', error);
+    } else {
+      const updatedJobs = [...jobs];
+      updatedJobs[index].id_compartida = newStatus;
+      setJobs(updatedJobs);
+      
+      // Recargar la página
+      window.location.reload();
+    }
+    setLoading(false);
+  };
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -147,28 +169,49 @@ const JobList = () => {
                       <p>{job.sueldo}</p>
                     </div>
                   </div>
-                  <div className="flex justify-end w-full">
-                    <Select
-                      value={job.estado}
-                      onChange={(e) => handleChangeStatus(index, e.target.value)}
-                      sx={{
-                        width: 120,
-                        color: job.estado === "activa" ? "green" : "red",
-                        ".MuiOutlinedInput-notchedOutline": {
-                          borderColor: job.estado === "activa" ? "green" : "red",
-                        },
-                        "&:hover .MuiOutlinedInput-notchedOutline": {
-                          borderColor: job.estado === "activa" ? "darkgreen" : "darkred",
-                        },
-                        ".MuiSvgIcon-root": {
+                  <div className="flex justify-between w-full">
+                  <Select
+                        value={job.id_compartida === 1 ? "activo" : "inactivo"}
+                        onChange={(e) => handleChangeStatuscd(index, e.target.value === "activo" ? 1 : 0)}
+                        sx={{
+                          width: 120,
+                          color: job.id_compartida === 1 ? "green" : "red",
+                          ".MuiOutlinedInput-notchedOutline": {
+                            borderColor: job.id_compartida === 1 ? "green" : "red",
+                          },
+                          "&:hover .MuiOutlinedInput-notchedOutline": {
+                            borderColor: job.id_compartida === 1 ? "darkgreen" : "darkred",
+                          },
+                          ".MuiSvgIcon-root": {
+                            color: job.id_compartida === 1 ? "green" : "red",
+                          },
+                        }}
+                      >
+                        <MenuItem value="activo">Compartir</MenuItem>
+                        <MenuItem value="inactivo">Desactivar</MenuItem>
+                      </Select>
+
+                      <Select
+                        value={job.estado}
+                        onChange={(e) => handleChangeStatus(index, e.target.value)}
+                        sx={{
+                          width: 120,
                           color: job.estado === "activa" ? "green" : "red",
-                        },
-                      }}
-                    >
-                      <MenuItem value="activa">Abierto</MenuItem>
-                      <MenuItem value="cerrada">Cerrado</MenuItem>
-                    </Select>
-                  </div>
+                          ".MuiOutlinedInput-notchedOutline": {
+                            borderColor: job.estado === "activa" ? "green" : "red",
+                          },
+                          "&:hover .MuiOutlinedInput-notchedOutline": {
+                            borderColor: job.estado === "activa" ? "darkgreen" : "darkred",
+                          },
+                          ".MuiSvgIcon-root": {
+                            color: job.estado === "activa" ? "green" : "red",
+                          },
+                        }}
+                      >
+                        <MenuItem value="activa">Abierto</MenuItem>
+                        <MenuItem value="cerrada">Cerrado</MenuItem>
+                      </Select>
+                    </div>
                 </div>
               ))
             ) : (

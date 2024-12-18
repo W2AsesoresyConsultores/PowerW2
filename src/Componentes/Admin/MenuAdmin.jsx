@@ -8,6 +8,7 @@ import {
   IoDocumentText,
 } from "react-icons/io5";
 import { RxAvatar, RxDashboard } from "react-icons/rx";
+import { RxDesktop } from "react-icons/rx";
 import { supabase } from "../../supabase/supabase.config";
 import { ThemeContext } from "../../Context/ThemeContext";
 import { UserAuth } from "../../Context/AuthContext";
@@ -123,7 +124,8 @@ function MenuAdmin() {
 
   const menuItems = useMemo(
     () => [
-      { to: "/Admin", icon: RxDashboard, label: "Ofertas" },
+      { to: "/Admin", icon: RxDashboard, label: "Ofertas Personales" },
+      { to: "/ofertascompartidas", icon: RxDesktop, label: "Ofertas Compartidas" },
       { to: "/Programa", icon: IoCalendarClearOutline, label: "Programación" },
       { to: "/Conversaciones", icon: IoChatbubbleOutline, label: "Conversaciones" },
       { to: "/Estadisticas", icon: IoStatsChartOutline, label: "Estadísticas" },

@@ -35,7 +35,7 @@ export const JobsProviderCompartido = ({ children }) => {
       .from('Oferta')
       .select('*')
       .eq('id_empresa', idEmpresa) // Filtrar por id_empresa
-      .eq('id_compartida', 1) // Filtrar por id_compartida
+      //.eq('id_compartida', 1) Filtrar por id_compartida
       .order('fecha_publicacion', { ascending: false });
 
     if (error) {
