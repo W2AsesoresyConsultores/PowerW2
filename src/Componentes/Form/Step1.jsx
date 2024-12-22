@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, Button, Box, InputAdornment, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
+import { TextField, Button, Box, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
 
 const Step1 = ({ data, handleChange, nextStep }) => {
     const [sueldoOption, setSueldoOption] = useState(''); // Estado para la opción de sueldo
@@ -87,19 +87,6 @@ const Step1 = ({ data, handleChange, nextStep }) => {
                 fullWidth
                 required
                 margin="normal"
-            />
-            <TextField
-                label="Empresa"
-                variant="outlined"
-                name="empresa"
-                value={data.empresa}
-                onChange={handleChange}
-                fullWidth
-                required
-                margin="normal"
-                InputProps={{
-                    startAdornment: <InputAdornment position="start">W2 -</InputAdornment>,
-                }}
             />
 
             {/* Selección de tipo de sueldo */}
