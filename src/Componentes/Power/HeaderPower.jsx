@@ -83,7 +83,7 @@ function HeaderPower() {
           </Link>
           <Link
             to="/Login"
-            className="text-md font-bold hover:bg-[#0f42e1] bg-[#0069ff] text-white transition-colors duration-200 px-6 py-2 rounded-full ml-4 font-inter"
+            className="text-md font-bold hover:bg-[#0f42e1] bg-  text-white transition-colors duration-200 px-6 py-2 rounded-full ml-4 font-inter"
           >
             Candidato
           </Link>
@@ -97,7 +97,7 @@ function HeaderPower() {
         onClose={toggleMenu}
         sx={{
           '& .MuiDrawer-paper': {
-            backgroundColor: '#003E9D',
+            backgroundColor: '#1433d6',
             width: '75%',
             padding: '1rem',
           },
