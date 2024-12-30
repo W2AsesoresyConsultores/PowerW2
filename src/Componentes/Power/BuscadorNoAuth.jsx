@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import JobsContext from '../../Context/JobsContext';
-import { FaSearch } from 'react-icons/fa'; // Ícono de buscar
+import { IoSearchOutline } from "react-icons/io5";
 
 function Buscador() {
   const { allActiveJobs, setSearchTerm } = useContext(JobsContext);
@@ -37,7 +37,7 @@ function Buscador() {
     }
     setFilteredJobs([]); // Limpiar las sugerencias al buscar
   };
-  
+
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       handleSearch(); // Ejecutar la búsqueda al presionar Enter
@@ -50,33 +50,28 @@ function Buscador() {
   };
 
   return (
-    <div className=" w-96 md:w-full flex justify-center items-center z-999 mb-4">
-      <div className='flex md:gap-4 md:w-1/2 w-[95%]'>
-      <input
-        type="search"
-        placeholder="Buscar Ofertas Laborales"
-        value={searchInput}
-        onChange={handleInputChange}
-        onKeyDown={handleKeyDown} // Asegúrate de tener este manejador
-        className="w-full px-6 py-4 rounded-full focus:outline-none text-black shadow-2xl placeholder:text-gray-500"
-      />
-
-      {/* Botón de buscar */}
-      <button
-        onClick={handleSearch}
-        className="hidden bg-white hover:bg-gray-50 text-primarycolor px-8 py-2 rounded-full md:flex items-center justify-center"
-      >
-        <FaSearch className="text-lg" />
-      </button>
-
+    <div className="relative w-full flex justify-center items-center z-50 my-6">
+      {/* Contenedor del input y el ícono */}
+      <div className="relative w-[95%] md:w-1/2">
+        {/* Ícono dentro del input */}
+        <span className="absolute inset-y-0 left-6 flex items-center text-gray-800">
+        <IoSearchOutline className='text-2xl' />
+        </span>
+        <input
+          type="search"
+          placeholder="¿Qué trabajo estás buscando?"
+          value={searchInput}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyDown} // Ejecutar búsqueda con Enter
+          className="w-full pl-16 pr-6 py-5 rounded-full focus:outline-none text-gray-800 shadow-2xl placeholder:text-gray-700 placeholder:font-inter placeholder:text-lg font-inter"
+        />
       </div>
-      {/* Input del buscador */}
-      
+
       {/* Resultados del buscador */}
       {filteredJobs.length > 0 && (
         <div
-          className="absolute w-1/2 mx-auto bg-white border border-gray-300 rounded-lg shadow-md mt-1"
-          style={{ top: '100%' }} // Asegura que las sugerencias estén debajo del input
+          className="absolute w-[95%] md:w-1/2 bg-white border border-gray-300 rounded-lg shadow-md mt-2"
+          style={{ top: '100%' }}
         >
           {filteredJobs.map((job) => (
             <div

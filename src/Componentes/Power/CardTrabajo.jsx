@@ -61,7 +61,7 @@ function CardTrabajo({ job, onSelectJob, isSelected }) {
                 <img src={empresa_img_url} className="w-full h-full rounded-lg" alt="" />
               </div>
               <div>
-                <h3 className="text-md font-semibold text-gray-900 font-source">
+                <h3 className="text-md font-semibold text-gray-900 font-inter">
                   {empresa}
                 </h3>
                 <p className="text-sm text-gray-700 font-inter">{nombreReclutador}</p>{" "}
@@ -71,10 +71,10 @@ function CardTrabajo({ job, onSelectJob, isSelected }) {
               <FaBookmark size={20} />
             </div>
           </div>
-          <h4 className="font-bold text-xl leading-tight text-newprimarycolor font-source">
+          <h4 className="font-bold text-xl leading-tight text-gray-800 font-inter">
             {puesto}
           </h4>
-          <p className="text-sm font-light text-gray-800 font-inter">
+          <p className="text-sm font-regular text-gray-800 font-inter">
             {descripcion} <span className="text-primarycolor font-semibold">Ver más</span>
           </p>
           <div className="flex space-x-2 justify-between">

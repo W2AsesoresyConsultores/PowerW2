@@ -4,7 +4,7 @@ import TrabajosContainer from './TrabajosContainer'
 
 function HeroPower() {
   return (
-    <div className="flex flex-col bg-primarygradientdark items-center justify-center w-full h-[55 0px] pt-28 md:pt-36 md:pb-12 text-gray-700 gap-2 bg-cover "
+    <div className="flex flex-col bg-primarygradientdark items-center justify-center w-full h-[650px] pt-28 md:pt-36 md:pb-12 text-gray-700 gap-2 bg-cover "
     style={{
       backgroundImage: "url('https://www.digitalocean.com/_next/static/media/hero-background.a9bcc858.svg')",
       backgroundRepeat: "no-repeat",
@@ -21,14 +21,17 @@ function HeroPower() {
       <div className="md:flex  flex-wrap w-full  justify-center animate-fade-up">
         <BuscadorNoAuth />
       </div>
-      <div className="w-full bg-white md:bg-transparent py-4 animate-fade-up delay-200">
-        {/* <img
-          className="mx-auto"
-          src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/AssetsPower/Main/BGPOWER.svg?t=2024-11-11T23%3A31%3A31.247Z"
-          alt=""
-        /> */}
-        
-      </div>     
+      <div className="md:flex flex-col hidden">
+  <h3 className="text-white font-semibold text-lg text-center font-inter mb-4">Ofertas populares:</h3>
+  <div className="flex flex-wrap gap-2 font-inter">
+    <span className="bg-gray-200 text-gray-700 px-4 py-1 rounded-full font-inter text-sm hover:bg-newprimarycolor transition-colors duration-300 hover:text-white cursor-pointer  ">Almacenero</span>
+    <span className="bg-gray-200 text-gray-700 px-4 py-1 rounded-full font-inter text-sm hover:bg-newprimarycolor transition-colors duration-300 hover:text-white cursor-pointer  ">Conductor</span>
+    <span className="bg-gray-200 text-gray-700 px-4 py-1 rounded-full font-inter text-sm hover:bg-newprimarycolor transition-colors duration-300 hover:text-white cursor-pointer  ">Asesor de ventas</span>
+    <span className="bg-gray-200 text-gray-700 px-4 py-1 rounded-full font-inter text-sm hover:bg-newprimarycolor transition-colors duration-300 hover:text-white cursor-pointer  ">Operario</span>
+    <span className="bg-gray-200 text-gray-700 px-4 py-1 rounded-full font-inter text-sm hover:bg-newprimarycolor transition-colors duration-300 hover:text-white cursor-pointer  ">Atención al cliente</span>
+  </div>
+</div>
+
     </div>
   );
 }
