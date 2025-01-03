@@ -3,7 +3,7 @@ import React from "react";
 function Hero() {
   return (
     <section
-      className="bg-[#0069ff] text-white h-[550px] text-center py-20 px-6 relative"
+      className="bg-[#0069ff] text-white h-[550px] text-center py-20 px-6 relative mt-20"
       style={{
         backgroundImage: "url('https://www.digitalocean.com/_next/static/media/hero-background.a9bcc858.svg')",
         backgroundRepeat: "no-repeat",

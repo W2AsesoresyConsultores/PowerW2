@@ -2,9 +2,13 @@ import React from "react";
 
 function Header() {
   return (
-    <header className="flex items-center justify-around px-6 py-4 shadow-sm font-inter">
-      {/* Logo */}
-      <div className="flex items-center">
+    <header className="w-full h-auto fixed top-0 z-20">
+      <div className="w-full h-8 bg-primarycolor">
+
+      </div>
+      <nav className="flex items-center justify-around px-6 py-4 shadow-sm font-inter bg-white">
+{/* Logo */}
+<div className="flex items-center">
         <img
           src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/Juniors/juniorsBlue.svg"
           alt="Logo"
@@ -13,8 +17,8 @@ function Header() {
       </div>
 
       {/* Menu */}
-      <nav className="hidden md:flex space-x-6 text-gray-700">
-        <a href="#" className="hover:text-[#0069ff]">
+      <nav className="hidden md:flex space-x-6 text-gray-700 bg-white">
+        <a href="#" className="hover:text-[#0069ff] hover:bg-[#eef2fa] px-4 py-1 rounded-full transition-colors duration-900">
           Producto
         </a>
         <a href="#" className="hover:text-[#0069ff]">
@@ -37,6 +41,8 @@ function Header() {
           Cotizar Web
         </button>
       </div>
+      </nav>
+      
     </header>
   );
 }
