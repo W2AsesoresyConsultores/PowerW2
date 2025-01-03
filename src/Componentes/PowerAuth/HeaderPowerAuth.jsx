@@ -49,11 +49,11 @@ function HeaderPowerAuth() {
   const whatsappSupportLink = "https://wa.me/51991879666?text=Hola,%20necesito%20ayuda%20en%20lo%20siguiente:";
 
   return (
-    <header className="bg-newprimarycolor fixed w-full z-10 transition-shadow flex justify-center duration-300">
+    <header className="bg-white fixed w-full h-[72px] z-10 transition-shadow flex justify-center duration-300">
       <div className="container md:mx-auto md:px-8 flex justify-between items-center py-2">
         <div className="md:flex items-center hidden">
         <Link className='text-white' to="/PowerAuth">
-            <img className='w-28' src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/AssetsPower/Main/logo%20power%20en%20positivo.png" alt="" />
+            <img className='w-28' src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/AssetsPower/Main/LOGOS.png?t=2024-12-18T16%3A32%3A30.587Z" alt="" />
           </Link>
         </div>
 

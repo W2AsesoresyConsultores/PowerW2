@@ -4,6 +4,7 @@ import JobsContext from '../../Context/JobsContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '../../supabase/supabase.config';
 import { Box, TextField, Button, List, ListItem, InputAdornment, IconButton } from '@mui/material';
+import { IoSearchOutline } from "react-icons/io5";
 
 
 function Buscador() {
@@ -143,7 +144,6 @@ function Buscador() {
           }}
         />
       </Box>
-
       <IconButton
       type='submit'
         sx={{
