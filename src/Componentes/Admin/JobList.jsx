@@ -169,8 +169,8 @@ const JobList = () => {
                       <p>{job.sueldo}</p>
                     </div>
                   </div>
-                  <div className="flex justify-between w-full">
-                  <Select
+                  <div className="flex justify-end w-full">
+                  {/* <Select
                         value={job.id_compartida === 1 ? "activo" : "inactivo"}
                         onChange={(e) => handleChangeStatuscd(index, e.target.value === "activo" ? 1 : 0)}
                         sx={{
@@ -189,7 +189,7 @@ const JobList = () => {
                       >
                         <MenuItem value="activo">Compartir</MenuItem>
                         <MenuItem value="inactivo">Desactivar</MenuItem>
-                      </Select>
+                      </Select> */}
 
                       <Select
                         value={job.estado}

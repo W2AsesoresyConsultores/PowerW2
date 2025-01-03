@@ -108,7 +108,7 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
       />
 
       {/* Imagen de la empresa */}
-      <Box mb={3}>
+      {/*<Box mb={3}>
         <Typography variant="body1" gutterBottom sx={{ color: 'text.primary' }}>
           Imagen de la empresa
         </Typography>
@@ -138,7 +138,7 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
             <PhotoCamera fontSize="large" />
           </IconButton>
         </label>
-      </Box>
+      </Box>*/}
 
       {/* Preguntas para el Postulante */}
       <Box mb={3}>

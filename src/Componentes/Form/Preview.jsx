@@ -17,6 +17,7 @@ const Preview = ({
 }) => {
     const { user } = UserAuth();
     const [idEmpresa, setIdEmpresa] = useState(null); // Estado para id_empresa
+    const [empresaImgUrl, setEmpresaImgUrl] = useState(null); // Estado para empresa_img_url
     const [jobDetails, setJobDetails] = useState([]);
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -42,6 +43,27 @@ const Preview = ({
 
         fetchIdEmpresa();
     }, [user]);
+
+    // Efecto para obtener empresa_url basado en idEmpresa
+    useEffect(() => {
+        const fetchEmpresaImgUrl = async () => {
+            if (idEmpresa) {
+                const { data: empresaData, error: empresaError } = await supabase
+                    .from('Empresa') // Nombre de tu tabla
+                    .select('empresa_url') // Columna que contiene la URL de la imagen
+                    .eq('id_empresa', idEmpresa)
+                    .single();
+
+                if (empresaError) {
+                    console.error('Error al obtener la empresa_url:', empresaError);
+                } else {
+                    setEmpresaImgUrl(empresaData?.empresa_url || null);
+                }
+            }
+        };
+
+        fetchEmpresaImgUrl();
+    }, [idEmpresa]);
 
     useEffect(() => {
         const details = [
@@ -104,7 +126,7 @@ const Preview = ({
                 sueldo: step1Data.sueldo,
                 empresa: step1Data.empresa,
                 id_empresa: idEmpresa, // Usar id_empresa obtenido
-                empresa_img_url: step1Data.empresa_img_url || null,
+                empresa_img_url: empresaImgUrl, // Usar empresa_url obtenida
                 modalidad: step3Data.modalidad,
                 horario: step3Data.horario,
                 beneficios: step3Data.beneficios,
@@ -153,7 +175,7 @@ const Preview = ({
                 <div className="flex items-center gap-4">
                     <div className="rounded-lg w-12 h-12">
                         <img
-                            src={step1Data.empresa_img_url}
+                            src={empresaImgUrl} // Mostrar empresa_img_url actualizado
                             className="w-full h-full rounded-lg"
                             alt=""
                         />
