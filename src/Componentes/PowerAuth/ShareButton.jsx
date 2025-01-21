@@ -7,7 +7,7 @@ function ShareButton({ selectedJob }) {
   const [isShareMenuOpen, setIsShareMenuOpen] = useState(false);
   const shareButtonRef = useRef(null);
 
-  const shareUrl = `https://w2asesoresyconsultores.com/Share?id=${selectedJob.id_oferta}`;
+  const shareUrl = `https://powerw2.com/Share?id=${selectedJob.id_oferta}`;
   const whatsappMessage = `Hola, quisiera compartir esta Oferta Laboral contigo: ${shareUrl}`;
   const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappMessage)}`;
 
