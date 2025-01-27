@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../supabase/supabase.config";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import HeaderPowerAuth from "./HeaderPowerAuth";
 import QuestionsModal from './QuestionsModal';
 import IniciarSesion from '../Power/IniciarSesion';
@@ -119,7 +119,7 @@ function Share() {
         {/* Header */}
         <div className="flex flex-col items-center justify-center bg-white rounded-lg p-4">
           <div className="bg-gray-100 p-3 rounded-xl mb-4">
-            <div className="bg-primarycolor p-2 rounded-lg">
+            <div className="bg-newprimarycolor p-2 rounded-lg">
               <MdOutlineVerifiedUser className="text-white text-xl" />
             </div>
           </div>
@@ -148,13 +148,12 @@ function Share() {
         {/* Apply Section */}
         <div className="flex w-full flex-col md:flex-row items-center justify-center my-4 px-4 md:px-24 bg-transparent fixed bottom-0">
           <div className="flex items-center justify-center bg-white rounded-lg">
-            <button
+            <Link
               className={`font-bold py-3 px-6 w-80 rounded-lg bg-primarycolor text-white ${hasApplied ? "opacity-70 cursor-not-allowed" : ""}`}
-              onClick={hasApplied ? null : handleOpenModal}
-              disabled={hasApplied}
+              to="/Login"
             >
               {hasApplied ? "Postulado" : "Postular Ahora"}
-            </button>
+            </Link>
           </div>
         </div>
 

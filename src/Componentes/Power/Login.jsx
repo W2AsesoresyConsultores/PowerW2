@@ -160,7 +160,7 @@ function Register() {
   return (
     <div className="flex justify-center min-h-screen font-dmsans">
       <HeaderPower />
-      <div className="w-1/2 h-screen bg-primarygradientdark hidden md:flex justify-center items-center relative"
+      <div className="w-1/2 h-screen bg-primarygradientdark hidden md:flex justify-center items-center relative bg-newprimarycolor"
       style={{
         backgroundImage: "url('https://www.digitalocean.com/_next/static/media/hero-background.a9bcc858.svg')",
         backgroundRepeat: "no-repeat",
