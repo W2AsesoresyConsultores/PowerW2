@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 
 const CallToAction = () => {
   return (
@@ -12,10 +13,10 @@ const CallToAction = () => {
     >
       <div className="flex-1 px-2 md:px-8">
         <h2 className="text-white text-3xl font-bold font-source">¿Quieres comenzar con Power?</h2>
-        <p className="text-white text-md mt-2 font-inter font-light">Ingresa a nuestra plataforma y encuentra tu trabajo ideal</p>
-        <button className="bg-white text-newprimarycolor font-bold px-6 py-2 rounded-full mt-4 font-source text-xl">
+        <p className="text-white text-md mt-2 mb-6 font-inter font-light">Ingresa a nuestra plataforma y encuentra tu trabajo ideal</p>
+        <Link to="/Login" className="bg-white text-newprimarycolor font-bold px-6 py-2 rounded-full font-source text-xl">
           Postula Ahora
-        </button>
+        </Link>
       </div>
       <div className="flex justify-center md:justify-start mt-4 md:mt-0 md:ml-6 -mb-4">
         <img 

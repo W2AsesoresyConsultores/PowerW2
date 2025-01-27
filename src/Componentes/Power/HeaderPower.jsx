@@ -53,7 +53,7 @@ function HeaderPower() {
 
   return (
     <header
-      className={`bg-white w-full z-10 h-[72px] flex justify-between md:justify-around items-center fixed top-0 transition-transform duration-300 ${
+      className={`bg-white w-full z-10 h-[72px] border-b border-gray-100 flex justify-between md:justify-around items-center fixed top-0 transition-transform duration-300 ${
         isVisible ? 'translate-y-0 shadow-sm' : '-translate-y-full'
       }`}
     >

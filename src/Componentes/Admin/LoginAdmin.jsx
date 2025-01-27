@@ -2,18 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../../Context/AuthContext";
 import HeaderPower from "../Power/HeaderPower";
-import {
-  Box,
-  Grid,
-  Typography,
-  TextField,
-  Button,
-  Link,
-  IconButton,
-  InputAdornment,
-} from "@mui/material";
-import { GrFormNextLink } from "react-icons/gr";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { HiOutlineEye } from "react-icons/hi";
+import { HiOutlineEyeOff } from "react-icons/hi";
 
 function LoginAdmin() {
   const navigate = useNavigate();
@@ -50,11 +40,9 @@ function LoginAdmin() {
   return (
     <div>
       <HeaderPower />
-      <Grid container height="100vh">
-        <Grid
-          item
-          md={6}
-          className="hidden md:flex flex-col gap-8 items-center justify-center overflow-hidden bg-newprimarycolor"
+      <div className="flex h-screen">
+        <div
+          className="hidden md:flex flex-col gap-8 items-center justify-center bg-newprimarycolor w-1/2"
           style={{
             backgroundImage: "url('https://www.digitalocean.com/_next/static/media/hero-background.a9bcc858.svg')",
             backgroundRepeat: "no-repeat",
@@ -62,129 +50,70 @@ function LoginAdmin() {
             backgroundSize: "cover",
           }}
         >
-          <Box sx={{ padding: "40px", textAlign: "center" }}>
-            <Typography
-              variant="h4"
-              fontWeight="bold"
-              gutterBottom
-              color="white"
-            >
-              Inicia sesión en Power
-            </Typography>
-            <Typography variant="subtitle1" color="white">
-              Si no tienes una cuenta puedes{" "}
-              <Link
+          <div className="p-10 text-center">
+            <h1 className="text-4xl font-bold text-white mb-4 font-inter">Inicia sesión en Power</h1>
+            <p className="text-white font-inter">
+              Si no tienes una cuenta puedes...  
+              <a
                 href="https://wa.me/51970632448?text=Hola%20vengo%20de%20Power.%20Quiero%20solicitar%20mi%20cuenta%20de%20Reclutador."
-                underline="hover"
-                style={{ color: "#ffe946" }}
-              >
-                Solicitarla aquí!
-              </Link>
-            </Typography>
-          </Box>
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          md={6}
-          className="flex items-center justify-center px-6 md:px-28"
-        >
-          <Box padding={2} maxWidth="md" width="100%">
-            <Typography
-              variant="h4"
-              align="center"
-              color="blue"
-              gutterBottom
-            >
-              Te damos la bienvenida
-            </Typography>
-            <Typography
-              variant="subtitle1"
-              align="center"
-              color="gray.300"
-              gutterBottom
-            >
-              Ingresa tus datos para iniciar sesión
-            </Typography>
-            <Box mt={4} component="form" onSubmit={handleLogin}>
-              <TextField
-                label="Correo electrónico"
-                variant="outlined"
-                fullWidth
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                margin="normal"
-                InputProps={{
-                  style: {
-                    backgroundColor: "white",
-                    borderRadius: "8px",
-                  },
-                }}
-              />
-              <TextField
-                label="Contraseña"
-                variant="outlined"
-                fullWidth
-                type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                margin="normal"
-                InputProps={{
-                  style: {
-                    backgroundColor: "white",
-                    borderRadius: "8px",
-                  },
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton onClick={handleClickShowPassword} edge="end">
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              {error && (
-                <Typography color="error" variant="body2" gutterBottom>
-                  {error}
-                </Typography>
-              )}
-              <Box
-                display="flex"
-                flexDirection={{ xs: "column", md: "column" }}
-                justifyContent="space-between"
-                alignItems="start"
-                gap={2}
-                mt={2}
-              >
-                <Link
+                className="text-yellowprimary hover:underline"
+              > Solicitarla aquí!</a>
+            </p>
+          </div>
+        </div>
+        <div className="flex items-center justify-center w-full md:w-1/2 px-6 md:px-28">
+          <div className="p-4 w-full max-w-md">
+            <h1 className="text-4xl text-newprimarycolor font-bold text-center mb-4 font-inter">Te damos la bienvenida</h1>
+            <p className="text-gray-800 text-center mb-8 font-inter">Ingresa tus datos para iniciar sesión</p>
+            <form onSubmit={handleLogin} className="space-y-6">
+              <div className="relative">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-1 focus:ring-newprimarycolor transition"
+                  placeholder="Correo electrónico"
+                />
+              </div>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-1 focus:ring-newprimarycolor transition"
+                  placeholder="Contraseña"
+                />
+                <button
+                  type="button"
+                  onClick={handleClickShowPassword}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                >
+                  {showPassword ? (
+                    <HiOutlineEye />
+                  ) : (
+                    <HiOutlineEyeOff />
+                  )}
+                </button>
+              </div>
+              {error && <p className="text-red-600 text-sm">{error}</p>}
+              <div className="flex flex-col gap-4 mt-4">
+                <a
                   href="https://wa.me/51970632448?text=Hola%2C%20me%20gustar%C3%ADa%20que%20me%20pueda%20ayudar%20a%20recuperar%20mi%20contrase%C3%B1a"
-                  color="secondary"
-                  underline="always"
-                  sx={{ color: "#01C29E", textDecorationColor: "#01C29E" }}
+                  className="text-colorgreen underline underline-offset-2 font-inter"
                 >
                   Olvidé mi contraseña
-                </Link>
-                <Button
+                </a>
+                <button
                   type="submit"
-                  variant="contained"
-                  fullWidth
-                  sx={{
-                    py: 2,
-                    borderRadius: "8px",
-                    backgroundColor: "#ffe946",
-                    color: "#2563eb",
-                  }}
+                  className="w-full py-3 font-inter text-md bg-yellowprimary text-newprimarycolor font-bold rounded-lg hover:bg-yellow-500 transition"
                 >
-                  <Typography variant="button" fontWeight="bold">
-                    Iniciar Sesión
-                  </Typography>
-                </Button>
-              </Box>
-            </Box>
-          </Box>
-        </Grid>
-      </Grid>
+                  Iniciar Sesión
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
