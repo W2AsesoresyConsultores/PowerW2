@@ -35,7 +35,8 @@ function Beneficios() {
       <div className="w-full md:w-1/2 h-full md:pt-8 px-4 md:md:pl-24 pr-10">
         <h2 className="font-source font-bold text-5xl text-[#2f4daa] text-center md:text-start">Lo que nos mueve en Dicar</h2>
         <p className="font-inter my-8 text-xl text-gray-800">
-        En Dicar, fomentamos una cultura laboral basada en la confianza y la innovación, asegurando soluciones logísticas eficientes que impactan positivamente en el bienestar de las personas.
+        Somos una empresa reconocida y certificada, con respaldo en nuestra excelencia operativa. En 2014 obtuvimos nuestro primer certificado de Buenas Prácticas de Almacenamiento (BPA) y, en 2019, la DIGEMID 
+        nos otorgó la certificación de Buenas Prácticas de Distribución y Transporte (BPDT).
         </p>
         <div className="font-inter flex w-full flex-wrap gap-2">
           {[
