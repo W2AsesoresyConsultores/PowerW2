@@ -1,12 +1,22 @@
-import React from 'react';
-import { TextField, Button, Typography, Box } from '@mui/material';
+import React, { useState } from 'react';
+import { TextField, Button, Box } from '@mui/material';
 
 const Step2 = ({ data, handleChange, nextStep, prevStep }) => {
-    const handleKeyDown = (event, name) => {
-        if (event.key === 'Enter') {
-            event.preventDefault(); // Evita el comportamiento por defecto de Enter
-            const newText = data[name] ? data[name] + '.\n' : '.\n'; // Añade un punto y salto de línea
-            handleChange({ target: { name, value: newText } }); // Actualiza el estado
+    const [errors, setErrors] = useState({});
+
+    const validateFields = () => {
+        let newErrors = {};
+        if (!data.requisitos) newErrors.requisitos = "Campo obligatorio";
+        if (!data.funciones) newErrors.funciones = "Campo obligatorio";
+        if (!data.beneficios) newErrors.beneficios = "Campo obligatorio";
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleNext = () => {
+        if (validateFields()) {
+            nextStep();
         }
     };
 
@@ -18,13 +28,13 @@ const Step2 = ({ data, handleChange, nextStep, prevStep }) => {
                 name="requisitos"
                 value={data.requisitos}
                 onChange={handleChange}
-                onKeyDown={(event) => handleKeyDown(event, 'requisitos')}
                 fullWidth
                 required
                 multiline
                 rows={4}
                 margin="normal"
-                helperText="Use viñetas separando por líneas para cada requisito"
+                error={!!errors.requisitos}
+                helperText={errors.requisitos || "Use viñetas separando por líneas para cada requisito"}
             />
             <TextField
                 label="Funciones"
@@ -32,13 +42,13 @@ const Step2 = ({ data, handleChange, nextStep, prevStep }) => {
                 name="funciones"
                 value={data.funciones}
                 onChange={handleChange}
-                onKeyDown={(event) => handleKeyDown(event, 'funciones')}
                 fullWidth
                 required
                 multiline
                 rows={4}
                 margin="normal"
-                helperText="Use viñetas separando por líneas para cada función"
+                error={!!errors.funciones}
+                helperText={errors.funciones || "Use viñetas separando por líneas para cada función"}
             />
             <TextField
                 label="Beneficios"
@@ -46,27 +56,19 @@ const Step2 = ({ data, handleChange, nextStep, prevStep }) => {
                 name="beneficios"
                 value={data.beneficios}
                 onChange={handleChange}
-                onKeyDown={(event) => handleKeyDown(event, 'beneficios')}
                 fullWidth
                 required
                 multiline
                 rows={4}
                 margin="normal"
-                helperText="Use viñetas separando por líneas para cada beneficio"
+                error={!!errors.beneficios}
+                helperText={errors.beneficios || "Use viñetas separando por líneas para cada beneficio"}
             />
             <Box mt={3} display="flex" justifyContent="space-between">
-                <Button 
-                    variant="contained" 
-                    color="secondary" 
-                    onClick={prevStep}
-                >
+                <Button variant="contained" color="secondary" onClick={prevStep}>
                     Anterior
                 </Button>
-                <Button 
-                    variant="contained" 
-                    color="primary" 
-                    onClick={nextStep}
-                >
+                <Button variant="contained" color="primary" onClick={handleNext}>
                     Siguiente
                 </Button>
             </Box>

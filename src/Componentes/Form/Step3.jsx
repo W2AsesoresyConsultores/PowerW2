@@ -1,23 +1,27 @@
 import React, { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 import { MdDeleteForever } from "react-icons/md";
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import {
   Box,
   TextField,
   Button,
-  Input,
-  Typography,
   Select,
   MenuItem,
   IconButton,
+  Typography,
+  FormHelperText,
+  FormControl
 } from "@mui/material";
 
 const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }) => {
   const [questions, setQuestions] = useState([""]);
-  const [companyImage, setCompanyImage] = useState(null);
+  const [errors, setErrors] = useState({
+    modalidad: false,
+    horario: false,
+    questions: false
+  });
 
-  // Manejar los cambios en las preguntas
+  // Manejo de cambios en las preguntas
   const handleQuestionChange = (index, e) => {
     const newQuestions = [...questions];
     newQuestions[index] = e.target.value;
@@ -31,21 +35,29 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
     }
   };
 
-  // Eliminar una pregunta específica
+  // Eliminar una pregunta
   const removeQuestion = (index) => {
     const newQuestions = questions.filter((_, i) => i !== index);
     setQuestions(newQuestions);
   };
 
-  // Manejar cambios en la imagen de la empresa
-  const handleImageChange = (e) => {
-    setCompanyImage(e.target.files[0]);
+  // Validar los campos antes de avanzar
+  const validateFields = () => {
+    const newErrors = {
+      modalidad: !data.modalidad,
+      horario: !data.horario.trim(),
+    };
+
+    setErrors(newErrors);
+    return !Object.values(newErrors).includes(true);
   };
 
-  // Navegar al preview y actualizar las preguntas en el estado global
+  // Manejo del botón "Preview"
   const handlePreview = () => {
-    handleQuestionsChange(questions); // Actualiza las preguntas en el estado global
-    nextStep(); // Navega al siguiente paso (Preview)
+    if (validateFields()) {
+      handleQuestionsChange(questions);
+      nextStep();
+    }
   };
 
   return (
@@ -59,32 +71,21 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
         p: 3,
         bgcolor: "background.paper",
         borderRadius: 2,
-        boxShadow: 1,
+        boxShadow: 1
       }}
     >
       {/* Modalidad */}
-      <Box mb={3}>
-        <Typography variant="body1" gutterBottom sx={{ color: 'text.primary' }}>
+      <FormControl fullWidth required error={errors.modalidad} margin="normal">
+        <Typography variant="body1" gutterBottom>
           Modalidad
         </Typography>
         <Select
           name="modalidad"
           value={data.modalidad}
           onChange={handleChange}
-          fullWidth
-          required
           sx={{
             bgcolor: 'background.default',
-            color: 'text.primary',
-            '& .MuiSelect-icon': {
-              color: 'text.primary',
-            },
-            '& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
-              borderColor: 'text.primary',
-            },
-            '&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
-              borderColor: 'text.primary',
-            }
+            color: 'text.primary'
           }}
         >
           <MenuItem value="">Selecciona una modalidad</MenuItem>
@@ -92,7 +93,8 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
           <MenuItem value="Remoto">Remoto</MenuItem>
           <MenuItem value="Híbrido">Híbrido</MenuItem>
         </Select>
-      </Box>
+        {errors.modalidad && <FormHelperText>Este campo es obligatorio</FormHelperText>}
+      </FormControl>
 
       {/* Horario */}
       <TextField
@@ -103,46 +105,14 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
         onChange={handleChange}
         fullWidth
         required
+        error={errors.horario}
+        helperText={errors.horario ? "Este campo es obligatorio" : ""}
         margin="normal"
-        sx={{ bgcolor: 'background.default', color: 'text.primary' }}
       />
-
-      {/* Imagen de la empresa */}
-      {/*<Box mb={3}>
-        <Typography variant="body1" gutterBottom sx={{ color: 'text.primary' }}>
-          Imagen de la empresa
-        </Typography>
-        <label htmlFor="upload-image">
-          <Input
-            id="upload-image"
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            style={{ display: 'none' }}
-          />
-          <IconButton
-            color="primary"
-            aria-label="upload picture"
-            component="span"
-            sx={{
-              width: '100%',
-              height: 'auto',
-              border: '1px solid #ccc',
-              padding: '16px',
-              borderRadius: '4px',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <PhotoCamera fontSize="large" />
-          </IconButton>
-        </label>
-      </Box>*/}
 
       {/* Preguntas para el Postulante */}
       <Box mb={3}>
-        <Typography variant="body1" gutterBottom sx={{ color: 'text.primary' }}>
+        <Typography variant="body1" gutterBottom>
           Preguntas para el Postulante
         </Typography>
         {questions.map((question, index) => (
@@ -152,10 +122,11 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
               onChange={(e) => handleQuestionChange(index, e)}
               fullWidth
               placeholder={`Pregunta ${index + 1}`}
-              required={index === 0} // Solo la primera pregunta es obligatoria
+              required
               variant="outlined"
               margin="normal"
-              sx={{ bgcolor: 'background.default', color: 'text.primary' }}
+              error={errors.questions && index === 0}
+              helperText={errors.questions && index === 0 ? "La primera pregunta es obligatoria" : ""}
             />
             {index === questions.length - 1 && questions.length < 6 && (
               <IconButton color="primary" onClick={addQuestion}>
@@ -163,10 +134,7 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
               </IconButton>
             )}
             {index > 0 && (
-              <IconButton
-                color="secondary"
-                onClick={() => removeQuestion(index)}
-              >
+              <IconButton color="secondary" onClick={() => removeQuestion(index)}>
                 <MdDeleteForever />
               </IconButton>
             )}

@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
 import {
-  LinearProgress, Select, MenuItem, IconButton, Tooltip, TablePagination
+  LinearProgress, Select, MenuItem, IconButton, Tooltip, TablePagination, Snackbar
 } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { FaUserFriends, FaDollarSign } from 'react-icons/fa';
+import { FaUserFriends, FaDollarSign, FaLink } from 'react-icons/fa';
 import { FaLocationDot, FaBuildingUser } from "react-icons/fa6";
 import EditIcon from "@mui/icons-material/Edit";
 import JobsContext from '../../Context/JobsContext';
@@ -18,10 +18,11 @@ const formatDate = (isoString) => {
 };
 
 const JobList = () => {
-  const { userSearchResults: jobs, setJobs, userId } = useContext(JobsContext); // Asegúrate de tener userId
+  const { userSearchResults: jobs, setJobs, userId } = useContext(JobsContext);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(9);
   const [loading, setLoading] = useState(true);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -41,6 +42,13 @@ const JobList = () => {
 
     fetchJobs();
   }, [setJobs, userId]);
+
+  const handleCopyLink = (jobId) => {
+    const jobUrl = `https://powerw2.com/Share?id=${jobId}`;
+    navigator.clipboard.writeText(jobUrl)
+      .then(() => setOpenSnackbar(true))
+      .catch((err) => console.error('Error al copiar el enlace:', err));
+  };
 
   const handleChangeStatus = async (index, newStatus) => {
     setLoading(true);
@@ -126,18 +134,20 @@ const JobList = () => {
                           className="w-12 h-12 rounded-lg"
                         />
                       </div>
-                      <Link to={`/EditJob/${job.id_oferta}`}>
-                        <Tooltip title="Editar">
-                          <IconButton
-                            color="primary"
-                            sx={{
-                              "&:hover": { color: "gray" },
-                            }}
-                          >
-                            <EditIcon />
-                          </IconButton>
-                        </Tooltip>
-                      </Link>
+                      <div className="flex gap-1">
+  <Link to={`/EditJob/${job.id_oferta}`}>
+    <Tooltip title="Editar">
+      <IconButton color="primary" sx={{ "&:hover": { color: "gray" } }}>
+        <EditIcon />
+      </IconButton>
+    </Tooltip>
+  </Link>
+  <Tooltip title="Copiar enlace">
+    <IconButton color="primary" onClick={() => handleCopyLink(job.id_oferta)}>
+      <FaLink />
+    </IconButton>
+  </Tooltip>
+</div>
                     </div>
                   </div>
                   <div className="mb-2">
@@ -230,6 +240,12 @@ const JobList = () => {
           />
         </>
       )}
+        <Snackbar
+        open={openSnackbar}
+        autoHideDuration={2000}
+        onClose={() => setOpenSnackbar(false)}
+        message="Enlace copiado correctamente"
+      />
     </div>
   );
 };
