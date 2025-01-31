@@ -79,7 +79,7 @@ function HeaderPowerAuth() {
               <BiSupport size={20} className="" />
             </a>
           </Tooltip>
-          <span className="overflow-hidden whitespace-nowrap font-inter text-md font-regular overflow-ellipsis text-white font-regular w-auto flex items-center">
+          <span className="overflow-hidden whitespace-nowrap font-inter text-md font-regular overflow-ellipsis text-black font-regular w-auto flex items-center">
             {profile.nombre || 'Usuario'}
           </span>
           <Tooltip title="Mi Perfil" arrow>
