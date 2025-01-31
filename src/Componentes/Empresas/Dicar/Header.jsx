@@ -29,7 +29,7 @@ function Header() {
   className="text-lg font-bold"
 >
   <img
-    src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/footer/logo-header.png"
+    src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/Dicar/Header%20-%20Logo/logo-header.png"
     alt="Logo"
     className="h-10"
   />

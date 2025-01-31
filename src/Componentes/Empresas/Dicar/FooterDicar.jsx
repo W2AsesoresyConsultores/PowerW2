@@ -8,7 +8,7 @@ const Footer = () => {
         {/* Logo y descripción */}
         <div className="flex flex-col items-center md:items-start mb-6 md:mb-0">
         <img
-        src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/footer/logo-footer-2%20(1).png" // Reemplaza con el logo real
+        src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/Dicar/Footer%20-%20Logo%20/Logo-Footer.png" // Reemplaza con el logo real
         alt="Logo Dicar"
         className="h-16 mb-4"
         />

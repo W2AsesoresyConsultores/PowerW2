@@ -1,6 +1,4 @@
 import React from "react";
-import Plyr from "plyr-react";
-import "plyr-react/plyr.css";
 import "../../../Nosotros.css";
 
 const Nosotros = () => {
@@ -9,39 +7,20 @@ const Nosotros = () => {
       {/* Título general */}
       <div className="text-center mb-12">
         <h1 className="font-source font-bold text-5xl text-[#2f4daa] text-center">
-            El éxito se construye con el mejor talento
+          El éxito se construye con el mejor talento
         </h1>
       </div>
 
+      {/* Contenedor del video manteniendo diseño */}
       <div className="relative w-full flex justify-center">
-  <div className="player-wrapper rounded-lg overflow-hidden shadow-lg">
-    <Plyr
-      source={{
-        type: "video",
-        sources: [
-          {
-            src: "https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/sedes/talanaremu.mp4?t=2024-12-04T22%3A25%3A53.063Z",
-            type: "video/mp4",
-          },
-        ],
-      }}
-      options={{
-        controls: [
-          "play-large", // Botón grande de reproducción
-          "play",
-          "progress",
-          "current-time",
-          "mute",
-          "volume",
-          "settings",
-          "fullscreen",
-        ],
-        settings: ["quality", "speed"], // Opciones de configuración
-        theme: { primary: "#FF5733" }, // Cambiar el color principal
-      }}
-    />
-  </div>
-</div>
+        <div className="player-wrapper rounded-lg overflow-hidden shadow-lg w-full max-w-3xl">
+          <iframe
+            src="https://drive.google.com/file/d/1nB3ak8uh0EhcuJR49sLPHUFinL1nyINj/preview"
+            className="w-full aspect-video"
+            allow="autoplay"
+          ></iframe>
+        </div>
+      </div>
     </div>
   );
 };
