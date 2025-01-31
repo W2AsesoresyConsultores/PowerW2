@@ -13,7 +13,7 @@ function Hero2() {
       {/* Imagen detrás del contenido */}
       <img
         className="absolute bottom-0 w-full object-cover z-10 h-[450px]"
-        src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/sedes/download-removebg-preview.png?t=2024-12-05T19%3A18%3A27.462Z"
+        src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/Dicar/Hero/Hero.png"
         alt="Decoración Detrás"
       />
     </div>
