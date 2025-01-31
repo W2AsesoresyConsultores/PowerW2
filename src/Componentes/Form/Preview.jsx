@@ -190,7 +190,7 @@ const Preview = ({
     const capitalizedTimeAgo = timeAgo.charAt(0).toUpperCase() + timeAgo.slice(1);
 
     return (
-        <div className="selected-job-info w-full custom-scrollbar rounded-lg md:flex flex-col px-8 py-4 mx-8 bg-[#ffffff] hidden transition-all duration-500 font-dmsans" style={{ height: "610px", overflowY: "auto" }}>
+        <div className="selected-job-info w-full custom-scrollbar rounded-lg md:flex flex-col px-8 py-4 mx-8 bg-[#ffffff] hidden transition-all duration-500 font-dmsans" style={{ height: "610px", width: "600px", overflowY: "auto" }}>
             <p className="text-gray-500 text-xs font-inter">{capitalizedTimeAgo}</p>
             <h2 className="font-bold text-3xl text-newprimarycolor font-source">{step1Data.puesto}</h2>
 
@@ -216,9 +216,11 @@ const Preview = ({
                 </span>
             </div>
 
-            <div className="mb-4">
+            <div className="mb-4" style={{ width: "100%", whiteSpace: "normal", overflowWrap: "break-word" }}>
                 <h3 className="font-semibold text-black font-inter text-lg">Descripción</h3>
-                <p className="text-gray-800 text-base font-inter ml-2">{step1Data.descripcion}</p>
+                <p className="text-gray-800 text-base font-inter ml-2">
+                    {step1Data.descripcion}
+                </p>
                 {jobDetails.map((detail, index) => (
                     <div key={index} className="py-2">
                         <div className="font-semibold text-black font-inter text-lg">{detail.title}</div>
@@ -238,7 +240,7 @@ const Preview = ({
                         >
                             {empresas.map((empresa) => (
                                 <MenuItem key={empresa.id_empresa} value={empresa.id_empresa}>
-                                    {empresa.nombre_empresa} {/* Muestra el nombre de la empresa */}
+                                    {empresa.nombre_empresa}
                                 </MenuItem>
                             ))}
                         </Select>
