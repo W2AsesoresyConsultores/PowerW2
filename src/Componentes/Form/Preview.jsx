@@ -23,7 +23,7 @@ const Preview = ({
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [createdJob, setCreatedJob] = useState(null);
     const [empresas, setEmpresas] = useState([]);
-    const [selectedCodigo, setSelectedCodigo] = useState(""); 
+    const [selectedEmpresa, setSelectedEmpresa] = useState(""); 
 
     useEffect(() => {
         const fetchIdEmpresa = async () => {
@@ -38,7 +38,7 @@ const Preview = ({
                     console.error('Error al obtener el id_empresa:', perfilError);
                 } else {
                     setIdEmpresa(perfilData?.id_empresa);
-                    fetchNombreEmpresa(perfilData?.id_empresa); // Llamar a la función para obtener el nombre de la empresa
+                    fetchNombreEmpresa(perfilData?.id_empresa);
                 }
             }
         };
@@ -46,7 +46,6 @@ const Preview = ({
         fetchIdEmpresa();
     }, [user]);
 
-    // Función para obtener el nombre de la empresa
     const fetchNombreEmpresa = async (id) => {
         if (id) {
             const { data: empresaData, error } = await supabase
@@ -58,37 +57,17 @@ const Preview = ({
             if (error) {
                 console.error('Error al obtener el nombre de la empresa:', error);
             } else {
-                step1Data.empresa = empresaData?.nombre_empresa || ""; // Actualizar el nombre de la empresa en step1Data
-                setEmpresaImgUrl(empresaData?.empresa_url || null); // Establecer la imagen de la empresa
+                step1Data.empresa = empresaData?.nombre_empresa || "";
+                setEmpresaImgUrl(empresaData?.empresa_url || null);
             }
         }
     };
 
     useEffect(() => {
-        const fetchEmpresaImgUrl = async () => {
-            if (idEmpresa) {
-                const { data: empresaData, error: empresaError } = await supabase
-                    .from('Empresa')
-                    .select('empresa_url')
-                    .eq('id_empresa', idEmpresa)
-                    .single();
-
-                if (empresaError) {
-                    console.error('Error al obtener la empresa_url:', empresaError);
-                } else {
-                    setEmpresaImgUrl(empresaData?.empresa_url || null);
-                }
-            }
-        };
-
-        fetchEmpresaImgUrl();
-    }, [idEmpresa]);
-
-    useEffect(() => {
         const fetchEmpresas = async () => {
             const { data: empresasData, error } = await supabase
                 .from('Empresa')
-                .select('id_empresa, empresa_url'); 
+                .select('id_empresa, nombre_empresa, empresa_url'); 
 
             if (error) {
                 console.error('Error al obtener las empresas:', error);
@@ -140,12 +119,6 @@ const Preview = ({
         setJobDetails(details);
     }, [step1Data, step3Data]);
 
-    const formattedDate = dayjs(step1Data.fecha_publicacion).format("DD-MM-YYYY");
-    dayjs.extend(relativeTime);
-    dayjs.locale("es");
-    const timeAgo = dayjs(step1Data.fecha_publicacion).fromNow();
-    const capitalizedTimeAgo = timeAgo.charAt(0).toUpperCase() + timeAgo.slice(1);
-
     const handleConfirm = async () => {
         setIsSubmitting(true);
         try {
@@ -156,8 +129,8 @@ const Preview = ({
                 funciones: step1Data.funciones,
                 ubicacion: step1Data.ubicacion,
                 sueldo: step1Data.sueldo,
-                empresa: step1Data.empresa, // Ahora este campo tiene el nombre correcto
-                id_empresa: selectedCodigo || idEmpresa,
+                empresa: step1Data.empresa,
+                id_empresa: selectedEmpresa || idEmpresa,
                 empresa_img_url: empresaImgUrl,
                 modalidad: step3Data.modalidad,
                 horario: step3Data.horario,
@@ -192,23 +165,29 @@ const Preview = ({
         }
     };
 
-    const handleCodigoChange = async (event) => {
-        const codigoSeleccionado = event.target.value;
-        setSelectedCodigo(codigoSeleccionado);
+    const handleEmpresaChange = async (event) => {
+        const empresaSeleccionada = event.target.value;
+        setSelectedEmpresa(empresaSeleccionada);
 
         const { data: empresaData, error } = await supabase
             .from('Empresa')
             .select('empresa_url, nombre_empresa')
-            .eq('id_empresa', codigoSeleccionado)
+            .eq('id_empresa', empresaSeleccionada)
             .single();
 
         if (error) {
             console.error('Error al obtener la empresa_url:', error);
         } else {
             setEmpresaImgUrl(empresaData?.empresa_url || null);
-            step1Data.empresa = empresaData?.nombre_empresa || ""; // Actualizar el nombre de la empresa en step1Data
+            step1Data.empresa = empresaData?.nombre_empresa || ""; 
         }
     };
+
+    const formattedDate = dayjs(step1Data.fecha_publicacion).format("DD-MM-YYYY");
+    dayjs.extend(relativeTime);
+    dayjs.locale("es");
+    const timeAgo = dayjs(step1Data.fecha_publicacion).fromNow();
+    const capitalizedTimeAgo = timeAgo.charAt(0).toUpperCase() + timeAgo.slice(1);
 
     return (
         <div className="selected-job-info w-full custom-scrollbar rounded-lg md:flex flex-col px-8 py-4 mx-8 bg-[#ffffff] hidden transition-all duration-500 font-dmsans" style={{ height: "610px", overflowY: "auto" }}>
@@ -251,15 +230,15 @@ const Preview = ({
             {idEmpresa === 1 && (
                 <div className="mb-4">
                     <FormControl fullWidth>
-                        <InputLabel id="select-codigo-label">Seleccionar Código</InputLabel>
+                        <InputLabel id="select-empresa-label">Seleccionar Empresa</InputLabel>
                         <Select
-                            labelId="select-codigo-label"
-                            value={selectedCodigo}
-                            onChange={handleCodigoChange}
+                            labelId="select-empresa-label"
+                            value={selectedEmpresa}
+                            onChange={handleEmpresaChange}
                         >
                             {empresas.map((empresa) => (
                                 <MenuItem key={empresa.id_empresa} value={empresa.id_empresa}>
-                                    {empresa.id_empresa} {/* Cambia esto por el nombre que desees mostrar */}
+                                    {empresa.nombre_empresa} {/* Muestra el nombre de la empresa */}
                                 </MenuItem>
                             ))}
                         </Select>
