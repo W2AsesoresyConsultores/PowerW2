@@ -101,7 +101,7 @@ function Sedes() {
 
   return (
     <>
-      <section className="py-12 2xl:py-16 max-w-screen-2xl mx-auto w-full px-3 sm:px-8 lg:px-16 xl:px-32 font-dmsans">
+      <section id="sedes" className="py-12 2xl:py-16 max-w-screen-2xl mx-auto w-full px-3 sm:px-8 lg:px-16 xl:px-32 font-dmsans">
         <h3 className="font-source font-bold text-5xl text-[#2f4daa] text-center">
           Conoce Nuestras Sedes
         </h3>
