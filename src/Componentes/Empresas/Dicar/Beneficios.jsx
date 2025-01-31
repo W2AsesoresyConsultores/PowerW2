@@ -5,11 +5,11 @@ function Beneficios() {
   const [fade, setFade] = useState(false); // Estado para manejar el efecto de transición
 
   const images = [
-    "https://www.buk.pe/hubfs/2024/nosotros/Somos%20cercanos%20y%20lo%20pasamos%20bien.jpg",
-    "https://www.buk.pe/hubfs/2024/nosotros/El%20cliente%20es%20nuestro%20centro.jpg",
-    "https://www.buk.pe/hubfs/Nos%20mueve%20la%20excelencia.jpg",
-    "https://www.buk.pe/hubfs/2024/nosotros/Lo%20que%20nos%20mueve/Los-pensamos-lo-hacemos.webp",
-    "https://www.buk.pe/hubfs/2024/nosotros/Vamos%20al%20infinito%20y%20m%C3%A1s%20all%C3%A1.webp",
+    "https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/Dicar/Beneficios/Beneficio1.jpg",
+    "https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/Dicar/Beneficios/Beneficio2.jpg",
+    "https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/Dicar/Beneficios/Beneficio3.png",
+    "https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/Dicar/Beneficios/Beneficio4.png",
+    "https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/Page_empresas/Dicar/Beneficios/Beneficio5.jpg",
   ];
 
   // Cambiar la imagen automáticamente cada 2 segundos
@@ -32,17 +32,17 @@ function Beneficios() {
   return (
     <div id="beneficios" className="w-full h-auto py-10 flex flex-wrap">
       {/* Texto y botones */}
-      <div className="w-full md:w-1/2 h-full md:pt-28 px-4 md:md:pl-24 pr-10">
+      <div className="w-full md:w-1/2 h-full md:pt-8 px-4 md:md:pl-24 pr-10">
         <h2 className="font-source font-bold text-5xl text-[#2f4daa] text-center md:text-start">Lo que nos mueve en Dicar</h2>
         <p className="font-inter my-8 text-xl text-gray-800">
         En Dicar, fomentamos una cultura laboral basada en la confianza y la innovación, asegurando soluciones logísticas eficientes que impactan positivamente en el bienestar de las personas.
         </p>
         <div className="font-inter flex w-full flex-wrap gap-2">
           {[
-            "El cliente es nuestro centro",
-            "Lo pensamos lo hacemos",
+            "Crecimiento Profesional",
+            "Estabilidad Laboral",
             "Vamos al infinito y más allá",
-            "Somos cercanos y lo pasamos bien",
+            "Beneficios Corporativos",
             "Nos mueve la excelencia",
           ].map((text, index) => (
             <button
@@ -60,7 +60,7 @@ function Beneficios() {
       {/* Imagen con transición */}
       <div className="w-full md:w-1/2 h-full py-10 md:px-24 flex justify-center items-center">
         <img
-          className={`w-[90%] transition-opacity duration-500 ${fade ? "opacity-0" : "opacity-100"}`}
+          className={`w-[90%] h-[400px] transition-opacity rounded-3xl duration-500 ${fade ? "opacity-0" : "opacity-100"}`}
           src={images[activeImage]}
           alt={`Imagen ${activeImage}`}
         />
