@@ -8,15 +8,16 @@ import SubmissionSuccess from './SubmissionSuccess';
 function QuestionsModal({ isOpen, onClose, selectedJob }) {
   const { user } = UserAuth();
   const [questions, setQuestions] = useState([]);
-  const [loading, setLoading] = useState(false); // Cambiar a false inicialmente
+  const [loading, setLoading] = useState(false);
   const [answers, setAnswers] = useState([]);
+  const [errors, setErrors] = useState([]);
   const [submissionSuccess, setSubmissionSuccess] = useState(false);
-  const [hasLoaded, setHasLoaded] = useState(false); // Nuevo estado para verificar si ya cargó
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        setLoading(true); // Activar el spinner
+        setLoading(true);
         const { data, error } = await supabase
           .from('Oferta')
           .select('preg_1, preg_2, preg_3, preg_4, preg_5')
@@ -25,40 +26,52 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
 
         if (error) throw error;
 
-        const questionsData = [data.preg_1, data.preg_2, data.preg_3, data.preg_4, data.preg_5];
-        setQuestions(questionsData.filter((question) => question));
-        setLoading(false); // Detener el spinner
-        setHasLoaded(true); // Marcar como cargado
+        const questionsData = [data.preg_1, data.preg_2, data.preg_3, data.preg_4, data.preg_5].filter(q => q);
+        setQuestions(questionsData);
+        setAnswers(new Array(questionsData.length).fill(''));
+        setErrors(new Array(questionsData.length).fill(false));
+        setLoading(false);
+        setHasLoaded(true);
       } catch (error) {
         console.error('Error fetching questions:', error.message);
-        setLoading(false); // Asegurarse de detener el spinner en caso de error
-        setHasLoaded(true); // Marcar como cargado incluso si hay error
+        setLoading(false);
+        setHasLoaded(true);
       }
     };
 
     if (isOpen && selectedJob && !hasLoaded) {
-      // Solo cargamos preguntas si el modal está abierto y no se han cargado antes
       fetchQuestions();
-      setAnswers(['', '', '', '', '']);
       setSubmissionSuccess(false);
     }
-  }, [isOpen, selectedJob, hasLoaded]); // Añadir hasLoaded como dependencia
+  }, [isOpen, selectedJob, hasLoaded]);
 
   const handleClose = () => {
     onClose();
-    setHasLoaded(false); // Restablecer el estado para que cargue nuevamente si se vuelve a abrir
+    setHasLoaded(false);
   };
 
   const handleAnswerChange = (e, index) => {
     const newAnswers = [...answers];
     newAnswers[index] = e.target.value;
     setAnswers(newAnswers);
+
+    // Actualizar errores en tiempo real
+    const newErrors = [...errors];
+    newErrors[index] = e.target.value.trim() === '';
+    setErrors(newErrors);
   };
 
   const handleSubmit = async () => {
+    // Verificar si todos los campos están llenos
+    const newErrors = answers.map(answer => answer.trim() === '');
+    setErrors(newErrors);
+
+    if (newErrors.includes(true)) {
+      return; // No enviar si hay errores
+    }
+
     try {
       if (!selectedJob || !selectedJob.id_oferta) {
-        console.error('Oferta no válida:', selectedJob);
         alert('Oferta no válida.');
         return;
       }
@@ -70,7 +83,6 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
         .single();
 
       if (profileError || !profileData) {
-        console.error('Error al obtener el perfil:', profileError ? profileError.message : 'Perfil no encontrado.');
         alert('No se pudo obtener el perfil del usuario.');
         return;
       }
@@ -98,7 +110,6 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
         });
 
       if (insertError) {
-        console.error('Error al insertar en postulaciones:', insertError.message);
         alert('Error al enviar la postulación.');
         return;
       }
@@ -109,15 +120,14 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
         .eq('id_oferta', selectedJob.id_oferta);
 
       if (updateError) {
-        console.error('Error al actualizar el conteo de postulados:', updateError.message);
         alert('Error al actualizar el conteo de postulados.');
         return;
       }
 
       setSubmissionSuccess(true);
-      setAnswers(['', '', '', '', '']); // Limpiar respuestas
+      setAnswers(new Array(questions.length).fill(''));
+      setErrors(new Array(questions.length).fill(false));
     } catch (error) {
-      console.error('Error al enviar la postulación:', error.message);
       alert(`Error: ${error.message}`);
     }
   };
@@ -139,6 +149,7 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
           <QuestionList
             questions={questions}
             answers={answers}
+            errors={errors}
             onAnswerChange={handleAnswerChange}
             onSubmit={handleSubmit}
           />
