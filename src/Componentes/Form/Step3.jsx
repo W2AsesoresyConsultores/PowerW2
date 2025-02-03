@@ -148,7 +148,7 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
           Anterior
         </Button>
         <Button variant="contained" color="primary" onClick={handlePreview}>
-          Preview
+          Vista Previa
         </Button>
       </Box>
     </Box>

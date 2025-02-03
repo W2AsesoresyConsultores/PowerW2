@@ -120,7 +120,7 @@ const Step1 = ({ data, handleChange, nextStep }) => {
             {/* Campos de sueldo dinámicos según la opción seleccionada */}
             {sueldoOption === "sueldoFijo" && (
                 <TextField
-                    label="Sueldo Fijo"
+                    label="Ingrese Monto"
                     variant="outlined"
                     name="sueldo"
                     value={data.sueldo}
