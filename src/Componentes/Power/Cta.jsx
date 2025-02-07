@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 
 const CallToAction = () => {
   return (
-    <div className="bg-newprimarycolor my-10 w-[90%] md:w-full max-w-[900px] h-[auto] mx-auto p-4 rounded-2xl  flex flex-col md:flex-row items-center"
+    <div className="bg-powercolorblue my-10 w-[90%] md:w-full max-w-[900px] h-[auto] mx-auto p-4 rounded-2xl  flex flex-col md:flex-row items-center"
     style={{
       backgroundImage: "url('https://www.digitalocean.com/_next/static/media/hero-background.a9bcc858.svg')",
       backgroundRepeat: "no-repeat",

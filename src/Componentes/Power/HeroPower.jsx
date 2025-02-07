@@ -4,7 +4,7 @@ import TrabajosContainer from './TrabajosContainer'
 
 function HeroPower() {
   return (
-    <div className="flex flex-col bg-primarygradientdark items-center justify-center w-full h-[650px] pt-28 md:pt-36 md:pb-12 bg-newprimarycolor text-gray-700 gap-2 bg-cover "
+    <div className="flex flex-col bg-primarygradientdark items-center justify-center w-full h-[650px] pt-28 md:pt-36 md:pb-12 bg-powercolorblue text-gray-700 gap-2 bg-cover "
     style={{
       backgroundImage: "url('https://www.digitalocean.com/api/static-content/v1/images?src=%2F_next%2Fstatic%2Fmedia%2Fhero-background.686539c6.svg&width=1920')",
       backgroundRepeat: "no-repeat",

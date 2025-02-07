@@ -23,7 +23,9 @@ module.exports = withMT( {
         bgsecundary: '#F7F7FB',
         colorgreen: '#01C29E',
         powercolor: '#111827',
-        newprimarycolor: '#1433d6'
+        newprimarycolor: '#1433d6',
+        powercolorblue: '#083795'
+
       },
       fontFamily: {
         'dmsans': ['"Poppins", sans-serif'],
