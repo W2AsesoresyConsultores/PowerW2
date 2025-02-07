@@ -1,45 +1,50 @@
-import React, { useState } from "react";
-import { TextField, Button, Box, MenuItem, Select, FormControl, InputLabel, FormHelperText } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { TextField, Button, Box, MenuItem, Select, FormControl, InputLabel, FormHelperText, InputAdornment } from "@mui/material";
 
 const Step1 = ({ data, handleChange, nextStep }) => {
-    const [sueldoOption, setSueldoOption] = useState(""); // Estado para la opción de sueldo
+    const [sueldoOption, setSueldoOption] = useState("");
+
+    useEffect(() => {
+        if (data.sueldo.includes("-")) {
+            setSueldoOption("sueldoRango");
+        } else if (data.sueldo.trim()) {
+            setSueldoOption("sueldoFijo");
+        }
+    }, [data.sueldo]);
+
     const [sueldoDesde, setSueldoDesde] = useState("");
     const [sueldoHasta, setSueldoHasta] = useState("");
-    const [errors, setErrors] = useState({}); // Estado para manejar errores de validación
+    const [errors, setErrors] = useState({});
 
-    // Maneja el cambio de la opción de sueldo
     const handleSueldoOptionChange = (event) => {
         const selectedOption = event.target.value;
         setSueldoOption(selectedOption);
         handleChange({ target: { name: "sueldo", value: "" } });
-        setSueldoDesde("");
-        setSueldoHasta("");
-    };
 
-    const handleKeyDown = (event, name) => {
-        if (event.key === "Enter") {
-            event.preventDefault();
-            const newText = data[name] ? data[name] + ".\n" : ".\n";
-            handleChange({ target: { name, value: newText } });
+        if (selectedOption === "sueldoRango") {
+            setSueldoDesde("");
+            setSueldoHasta("");
         }
     };
 
     const handleSueldoFijoChange = (event) => {
-        handleChange(event);
+        const value = event.target.value.replace(/\D/g, ""); // Solo permite números
+        handleChange({ target: { name: "sueldo", value } });
     };
 
     const handleSueldoRangoChange = (event) => {
         const { name, value } = event.target;
+        const numericValue = value.replace(/\D/g, ""); // Solo permite números
+
         if (name === "sueldoDesde") {
-            setSueldoDesde(value);
-            handleChange({ target: { name: "sueldo", value: `${value} - ${sueldoHasta}` } });
+            setSueldoDesde(numericValue);
+            handleChange({ target: { name: "sueldo", value: `${numericValue} - ${sueldoHasta}` } });
         } else {
-            setSueldoHasta(value);
-            handleChange({ target: { name: "sueldo", value: `${sueldoDesde} - ${value}` } });
+            setSueldoHasta(numericValue);
+            handleChange({ target: { name: "sueldo", value: `${sueldoDesde} - ${numericValue}` } });
         }
     };
 
-    // Validaciones de los campos
     const validateFields = () => {
         let newErrors = {};
         if (!data.puesto.trim()) newErrors.puesto = "Este campo es obligatorio";
@@ -83,7 +88,6 @@ const Step1 = ({ data, handleChange, nextStep }) => {
                 name="descripcion"
                 value={data.descripcion}
                 onChange={handleChange}
-                onKeyDown={(event) => handleKeyDown(event, "descripcion")}
                 fullWidth
                 required
                 multiline
@@ -108,16 +112,13 @@ const Step1 = ({ data, handleChange, nextStep }) => {
             {/* Selección de tipo de sueldo */}
             <FormControl fullWidth margin="normal">
                 <InputLabel>Selecciona una opción</InputLabel>
-                <Select value={sueldoOption} onChange={handleSueldoOptionChange} displayEmpty>
-                    <MenuItem value="" disabled>
-                        Selecciona una opción
-                    </MenuItem>
+                <Select value={sueldoOption} onChange={handleSueldoOptionChange}>
                     <MenuItem value="sueldoFijo">Sueldo Fijo</MenuItem>
                     <MenuItem value="sueldoRango">Sueldo Desde - Hasta</MenuItem>
                 </Select>
             </FormControl>
 
-            {/* Campos de sueldo dinámicos según la opción seleccionada */}
+            {/* Campos de sueldo con símbolo "S/." */}
             {sueldoOption === "sueldoFijo" && (
                 <TextField
                     label="Ingrese Monto"
@@ -130,6 +131,9 @@ const Step1 = ({ data, handleChange, nextStep }) => {
                     margin="normal"
                     error={!!errors.sueldo}
                     helperText={errors.sueldo}
+                    InputProps={{
+                        startAdornment: <InputAdornment position="start">S/.</InputAdornment>,
+                    }}
                 />
             )}
 
@@ -146,6 +150,9 @@ const Step1 = ({ data, handleChange, nextStep }) => {
                         sx={{ flex: 1 }}
                         error={!!errors.sueldoDesde}
                         helperText={errors.sueldoDesde}
+                        InputProps={{
+                            startAdornment: <InputAdornment position="start">S/.</InputAdornment>,
+                        }}
                     />
                     <span>-</span>
                     <TextField
@@ -159,6 +166,9 @@ const Step1 = ({ data, handleChange, nextStep }) => {
                         sx={{ flex: 1 }}
                         error={!!errors.sueldoHasta}
                         helperText={errors.sueldoHasta}
+                        InputProps={{
+                            startAdornment: <InputAdornment position="start">S/.</InputAdornment>,
+                        }}
                     />
                 </Box>
             )}
