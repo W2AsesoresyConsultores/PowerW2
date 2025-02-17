@@ -3,7 +3,7 @@ import {
   LinearProgress, Select, MenuItem, IconButton, Tooltip, TablePagination, Snackbar
 } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { FaUserFriends, FaDollarSign, FaLink } from 'react-icons/fa';
+import { FaUserFriends, FaLink } from 'react-icons/fa';
 import { FaLocationDot, FaBuildingUser } from "react-icons/fa6";
 import EditIcon from "@mui/icons-material/Edit";
 import JobsContext from '../../Context/JobsContext';
@@ -175,9 +175,9 @@ const JobList = () => {
                     </div>
                     
                     <div className="flex items-center gap-2">
-                      <FaDollarSign />
-                      <p>{job.sueldo}</p>
-                    </div>
+  <span className="font-bold">S/.</span>
+  <p>{job.sueldo}</p>
+</div>
                   </div>
                   <div className="flex justify-end w-full">
                   {/* <Select
