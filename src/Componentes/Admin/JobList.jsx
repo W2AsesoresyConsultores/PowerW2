@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { FaUserFriends, FaDollarSign, FaLink } from 'react-icons/fa';
 import { FaLocationDot, FaBuildingUser } from "react-icons/fa6";
 import EditIcon from "@mui/icons-material/Edit";
+import VisibilityIcon from '@mui/icons-material/Visibility'; // Importa el icono de ojo
 import JobsContext from '../../Context/JobsContext';
 import { supabase } from '../../supabase/supabase.config';
 
@@ -139,6 +140,13 @@ const JobList = () => {
     <Tooltip title="Editar">
       <IconButton color="primary" sx={{ "&:hover": { color: "gray" } }}>
         <EditIcon />
+      </IconButton>
+    </Tooltip>
+  </Link>
+  <Link to={`/VistaEditar/${job.id_oferta}`}>
+    <Tooltip title="VistaEditar">
+      <IconButton color="primary" sx={{ "&:hover": { color: "gray" } }}>
+        <VisibilityIcon />
       </IconButton>
     </Tooltip>
   </Link>
