@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { IoLocationOutline } from "react-icons/io5";
-import ShareButton from "../PowerAuth/ShareButton"; 
 import ShareModal from "./ShareModal"; 
 import { UserAuth } from '../../Context/AuthContext';
 import dayjs from "dayjs";
@@ -12,7 +11,6 @@ import { Box, Button, Select, MenuItem, FormControl, InputLabel } from "@mui/mat
 const Preview = ({ 
     step1Data, 
     step3Data, 
-    nombreReclutador, 
     onCancel 
 }) => {
     const { user } = UserAuth();
@@ -201,7 +199,6 @@ const Preview = ({
                     </div>
                     <div>
                         <p className="text-sm font-medium text-gray-800 font-inter">{step1Data.empresa}</p>
-                        <p className="text-xs text-gray-600 font-inter">{nombreReclutador}</p>
                     </div>
                 </div>
             </div>

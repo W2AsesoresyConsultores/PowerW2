@@ -1,17 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IoMdAdd } from "react-icons/io";
 import { MdDeleteForever } from "react-icons/md";
-import {
-  Box,
-  TextField,
-  Button,
-  Select,
-  MenuItem,
-  IconButton,
-  Typography,
-  FormHelperText,
-  FormControl
-} from "@mui/material";
+import { Box, TextField, Button, Select, MenuItem, IconButton, Typography, FormHelperText, FormControl } from "@mui/material";
 
 const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }) => {
   const [questions, setQuestions] = useState([""]);
@@ -20,6 +10,18 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
     horario: false,
     questions: false
   });
+
+  // Sincronizar preguntas con el estado de `data` cada vez que `data` cambia
+  useEffect(() => {
+    setQuestions([
+      data.preg_1 || "",
+      data.preg_2 || "",
+      data.preg_3 || "",
+      data.preg_4 || "",
+      data.preg_5 || "",
+      data.preg_6 || ""
+    ]);
+  }, [data]);  // Dependencia de `data` para actualizar las preguntas
 
   // Manejo de cambios en las preguntas
   const handleQuestionChange = (index, e) => {

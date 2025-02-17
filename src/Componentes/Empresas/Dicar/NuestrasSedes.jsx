@@ -25,7 +25,7 @@ const ImageSlide = ({ image, title, address, onButtonClick }) => {
         }`}
       >
         <p className="text-white text-xl font-bold">{title}</p>
-        <p className="mt-6 text-white text-base">{address}</p>
+        <p className="mt-6 text-white text-base text-center">{address}</p>
         <button
           type="button"
           className="mt-8 bg-white text-[#2f4daa] px-4 py-2 rounded-lg font-semibold"

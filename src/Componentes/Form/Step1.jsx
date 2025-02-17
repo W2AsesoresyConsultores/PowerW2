@@ -12,18 +12,21 @@ const Step1 = ({ data, handleChange, nextStep }) => {
         }
     }, [data.sueldo]);
 
-    const [sueldoDesde, setSueldoDesde] = useState("");
-    const [sueldoHasta, setSueldoHasta] = useState("");
     const [errors, setErrors] = useState({});
+
+    // Extraer valores desde el estado global
+    const sueldoArray = data.sueldo.split(" - ");
+    const sueldoDesde = sueldoArray[0] || "";
+    const sueldoHasta = sueldoArray[1] || "";
 
     const handleSueldoOptionChange = (event) => {
         const selectedOption = event.target.value;
         setSueldoOption(selectedOption);
-        handleChange({ target: { name: "sueldo", value: "" } });
 
         if (selectedOption === "sueldoRango") {
-            setSueldoDesde("");
-            setSueldoHasta("");
+            handleChange({ target: { name: "sueldo", value: " - " } });
+        } else {
+            handleChange({ target: { name: "sueldo", value: "" } });
         }
     };
 
@@ -37,10 +40,8 @@ const Step1 = ({ data, handleChange, nextStep }) => {
         const numericValue = value.replace(/\D/g, ""); // Solo permite números
 
         if (name === "sueldoDesde") {
-            setSueldoDesde(numericValue);
             handleChange({ target: { name: "sueldo", value: `${numericValue} - ${sueldoHasta}` } });
         } else {
-            setSueldoHasta(numericValue);
             handleChange({ target: { name: "sueldo", value: `${sueldoDesde} - ${numericValue}` } });
         }
     };
