@@ -11,17 +11,21 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
     questions: false
   });
 
-  // Sincronizar preguntas con el estado de `data` cada vez que `data` cambia
+  // Sincronizar preguntas con el estado de `data` sin sobrescribir el estado de preguntas
   useEffect(() => {
-    setQuestions([
+    const existingQuestions = [
       data.preg_1 || "",
       data.preg_2 || "",
       data.preg_3 || "",
       data.preg_4 || "",
       data.preg_5 || "",
       data.preg_6 || ""
-    ]);
-  }, [data]);  // Dependencia de `data` para actualizar las preguntas
+    ].filter(q => q.trim() !== ""); // Filtrar preguntas vacías
+
+    if (existingQuestions.length > 0) {
+      setQuestions(existingQuestions);
+    }
+  }, [data]); 
 
   // Manejo de cambios en las preguntas
   const handleQuestionChange = (index, e) => {
@@ -33,7 +37,7 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
   // Agregar una nueva pregunta
   const addQuestion = () => {
     if (questions.length < 6) {
-      setQuestions([...questions, ""]);
+      setQuestions(prevQuestions => [...prevQuestions, ""]);
     }
   };
 
@@ -97,20 +101,20 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
         </Select>
         {errors.modalidad && <FormHelperText>Este campo es obligatorio</FormHelperText>}
       </FormControl>
-
-      {/* Horario */}
-      <TextField
-        label="Horario"
-        variant="outlined"
-        name="horario"
-        value={data.horario}
-        onChange={handleChange}
-        fullWidth
-        required
-        error={errors.horario}
+ <TextField
+                label="Horario"
+                variant="outlined"
+                name="horario"
+                value={data.horario}
+                onChange={handleChange}
+                fullWidth
+                required
+                multiline
+                rows={4}
+                margin="normal"
+                error={errors.horario}
         helperText={errors.horario ? "Este campo es obligatorio" : ""}
-        margin="normal"
-      />
+            />
 
       {/* Preguntas para el Postulante */}
       <Box mb={3}>

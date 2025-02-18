@@ -247,7 +247,7 @@ const Preview = ({
 
             <Box display="flex" justifyContent="space-between" mt={3}>
                 <Button variant="outlined" color="secondary" onClick={onCancel} fullWidth sx={{ mr: 1 }}>
-                    Cancelar
+                    Volver
                 </Button>
                 <Button 
                     variant="contained" 
@@ -257,7 +257,7 @@ const Preview = ({
                     sx={{ ml: 1 }}
                     disabled={isSubmitting}
                 >
-                    {isSubmitting ? "Enviando..." : "Confirmar y Enviar"}
+                    {isSubmitting ? "Enviando..." : "Crear Oferta"}
                 </Button>
             </Box>
 
