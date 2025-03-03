@@ -20,6 +20,13 @@ const Step2 = ({ data, handleChange, nextStep, prevStep }) => {
         }
     };
 
+    const handleKeyDown = (event, fieldName) => {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Previene el comportamiento por defecto
+            handleChange({ target: { name: fieldName, value: data[fieldName] + '.\n' } });
+        }
+    };
+
     return (
         <Box sx={{ maxWidth: 600, mx: 'auto', mt: 0, p: 3, bgcolor: 'background.paper', borderRadius: 2, boxShadow: 1 }}>
             <TextField
@@ -28,6 +35,7 @@ const Step2 = ({ data, handleChange, nextStep, prevStep }) => {
                 name="requisitos"
                 value={data.requisitos}
                 onChange={handleChange}
+                onKeyDown={(event) => handleKeyDown(event, 'requisitos')}
                 fullWidth
                 required
                 multiline
@@ -42,6 +50,7 @@ const Step2 = ({ data, handleChange, nextStep, prevStep }) => {
                 name="funciones"
                 value={data.funciones}
                 onChange={handleChange}
+                onKeyDown={(event) => handleKeyDown(event, 'funciones')}
                 fullWidth
                 required
                 multiline
@@ -56,6 +65,7 @@ const Step2 = ({ data, handleChange, nextStep, prevStep }) => {
                 name="beneficios"
                 value={data.beneficios}
                 onChange={handleChange}
+                onKeyDown={(event) => handleKeyDown(event, 'beneficios')}
                 fullWidth
                 required
                 multiline

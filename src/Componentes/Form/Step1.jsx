@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { TextField, Button, Box, MenuItem, Select, FormControl, InputLabel, FormHelperText, InputAdornment } from "@mui/material";
+import { TextField, Button, Box, MenuItem, Select, FormControl, InputLabel, InputAdornment } from "@mui/material";
 
 const Step1 = ({ data, handleChange, nextStep }) => {
     const [sueldoOption, setSueldoOption] = useState("");
@@ -14,7 +14,6 @@ const Step1 = ({ data, handleChange, nextStep }) => {
 
     const [errors, setErrors] = useState({});
 
-    // Extraer valores desde el estado global
     const sueldoArray = data.sueldo.split(" - ");
     const sueldoDesde = sueldoArray[0] || "";
     const sueldoHasta = sueldoArray[1] || "";
@@ -31,13 +30,13 @@ const Step1 = ({ data, handleChange, nextStep }) => {
     };
 
     const handleSueldoFijoChange = (event) => {
-        const value = event.target.value.replace(/\D/g, ""); // Solo permite números
+        const value = event.target.value.replace(/\D/g, "");
         handleChange({ target: { name: "sueldo", value } });
     };
 
     const handleSueldoRangoChange = (event) => {
         const { name, value } = event.target;
-        const numericValue = value.replace(/\D/g, ""); // Solo permite números
+        const numericValue = value.replace(/\D/g, "");
 
         if (name === "sueldoDesde") {
             handleChange({ target: { name: "sueldo", value: `${numericValue} - ${sueldoHasta}` } });
@@ -69,6 +68,13 @@ const Step1 = ({ data, handleChange, nextStep }) => {
         }
     };
 
+    const handleDescriptionKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Previene el comportamiento por defecto
+            handleChange({ target: { name: "descripcion", value: data.descripcion + '.\n' } });
+        }
+    };
+
     return (
         <Box sx={{ maxWidth: 600, mx: "auto", mt: 0, p: 3, bgcolor: "background.paper", borderRadius: 2, boxShadow: 1 }}>
             <TextField
@@ -89,6 +95,7 @@ const Step1 = ({ data, handleChange, nextStep }) => {
                 name="descripcion"
                 value={data.descripcion}
                 onChange={handleChange}
+                onKeyDown={handleDescriptionKeyDown}
                 fullWidth
                 required
                 multiline
@@ -110,7 +117,6 @@ const Step1 = ({ data, handleChange, nextStep }) => {
                 helperText={errors.ubicacion}
             />
 
-            {/* Selección de tipo de sueldo */}
             <FormControl fullWidth margin="normal">
                 <InputLabel>Selecciona una opción</InputLabel>
                 <Select value={sueldoOption} onChange={handleSueldoOptionChange}>
@@ -119,7 +125,6 @@ const Step1 = ({ data, handleChange, nextStep }) => {
                 </Select>
             </FormControl>
 
-            {/* Campos de sueldo con símbolo "S/." */}
             {sueldoOption === "sueldoFijo" && (
                 <TextField
                     label="Ingrese Monto"

@@ -5,11 +5,7 @@ import { Box, TextField, Button, Select, MenuItem, IconButton, Typography, FormH
 
 const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }) => {
   const [questions, setQuestions] = useState([""]);
-  const [errors, setErrors] = useState({
-    modalidad: false,
-    horario: false,
-    questions: false
-  });
+  const [errors, setErrors] = useState({ modalidad: false, horario: false, questions: false });
 
   // Sincronizar preguntas con el estado de `data` sin sobrescribir el estado de preguntas
   useEffect(() => {
@@ -25,7 +21,7 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
     if (existingQuestions.length > 0) {
       setQuestions(existingQuestions);
     }
-  }, [data]); 
+  }, [data]);
 
   // Manejo de cambios en las preguntas
   const handleQuestionChange = (index, e) => {
@@ -66,6 +62,16 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
     }
   };
 
+  // Manejo del evento Enter
+  const handleKeyDown = (index, event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Previene el comportamiento por defecto
+      const newQuestions = [...questions];
+      newQuestions[index] = newQuestions[index] + '.\n'; // Agrega un punto y salto de línea
+      setQuestions(newQuestions);
+    }
+  };
+
   return (
     <Box
       fullWidth
@@ -101,20 +107,21 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
         </Select>
         {errors.modalidad && <FormHelperText>Este campo es obligatorio</FormHelperText>}
       </FormControl>
- <TextField
-                label="Horario"
-                variant="outlined"
-                name="horario"
-                value={data.horario}
-                onChange={handleChange}
-                fullWidth
-                required
-                multiline
-                rows={4}
-                margin="normal"
-                error={errors.horario}
+
+      <TextField
+        label="Horario"
+        variant="outlined"
+        name="horario"
+        value={data.horario}
+        onChange={handleChange}
+        fullWidth
+        required
+        multiline
+        rows={4}
+        margin="normal"
+        error={errors.horario}
         helperText={errors.horario ? "Este campo es obligatorio" : ""}
-            />
+      />
 
       {/* Preguntas para el Postulante */}
       <Box mb={3}>
@@ -126,6 +133,7 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
             <TextField
               value={question}
               onChange={(e) => handleQuestionChange(index, e)}
+              onKeyDown={(event) => handleKeyDown(index, event)} // Aquí se añade el evento onKeyDown
               fullWidth
               placeholder={`Pregunta ${index + 1}`}
               required
