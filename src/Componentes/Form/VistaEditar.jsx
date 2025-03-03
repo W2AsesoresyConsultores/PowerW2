@@ -48,7 +48,7 @@ const Vista = () => {
             <HeaderAdmin />
             <MenuAdmin />
         
-        <div className="selected-job-info w-full max-w-[600px] mx-auto rounded-lg md:flex flex-col px-8 py-28 bg-white transition-all duration-500 font-dmsans">
+        <div className="selected-job-info w-full max-w-[600px] mx-auto rounded-lg md:flex flex-col py-28 bg-white transition-all duration-500 font-dmsans">
             <p className="text-gray-500 text-xs font-inter">{capitalizedTimeAgo}</p>
             <h2 className="font-bold text-3xl text-newprimarycolor font-source">
                 {jobData.puesto}
@@ -105,7 +105,11 @@ const Vista = () => {
                     ))}
                 </ul>
                 <h3 className="font-semibold text-black font-inter text-lg mt-4">Horario de Trabajo</h3>
-                <p className="text-gray-800 text-base font-inter ml-2">{jobData.horario}</p>
+                <ul>
+                    {jobData.horario.split('.').map((horario, index) => (
+                        horario.trim() && <li key={index} className="text-gray-800 text-base font-inter ml-2">{horario.trim()}</li>
+                    ))}
+                </ul>
             </div>
         </div>
         </div>
