@@ -11,42 +11,38 @@ function Buscador() {
     const input = e.target.value;
     setSearchInput(input);
 
-    // Filtrar trabajos en tiempo real mientras el usuario escribe
-    const results = allActiveJobs.filter(job =>
-      job.puesto.toLowerCase().includes(input.toLowerCase())
-    );
-    setFilteredJobs(results);
+    // Filtrar trabajos en tiempo real
+    const results = input
+      ? allActiveJobs.filter(job =>
+          job.puesto.toLowerCase().includes(input.toLowerCase())
+        )
+      : [];
 
-    // Si la entrada está vacía, limpiar resultados mostrados
-    if (input === '') {
-      setFilteredJobs([]);
-    }
+    setFilteredJobs(results);
+    setSearchTerm(input);
   };
 
   const handleSearch = () => {
-    if (searchInput.trim() === '') {
-      // Mostrar todos los trabajos
-      setSearchTerm('');
-    } else {
-      // Buscar según el término ingresado
-      setSearchTerm(searchInput);
-      const targetSection = document.getElementById('ofertas'); // Seleccionar el contenedor de trabajos
-      if (targetSection) {
-        targetSection.scrollIntoView({ behavior: 'smooth' }); // Desplazar suavemente hacia el contenedor
-      }
+    setSearchTerm(searchInput.trim());
+
+    const targetSection = document.getElementById('ofertas');
+    if (targetSection) {
+      targetSection.scrollIntoView({ behavior: 'smooth' });
     }
-    setFilteredJobs([]); // Limpiar las sugerencias al buscar
+
+    setFilteredJobs([]);
   };
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      handleSearch(); // Ejecutar la búsqueda al presionar Enter
+      handleSearch();
     }
   };
 
   const handleSuggestionClick = (job) => {
-    setSearchInput(job.puesto); // Colocar el texto en el buscador
-    setFilteredJobs([]); // Limpiar las sugerencias
+    setSearchInput(job.puesto);
+    setSearchTerm(job.puesto);
+    setFilteredJobs([]);
   };
 
   return (
@@ -55,37 +51,39 @@ function Buscador() {
       <div className="relative w-[95%] md:w-1/2">
         {/* Ícono dentro del input */}
         <span className="absolute inset-y-0 left-6 flex items-center text-gray-800">
-        <IoSearchOutline className='text-2xl' />
+          <IoSearchOutline className='text-2xl' />
         </span>
         <input
           type="search"
           placeholder="¿Qué trabajo estás buscando?"
           value={searchInput}
           onChange={handleInputChange}
-          onKeyDown={handleKeyDown} // Ejecutar búsqueda con Enter
+          onKeyDown={handleKeyDown}
           className="w-full pl-16 pr-6 py-5 rounded-full focus:outline-none text-gray-800 shadow-2xl placeholder:text-gray-700 placeholder:font-inter placeholder:text-lg font-inter"
         />
+        
+        {/* Resultados del buscador */}
+        {searchInput && (
+          <div className="absolute top-full left-0 w-full bg-white border border-gray-300 rounded-lg shadow-md z-40 max-h-60 overflow-y-auto mt-1">
+            {filteredJobs.length > 0 ? (
+              filteredJobs.map((job) => (
+                <div
+                  key={job.id_oferta}
+                  className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-black"
+                  onClick={() => handleSuggestionClick(job)}
+                >
+                  {job.puesto}
+                </div>
+              ))
+            ) : (
+              <div className="px-4 py-2 text-gray-500">No se encontraron resultados</div>
+            )}
+          </div>
+        )}
       </div>
-
-      {/* Resultados del buscador */}
-      {filteredJobs.length > 0 && (
-        <div
-          className="absolute w-[95%] md:w-1/2 bg-white border border-gray-300 rounded-lg shadow-md mt-2"
-          style={{ top: '100%' }}
-        >
-          {filteredJobs.map((job) => (
-            <div
-              key={job.id_oferta}
-              className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-black"
-              onClick={() => handleSuggestionClick(job)}
-            >
-              {job.puesto}
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 }
 
 export default Buscador;
+
