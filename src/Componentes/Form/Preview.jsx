@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/es"; 
 import relativeTime from "dayjs/plugin/relativeTime";
 import { supabase } from "../../supabase/supabase.config"; 
-import { Box, Button, Select, MenuItem, FormControl, InputLabel } from "@mui/material";
+import { Box, Button, Select, MenuItem, FormControl, InputLabel, Dialog, DialogContent, DialogTitle } from "@mui/material";
 
 const Preview = ({ 
     step1Data, 
@@ -22,6 +22,7 @@ const Preview = ({
     const [createdJob, setCreatedJob] = useState(null);
     const [empresas, setEmpresas] = useState([]);
     const [selectedEmpresa, setSelectedEmpresa] = useState(""); 
+    const [isModalOpen, setIsModalOpen] = useState(true); // Control del modal
 
     useEffect(() => {
         const fetchIdEmpresa = async () => {
@@ -188,86 +189,102 @@ const Preview = ({
     const capitalizedTimeAgo = timeAgo.charAt(0).toUpperCase() + timeAgo.slice(1);
 
     return (
-        <div className="selected-job-info w-full custom-scrollbar rounded-lg md:flex flex-col px-8 py-4 mx-8 bg-[#ffffff] hidden transition-all duration-500 font-dmsans" style={{ height: "610px", width: "600px", overflowY: "auto" }}>
-            <p className="text-gray-500 text-xs font-inter">{capitalizedTimeAgo}</p>
-            <h2 className="font-bold text-3xl text-newprimarycolor font-source">{step1Data.puesto}</h2>
+        <Dialog 
+            open={isModalOpen} 
+            onClose={onCancel} 
+            maxWidth="md" 
+            fullWidth 
+            PaperProps={{
+                style: {
+                    height: "610px",
+                    overflowY: "auto",
+                },
+            }}
+        >
+            <DialogTitle>Detalles del Trabajo</DialogTitle>
+            <DialogContent>
+                <div className="selected-job-info w-full custom-scrollbar rounded-lg px-8 py-4 bg-[#ffffff] font-dmsans">
+                    <p className="text-gray-500 text-xs font-inter">{capitalizedTimeAgo}</p>
+                    <h2 className="font-bold text-3xl text-newprimarycolor font-source">{step1Data.puesto}</h2>
 
-            <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-4">
-                    <div className="rounded-lg w-12 h-12">
-                        <img src={empresaImgUrl} className="w-full h-full rounded-lg" alt="" />
+                    <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center gap-4">
+                            <div className="rounded-lg w-12 h-12">
+                                <img src={empresaImgUrl} className="w-full h-full rounded-lg" alt="" />
+                            </div>
+                            <div>
+                                <p className="text-sm font-medium text-gray-800 font-inter">{step1Data.empresa}</p>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <p className="text-sm font-medium text-gray-800 font-inter">{step1Data.empresa}</p>
+
+                    <div className="flex items-center space-x-2 mb-4">
+                        <span className="bg-yellowprimary text-primarycolor py-1 px-3 text-xs rounded-full font-medium tracking-wide flex items-center gap-1 font-inter">
+                            <IoLocationOutline />
+                            {step1Data.ubicacion}
+                        </span>
+                        <span className="bg-primarycolor text-white py-1 px-3 text-xs rounded-full font-medium tracking-wide gap-1 flex items-center font-inter">
+                            S/. {step1Data.sueldo}
+                        </span>
                     </div>
-                </div>
-            </div>
 
-            <div className="flex items-center space-x-2 mb-4">
-                <span className="bg-yellowprimary text-primarycolor py-1 px-3 text-xs rounded-full font-medium tracking-wide flex items-center gap-1 font-inter">
-                    <IoLocationOutline />
-                    {step1Data.ubicacion}
-                </span>
-                <span className="bg-primarycolor text-white py-1 px-3 text-xs rounded-full font-medium tracking-wide gap-1 flex items-center font-inter">
-                    S/. {step1Data.sueldo}
-                </span>
-            </div>
-
-            <div className="mb-4" style={{ width: "100%", whiteSpace: "normal", overflowWrap: "break-word" }}>
-                <h3 className="font-semibold text-black font-inter text-lg">Descripción</h3>
-                <p className="text-gray-800 text-base font-inter ml-2">
-                    {step1Data.descripcion}
-                </p>
-                {jobDetails.map((detail, index) => (
-                    <div key={index} className="py-2">
-                        <div className="font-semibold text-black font-inter text-lg">{detail.title}</div>
-                        <div className="mt-2 text-gray-800 text-base font-inter ml-2">{detail.content}</div>
+                    <div className="mb-4" style={{ width: "100%", whiteSpace: "normal", overflowWrap: "break-word" }}>
+                        <h3 className="font-semibold text-black font-inter text-lg">Descripción</h3>
+                        <p className="text-gray-800 text-base font-inter ml-2">
+                            {step1Data.descripcion}
+                        </p>
+                        {jobDetails.map((detail, index) => (
+                            <div key={index} className="py-2">
+                                <div className="font-semibold text-black font-inter text-lg">{detail.title}</div>
+                                <div className="mt-2 text-gray-800 text-base font-inter ml-2">{detail.content}</div>
+                            </div>
+                        ))}
                     </div>
-                ))}
-            </div>
 
-            {idEmpresa === 1 && (
-                <div className="mb-4">
-                    <FormControl fullWidth>
-                        <InputLabel id="select-empresa-label">Seleccionar Empresa</InputLabel>
-                        <Select
-                            labelId="select-empresa-label"
-                            value={selectedEmpresa}
-                            onChange={handleEmpresaChange}
+                    {idEmpresa === 1 && (
+                        <div className="mb-4">
+                            <FormControl fullWidth>
+                                <InputLabel id="select-empresa-label">Seleccionar Empresa</InputLabel>
+                                <Select
+                                    labelId="select-empresa-label"
+                                    value={selectedEmpresa}
+                                    onChange={handleEmpresaChange}
+                                >
+                                    {empresas.map((empresa) => (
+                                        <MenuItem key={empresa.id_empresa} value={empresa.id_empresa}>
+                                            {empresa.nombre_empresa}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </div>
+                    )}
+
+                    <Box display="flex" justifyContent="space-between" mt={3}>
+                        <Button variant="outlined" color="secondary" onClick={onCancel} fullWidth sx={{ mr: 1 }}>
+                            Volver
+                        </Button>
+                        <Button 
+                            variant="contained" 
+                            color="primary" 
+                            onClick={handleConfirm} 
+                            fullWidth 
+                            sx={{ ml: 1 }}
+                            disabled={isSubmitting}
                         >
-                            {empresas.map((empresa) => (
-                                <MenuItem key={empresa.id_empresa} value={empresa.id_empresa}>
-                                    {empresa.nombre_empresa}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
+                            {isSubmitting ? "Enviando..." : "Crear Oferta"}
+                        </Button>
+                    </Box>
+
+                    {isShareModalOpen && createdJob && (
+                        <ShareModal
+                            selectedJob={createdJob}
+                            onClose={() => setIsShareModalOpen(false)}
+                        />
+                    )}
                 </div>
-            )}
-
-            <Box display="flex" justifyContent="space-between" mt={3}>
-                <Button variant="outlined" color="secondary" onClick={onCancel} fullWidth sx={{ mr: 1 }}>
-                    Volver
-                </Button>
-                <Button 
-                    variant="contained" 
-                    color="primary" 
-                    onClick={handleConfirm} 
-                    fullWidth 
-                    sx={{ ml: 1 }}
-                    disabled={isSubmitting}
-                >
-                    {isSubmitting ? "Enviando..." : "Crear Oferta"}
-                </Button>
-            </Box>
-
-            {isShareModalOpen && createdJob && (
-                <ShareModal
-                    selectedJob={createdJob}
-                    onClose={() => setIsShareModalOpen(false)}
-                />
-            )}
-        </div>
+            </DialogContent>
+        </Dialog>
     );
 };
 
