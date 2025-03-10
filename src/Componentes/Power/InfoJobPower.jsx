@@ -134,11 +134,11 @@ function InfoJobPower({ selectedJob }) {
 
   return (
     <div
-      className="selected-job-info custom-scrollbar w-full sm:w-3/5 rounded-lg md:flex flex-col p-8 mx-8 bg-white hidden transition-all duration-500 "
+      className="selected-job-info custom-scrollbar border w-full sm:w-3/5 rounded-lg md:flex flex-col p-8 mx-8 bg-white hidden transition-all duration-500 "
       style={{ height: "650px", overflowY: "auto" }}
     >
       <p className="text-gray-500 text-xs font-inter">{capitalizedTimeAgo}</p>
-      <h2 className="font-bold text-3xl  text-newprimarycolor font-source">
+      <h2 className="font-bold text-3xl  text-gray-800 font-jakarta">
         {selectedJob.puesto}
       </h2>
       <div className="flex items-center justify-between mb-4">

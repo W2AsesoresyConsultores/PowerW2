@@ -42,7 +42,7 @@ function LoginAdmin() {
       <HeaderPower />
       <div className="flex h-screen">
         <div
-          className="hidden md:flex flex-col gap-8 items-center justify-center bg-newprimarycolor w-1/2"
+          className="hidden md:flex flex-col gap-8 items-center justify-center bg-powercolorblue w-1/2"
           style={{
             backgroundImage: "url('https://www.digitalocean.com/_next/static/media/hero-background.a9bcc858.svg')",
             backgroundRepeat: "no-repeat",
@@ -63,7 +63,7 @@ function LoginAdmin() {
         </div>
         <div className="flex items-center justify-center w-full md:w-1/2 px-6 md:px-28">
           <div className="p-4 w-full max-w-md">
-            <h1 className="text-4xl text-newprimarycolor font-bold text-center mb-4 font-inter">Te damos la bienvenida</h1>
+            <h1 className="text-4xl text-powercolor font-semibold text-center mb-4 font-inter">Te damos la bienvenida</h1>
             <p className="text-gray-800 text-center mb-8 font-inter">Ingresa tus datos para iniciar sesión</p>
             <form onSubmit={handleLogin} className="space-y-6">
               <div className="relative">
@@ -105,7 +105,7 @@ function LoginAdmin() {
                 </a>
                 <button
                   type="submit"
-                  className="w-full py-3 font-inter text-md bg-yellowprimary text-newprimarycolor font-bold rounded-lg hover:bg-yellow-500 transition"
+                  className="w-full py-3 font-inter text-md bg-powercolorblue text-white font-bold rounded-lg hover:bg-newprimarycolor transition"
                 >
                   Iniciar Sesión
                 </button>

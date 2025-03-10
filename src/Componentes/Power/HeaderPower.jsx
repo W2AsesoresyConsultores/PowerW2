@@ -53,7 +53,7 @@ function HeaderPower() {
 
   return (
     <header
-      className={`bg-white w-full z-10 h-[72px] border-b border-gray-100 flex justify-between md:justify-around items-center fixed top-0 transition-transform duration-300 ${
+      className={`bg-powercolorblue w-full z-10 h-[72px] flex justify-between md:justify-around items-center fixed top-0 transition-transform duration-300 ${
         isVisible ? 'translate-y-0 shadow-sm' : '-translate-y-full'
       }`}
     >
@@ -61,7 +61,7 @@ function HeaderPower() {
         <Link className="text-white" to="/">
           <img
             className="w-28"
-            src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/AssetsPower/Main/LOGOS.png?t=2024-12-18T16%3A32%3A30.587Z"
+            src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/AssetsPower/Main/logo%20power%20en%20positivo.png"
             alt="Logo"
           />
         </Link>
@@ -77,13 +77,13 @@ function HeaderPower() {
         <div className="hidden md:flex font-inter items-center">
           <Link
             to="/AdminLogin"
-            className="text-md font-semibold hover:bg-[#eef2fa]  transition-colors duration-900 text-[#4d5b7c] px-6 py-2 rounded-full ml-4 font-inter"
+            className="text-md font-semibold border border-white hover:bg-[#eef2fa] hover:text-powercolorblue transition-colors duration-200 text-white px-6 py-2 rounded-full ml-4 font-inter"
           >
             Reclutador
           </Link>
           <Link
             to="/Login"
-            className="text-md font-bold hover:bg-[#0f42e1] bg-newprimarycolor text-white transition-colors duration-200 px-6 py-2 rounded-full ml-4 font-inter"
+            className="text-md font-semibold hover:bg-[#ececec] bg-white text-powercolorblue transition-colors duration-200 px-6 py-2 rounded-full ml-4 font-inter"
           >
             Candidato
           </Link>

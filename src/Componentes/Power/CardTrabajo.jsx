@@ -49,8 +49,8 @@ function CardTrabajo({ job, onSelectJob, isSelected }) {
     <div className="w-full flex justify-center">
       <button
         onClick={() => onSelectJob(job)}
-        className={`w-full md:w-[90%] text-left border hover:shadow-sm hover:transition-all hover:duration-200 rounded-lg p-6 overflow-hidden flex justify-between items-center ${
-          isSelected ? "bg-[#f1f5f9]" : "bg-white"
+        className={`w-full md:w-[90%] text-left border hover:shadow-md hover:transition-all hover:duration-200 rounded-lg p-6 overflow-hidden flex justify-between items-center ${
+          isSelected ? "border-powercolorblue/25" : "bg-white"
         }`}
       >
         <div className="flex flex-col space-y-2 w-full">
@@ -61,20 +61,20 @@ function CardTrabajo({ job, onSelectJob, isSelected }) {
                 <img src={empresa_img_url} className="w-full h-full rounded-lg" alt="" />
               </div>
               <div>
-                <h3 className="text-md font-semibold text-gray-900 font-inter">
+                <h3 className="text-md font-semibold text-gray-800 font-inter">
                   {empresa}
                 </h3>
-                <p className="text-sm text-gray-700 font-inter">{nombreReclutador}</p>{" "}
+                <p className="text-sm text-gray-600 font-inter">{nombreReclutador}</p>{" "}
                 {/* Aquí se muestra el nombre del reclutador */}
               </div>
               </div>
               <FaBookmark size={20} />
             </div>
           </div>
-          <h4 className="font-bold text-xl leading-tight text-gray-800 font-inter">
+          <h4 className="font-semibold text-lg leading-tight text-gray-800 font-jakarta">
             {puesto}
           </h4>
-          <p className="text-sm font-regular text-gray-800 font-inter">
+          <p className="text-sm font-regular text-gray-600 font-inter">
             {descripcion} <span className="text-primarycolor font-semibold">Ver más</span>
           </p>
           <div className="flex space-x-2 justify-between">
@@ -89,11 +89,7 @@ function CardTrabajo({ job, onSelectJob, isSelected }) {
             </span>
             </div>
             
-            <BsArrowRightCircle
-          className={`text-3xl self-end ${
-            isSelected ? "text-primarycolor" : "text-gray-400"
-          }`}
-        />
+            
           </div>
           <div className="text-md flex items-center justify-between text-gray-600 gap-1">
               <span className="text-[12px]">{capitalizedTimeAgo}</span> 

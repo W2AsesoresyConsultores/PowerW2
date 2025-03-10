@@ -8,7 +8,7 @@ function HeroPowerAuth() {
 
   return (
     <section
-      className="w-full bg-[#0069ff] h-auto z-999 pb-4 md:pt-24 pt-[68px] font-dmsans flex flex-col items-center justify-center relative">
+      className="w-full bg-powercolorblue mb-4 h-auto z-999 pb-4 md:pt-24 pt-[68px] font-dmsans flex flex-col items-center justify-center relative">
       <div className="w-full md:w-3/4 lg:w-2/3 relative flex items-center justify-center">
         <Buscador />
       </div>

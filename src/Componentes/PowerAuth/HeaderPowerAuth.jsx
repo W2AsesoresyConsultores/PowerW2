@@ -49,23 +49,23 @@ function HeaderPowerAuth() {
   const whatsappSupportLink = "https://wa.me/51991879666?text=Hola,%20necesito%20ayuda%20en%20lo%20siguiente:";
 
   return (
-    <header className="bg-white fixed w-full h-[72px] z-10 transition-shadow flex justify-center duration-300">
-      <div className="container md:mx-auto md:px-8 flex justify-between items-center py-2">
+    <header className="bg-powercolorblue w-full z-10 h-[72px] flex justify-between md:justify-around items-center fixed top-0 transition-transform duration-300">
+      <div className="mx-auto w-full px-4 flex justify-between md:justify-around items-center">
         <div className="md:flex items-center hidden">
         <Link className='text-white' to="/PowerAuth">
-            <img className='w-28' src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/AssetsPower/Main/LOGOS.png?t=2024-12-18T16%3A32%3A30.587Z" alt="" />
+            <img className='w-28' src="https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/AssetsPower/Main/logo%20power%20en%20positivo.png" alt="" />
           </Link>
         </div>
 
         {/* Desktop view */}
         <div className="items-center gap-4 md:flex hidden">
           <Tooltip title="Notificaciones" arrow>
-            <button className="p-2 rounded-full bg-newprimarycolor text-white  hover:text-primarycolor hover:bg-gray-200 focus:outline-none transition">
+            <button className="p-2 rounded-full text-white  hover:text-primarycolor hover:bg-gray-200 focus:outline-none transition">
               <NotificationsIcon fontSize="small" className="" />
             </button>
           </Tooltip>
           <Tooltip title="Mis Postulaciones" arrow>
-            <button className="p-2 rounded-full bg-newprimarycolor text-white  hover:text-primarycolor hover:bg-gray-200 focus:outline-none transition">
+            <button className="p-2 rounded-full text-white  hover:text-primarycolor hover:bg-gray-200 focus:outline-none transition">
               <WorkOutlineIcon fontSize="small" className="" />
             </button>
           </Tooltip>
@@ -74,14 +74,15 @@ function HeaderPowerAuth() {
               href={whatsappSupportLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-full bg-newprimarycolor text-white  hover:text-primarycolor hover:bg-gray-200 focus:outline-none transition"
+              className="p-2 rounded-full text-white  hover:text-primarycolor hover:bg-gray-200 focus:outline-none transition"
             >
               <BiSupport size={20} className="" />
             </a>
           </Tooltip>
-          <span className="overflow-hidden whitespace-nowrap font-inter text-md font-regular overflow-ellipsis text-black font-regular w-auto flex items-center">
-            {profile.nombre || 'Usuario'}
-          </span>
+          <span className="w-40 truncate font-inter text-md text-white ">
+  {profile.nombre || 'Usuario'}
+</span>
+
           <Tooltip title="Mi Perfil" arrow>
             <Link to="/Profile">
               <img
