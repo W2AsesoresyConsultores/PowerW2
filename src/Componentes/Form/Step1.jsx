@@ -89,6 +89,23 @@ const Step1 = ({ data, handleChange, nextStep }) => {
                 error={!!errors.puesto}
                 helperText={errors.puesto}
             />
+               <TextField
+    label="Cantidad de Personas a Contratar"
+    variant="outlined"
+    name="personas"
+    value={data.cantidadPersonas}
+    onChange={(e) => {
+        const value = e.target.value.replace(/\D/g, ""); // Permite solo números
+        handleChange({ target: { name: "cantidadPersonas", value } });
+    }}
+    onInput={(e) => e.target.value = e.target.value.replace(/[^0-9]/g, '')} // Bloquea entrada de no números
+    fullWidth
+    required
+    margin="normal"
+    error={!!errors.cantidadPersonas}
+    helperText={errors.cantidadPersonas}
+    inputProps={{ min: "1" }} // Evita números negativos
+/>
             <TextField
                 label="Descripción"
                 variant="outlined"
