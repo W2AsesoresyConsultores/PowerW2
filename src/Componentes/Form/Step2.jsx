@@ -20,6 +20,13 @@ const Step2 = ({ data, handleChange, nextStep, prevStep }) => {
         }
     };
 
+    const handleKeyDown = (event, fieldName) => {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Previene el comportamiento por defecto
+            handleChange({ target: { name: fieldName, value: data[fieldName] + '.\n' } });
+        }
+    };
+
     return (
         <Box sx={{ maxWidth: 600, mx: 'auto', mt: 0, p: 3, bgcolor: 'background.paper', borderRadius: 2, boxShadow: 1 }}>
             <TextField
@@ -28,6 +35,7 @@ const Step2 = ({ data, handleChange, nextStep, prevStep }) => {
                 name="requisitos"
                 value={data.requisitos}
                 onChange={handleChange}
+                onKeyDown={(event) => handleKeyDown(event, 'requisitos')}
                 fullWidth
                 required
                 multiline
@@ -42,6 +50,7 @@ const Step2 = ({ data, handleChange, nextStep, prevStep }) => {
                 name="funciones"
                 value={data.funciones}
                 onChange={handleChange}
+                onKeyDown={(event) => handleKeyDown(event, 'funciones')}
                 fullWidth
                 required
                 multiline
@@ -56,6 +65,7 @@ const Step2 = ({ data, handleChange, nextStep, prevStep }) => {
                 name="beneficios"
                 value={data.beneficios}
                 onChange={handleChange}
+                onKeyDown={(event) => handleKeyDown(event, 'beneficios')}
                 fullWidth
                 required
                 multiline
@@ -65,12 +75,31 @@ const Step2 = ({ data, handleChange, nextStep, prevStep }) => {
                 helperText={errors.beneficios || "Use viñetas separando por líneas para cada beneficio"}
             />
             <Box mt={3} display="flex" justifyContent="space-between">
-                <Button variant="contained" color="secondary" onClick={prevStep}>
-                    Anterior
-                </Button>
-                <Button variant="contained" color="primary" onClick={handleNext}>
-                    Siguiente
-                </Button>
+                  <Button
+                        onClick={prevStep}
+                        sx={{
+                          color: "#1E50A2",
+                          fontWeight: "bold",
+                          textTransform: "none"
+                        }}
+                      >
+                        ← Volver
+                      </Button>
+                      <Button onClick={handleNext}
+                                  variant="contained"
+                                  sx={{
+                                    bgcolor: "#1E50A2",
+                                    color: "white",
+                                    fontWeight: "bold",
+                                    textTransform: "none",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: 1
+                                  }}
+                                >
+                                  Continuar →
+                                </Button>
+            
             </Box>
         </Box>
     );

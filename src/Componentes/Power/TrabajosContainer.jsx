@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import CardTrabajo from './CardTrabajo';
 import InfoJobPower from './InfoJobPower';
 import { supabase } from '../../supabase/supabase.config';
 import { useNavigate, useParams } from 'react-router-dom';
+import JobsContext from '../../Context/JobsContext';
 
 function TrabajosContainer() {
+  const { searchTerm } = useContext(JobsContext);
   const [jobs, setJobs] = useState([]);
   const [selectedJob, setSelectedJob] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -17,7 +19,6 @@ function TrabajosContainer() {
     };
 
     window.addEventListener('resize', handleResize);
-
     return () => {
       window.removeEventListener('resize', handleResize);
     };
@@ -63,9 +64,13 @@ function TrabajosContainer() {
     }
   };
 
+  // **Filtrar trabajos en tiempo real mientras el usuario escribe**
+  const filteredJobs = searchTerm
+    ? jobs.filter(job => job.puesto.toLowerCase().includes(searchTerm.toLowerCase()))
+    : jobs;
+
   return (
     <div id='ofertas' className='md:w-[80%] w-full mx-auto flex flex-col items-center pt-6 px-4 rounded-2xl justify-center pb-10 bg-white'>
-      {/* <h1 className='text-3xl font-bold mb-4'> OFERTAS <span className="text-primarycolor xl:inline"> LABORALES </span></h1> */}
       <div className='flex w-full justify-center items-center'>
         <div
           className='flex flex-col w-full md:w-1/2 justify-start items-center gap-4 md:h-[650px] md:overflow-auto h-auto'
@@ -74,7 +79,7 @@ function TrabajosContainer() {
             scrollbarWidth: 'none'
           }}
         >
-          {jobs.map((job, index) => (
+          {filteredJobs.map((job, index) => (
             <CardTrabajo
               key={index}
               job={job}

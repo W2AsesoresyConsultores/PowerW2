@@ -107,7 +107,16 @@ function InfoJob({ selectedJob }) {
     },
     {
       title: "Horario de Trabajo",
-      content: selectedJob.horario, // El horario se mantiene como texto simple
+      content: (
+        <ul>
+          {selectedJob.horario
+            .split(".")
+            .map(
+              (horario, index) =>
+                horario.trim() && <li key={index}>{horario.trim()}</li>
+            )}
+        </ul>
+      ),
     },
   ];
 

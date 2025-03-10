@@ -13,6 +13,7 @@ import PgPostulados from "./Componentes/Admin/PgPostulados.jsx";
 import Share from "./Componentes/PowerAuth/Share.jsx";
 import InfoJobMovil from "./Componentes/PowerAuth/InfoJobMovil.jsx";
 import EditJob from "./Componentes/Form/EditJob.jsx";
+import VistaEditar from "./Componentes/Form/VistaEditar.jsx";
 import Login from './Componentes/Power/Login.jsx';
 import RegisterAdmin from "./Componentes/Admin/RegisterAdmin.jsx";
 import Conversaciones from "./Componentes/Admin/Conversaciones.jsx";
@@ -52,6 +53,7 @@ function App() {
               <Route path="/AdminLogin" element={<LoginAdmin />} />
               <Route path="/550e8400-e29b-41d4-a716-446655440000" element={<RegisterAdmin />} />
               <Route path="/EditJob/:id_oferta" element={<ProtectedRoute><EditJob /></ProtectedRoute>} />
+              <Route path="/VistaEditar/:id_oferta" element={<ProtectedRoute><VistaEditar /></ProtectedRoute>} />
               <Route path="/Entrevistas/:id_oferta" element={<ProtectedRoute><Entrevistas /></ProtectedRoute>} />
               <Route path="/Postulados/:id" element={<ProtectedRoute><PgPostulados /></ProtectedRoute>} />
               <Route path="/Profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />

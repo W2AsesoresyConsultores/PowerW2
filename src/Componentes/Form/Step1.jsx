@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { TextField, Button, Box, MenuItem, Select, FormControl, InputLabel, FormHelperText, InputAdornment } from "@mui/material";
+import { TextField, Button, Box, MenuItem, Select, FormControl, InputLabel, InputAdornment } from "@mui/material";
 
 const Step1 = ({ data, handleChange, nextStep }) => {
     const [sueldoOption, setSueldoOption] = useState("");
@@ -12,59 +12,68 @@ const Step1 = ({ data, handleChange, nextStep }) => {
         }
     }, [data.sueldo]);
 
-    const [sueldoDesde, setSueldoDesde] = useState("");
-    const [sueldoHasta, setSueldoHasta] = useState("");
     const [errors, setErrors] = useState({});
+
+    const sueldoArray = data.sueldo.split(" - ");
+    const sueldoDesde = sueldoArray[0] || "";
+    const sueldoHasta = sueldoArray[1] || "";
 
     const handleSueldoOptionChange = (event) => {
         const selectedOption = event.target.value;
         setSueldoOption(selectedOption);
-        handleChange({ target: { name: "sueldo", value: "" } });
 
         if (selectedOption === "sueldoRango") {
-            setSueldoDesde("");
-            setSueldoHasta("");
+            handleChange({ target: { name: "sueldo", value: " - " } });
+        } else {
+            handleChange({ target: { name: "sueldo", value: "" } });
         }
     };
 
     const handleSueldoFijoChange = (event) => {
-        const value = event.target.value.replace(/\D/g, ""); // Solo permite números
+        const value = event.target.value.replace(/\D/g, "");
         handleChange({ target: { name: "sueldo", value } });
     };
 
     const handleSueldoRangoChange = (event) => {
         const { name, value } = event.target;
-        const numericValue = value.replace(/\D/g, ""); // Solo permite números
+        const numericValue = value.replace(/\D/g, "");
 
         if (name === "sueldoDesde") {
-            setSueldoDesde(numericValue);
             handleChange({ target: { name: "sueldo", value: `${numericValue} - ${sueldoHasta}` } });
         } else {
-            setSueldoHasta(numericValue);
             handleChange({ target: { name: "sueldo", value: `${sueldoDesde} - ${numericValue}` } });
         }
     };
 
     const validateFields = () => {
         let newErrors = {};
-        if (!data.puesto.trim()) newErrors.puesto = "Este campo es obligatorio";
-        if (!data.descripcion.trim()) newErrors.descripcion = "Este campo es obligatorio";
-        if (!data.ubicacion.trim()) newErrors.ubicacion = "Este campo es obligatorio";
-
-        if (sueldoOption === "sueldoFijo" && !data.sueldo.trim()) {
+        if (!data.puesto?.trim()) newErrors.puesto = "Este campo es obligatorio";
+        if (!data.descripcion?.trim()) newErrors.descripcion = "Este campo es obligatorio";
+        if (!data.ubicacion?.trim()) newErrors.ubicacion = "Este campo es obligatorio";
+        if (!data.cantidadPersonas?.trim()) newErrors.cantidadPersonas = "Este campo es obligatorio"; // Evita el error
+    
+        if (sueldoOption === "sueldoFijo" && !data.sueldo?.trim()) {
             newErrors.sueldo = "Este campo es obligatorio";
         } else if (sueldoOption === "sueldoRango") {
-            if (!sueldoDesde.trim()) newErrors.sueldoDesde = "Este campo es obligatorio";
-            if (!sueldoHasta.trim()) newErrors.sueldoHasta = "Este campo es obligatorio";
+            if (!sueldoDesde?.trim()) newErrors.sueldoDesde = "Este campo es obligatorio";
+            if (!sueldoHasta?.trim()) newErrors.sueldoHasta = "Este campo es obligatorio";
         }
-
+    
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
+    
 
     const handleNextStep = () => {
         if (validateFields()) {
             nextStep();
+        }
+    };
+
+    const handleDescriptionKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Previene el comportamiento por defecto
+            handleChange({ target: { name: "descripcion", value: data.descripcion + '.\n' } });
         }
     };
 
@@ -82,12 +91,30 @@ const Step1 = ({ data, handleChange, nextStep }) => {
                 error={!!errors.puesto}
                 helperText={errors.puesto}
             />
+               <TextField
+    label="Cantidad de Personas a Contratar"
+    variant="outlined"
+    name="personas"
+    value={data.cantidadPersonas}
+    onChange={(e) => {
+        const value = e.target.value.replace(/\D/g, ""); // Permite solo números
+        handleChange({ target: { name: "cantidadPersonas", value } });
+    }}
+    onInput={(e) => e.target.value = e.target.value.replace(/[^0-9]/g, '')} // Bloquea entrada de no números
+    fullWidth
+    required
+    margin="normal"
+    error={!!errors.cantidadPersonas}
+    helperText={errors.cantidadPersonas}
+    inputProps={{ min: "1" }} // Evita números negativos
+/>
             <TextField
                 label="Descripción"
                 variant="outlined"
                 name="descripcion"
                 value={data.descripcion}
                 onChange={handleChange}
+                onKeyDown={handleDescriptionKeyDown}
                 fullWidth
                 required
                 multiline
@@ -109,7 +136,6 @@ const Step1 = ({ data, handleChange, nextStep }) => {
                 helperText={errors.ubicacion}
             />
 
-            {/* Selección de tipo de sueldo */}
             <FormControl fullWidth margin="normal">
                 <InputLabel>Selecciona una opción</InputLabel>
                 <Select value={sueldoOption} onChange={handleSueldoOptionChange}>
@@ -118,7 +144,6 @@ const Step1 = ({ data, handleChange, nextStep }) => {
                 </Select>
             </FormControl>
 
-            {/* Campos de sueldo con símbolo "S/." */}
             {sueldoOption === "sueldoFijo" && (
                 <TextField
                     label="Ingrese Monto"
@@ -174,9 +199,21 @@ const Step1 = ({ data, handleChange, nextStep }) => {
             )}
 
             <Box mt={3} display="flex" justifyContent="flex-end">
-                <Button variant="contained" color="primary" onClick={handleNextStep}>
-                    Siguiente
-                </Button>
+                <Button onClick={handleNextStep}
+                            variant="contained"
+                            sx={{
+                              bgcolor: "#1E50A2",
+                              color: "white",
+                              fontWeight: "bold",
+                              textTransform: "none",
+                              display: "flex",
+                              alignItems: "center",
+                              gap: 1
+                            }}
+                          >
+                            Continuar →
+                          </Button>
+            
             </Box>
         </Box>
     );

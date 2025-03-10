@@ -1,47 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IoMdAdd } from "react-icons/io";
 import { MdDeleteForever } from "react-icons/md";
-import {
-  Box,
-  TextField,
-  Button,
-  Select,
-  MenuItem,
-  IconButton,
-  Typography,
-  FormHelperText,
-  FormControl
-} from "@mui/material";
+import { AiOutlineEye } from "react-icons/ai"; // Icono de ojo
+import { Box, TextField, Button, Select, MenuItem, IconButton, Typography, FormHelperText, FormControl } from "@mui/material";
 
 const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }) => {
   const [questions, setQuestions] = useState([""]);
-  const [errors, setErrors] = useState({
-    modalidad: false,
-    horario: false,
-    questions: false
-  });
+  const [errors, setErrors] = useState({ modalidad: false, horario: false, questions: false });
 
-  // Manejo de cambios en las preguntas
+  useEffect(() => {
+    const existingQuestions = [
+      data.preg_1 || "",
+      data.preg_2 || "",
+      data.preg_3 || "",
+      data.preg_4 || "",
+      data.preg_5 || "",
+      data.preg_6 || ""
+    ].filter(q => q.trim() !== "");
+
+    if (existingQuestions.length > 0) {
+      setQuestions(existingQuestions);
+    }
+  }, [data]);
+
   const handleQuestionChange = (index, e) => {
     const newQuestions = [...questions];
     newQuestions[index] = e.target.value;
     setQuestions(newQuestions);
   };
 
-  // Agregar una nueva pregunta
   const addQuestion = () => {
     if (questions.length < 6) {
-      setQuestions([...questions, ""]);
+      setQuestions(prevQuestions => [...prevQuestions, ""]);
     }
   };
 
-  // Eliminar una pregunta
   const removeQuestion = (index) => {
     const newQuestions = questions.filter((_, i) => i !== index);
     setQuestions(newQuestions);
   };
 
-  // Validar los campos antes de avanzar
   const validateFields = () => {
     const newErrors = {
       modalidad: !data.modalidad,
@@ -52,7 +50,6 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
     return !Object.values(newErrors).includes(true);
   };
 
-  // Manejo del botón "Preview"
   const handlePreview = () => {
     if (validateFields()) {
       handleQuestionsChange(questions);
@@ -96,7 +93,6 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
         {errors.modalidad && <FormHelperText>Este campo es obligatorio</FormHelperText>}
       </FormControl>
 
-      {/* Horario */}
       <TextField
         label="Horario"
         variant="outlined"
@@ -105,9 +101,11 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
         onChange={handleChange}
         fullWidth
         required
+        multiline
+        rows={4}
+        margin="normal"
         error={errors.horario}
         helperText={errors.horario ? "Este campo es obligatorio" : ""}
-        margin="normal"
       />
 
       {/* Preguntas para el Postulante */}
@@ -143,13 +141,50 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
       </Box>
 
       {/* Botones de navegación */}
-      <Box display="flex" justifyContent="space-between" mt={3}>
-        <Button variant="contained" color="secondary" onClick={prevStep}>
-          Anterior
+      <Box display="flex" justifyContent="space-between" alignItems="center" mt={3}>
+        {/* Botón de Volver */}
+        <Button
+          onClick={prevStep}
+          sx={{
+            color: "#1E50A2",
+            fontWeight: "bold",
+            textTransform: "none"
+          }}
+        >
+          ← Volver
         </Button>
-        <Button variant="contained" color="primary" onClick={handlePreview}>
-          Vista Previa
-        </Button>
+
+        {/* Botones de Vista Previa y Continuar */}
+        <Box display="flex" gap={2}>
+          <Button
+            onClick={handlePreview}
+            sx={{
+              color: "#1E50A2",
+              fontWeight: "bold",
+              textTransform: "none",
+              display: "flex",
+              alignItems: "center",
+              gap: 1
+            }}
+          >
+            Vista previa <AiOutlineEye size={20} />
+          </Button>
+{/*
+          <Button
+            variant="contained"
+            sx={{
+              bgcolor: "#1E50A2",
+              color: "white",
+              fontWeight: "bold",
+              textTransform: "none",
+              display: "flex",
+              alignItems: "center",
+              gap: 1
+            }}
+          >
+            Crear Oferta
+          </Button> */}
+        </Box>
       </Box>
     </Box>
   );
