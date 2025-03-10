@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { IoMdAdd } from "react-icons/io";
 import { MdDeleteForever } from "react-icons/md";
+import { AiOutlineEye } from "react-icons/ai"; // Icono de ojo
 import { Box, TextField, Button, Select, MenuItem, IconButton, Typography, FormHelperText, FormControl } from "@mui/material";
 
 const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }) => {
   const [questions, setQuestions] = useState([""]);
   const [errors, setErrors] = useState({ modalidad: false, horario: false, questions: false });
 
-  // Sincronizar preguntas con el estado de `data` sin sobrescribir el estado de preguntas
   useEffect(() => {
     const existingQuestions = [
       data.preg_1 || "",
@@ -16,34 +16,30 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
       data.preg_4 || "",
       data.preg_5 || "",
       data.preg_6 || ""
-    ].filter(q => q.trim() !== ""); // Filtrar preguntas vacías
+    ].filter(q => q.trim() !== "");
 
     if (existingQuestions.length > 0) {
       setQuestions(existingQuestions);
     }
   }, [data]);
 
-  // Manejo de cambios en las preguntas
   const handleQuestionChange = (index, e) => {
     const newQuestions = [...questions];
     newQuestions[index] = e.target.value;
     setQuestions(newQuestions);
   };
 
-  // Agregar una nueva pregunta
   const addQuestion = () => {
     if (questions.length < 6) {
       setQuestions(prevQuestions => [...prevQuestions, ""]);
     }
   };
 
-  // Eliminar una pregunta
   const removeQuestion = (index) => {
     const newQuestions = questions.filter((_, i) => i !== index);
     setQuestions(newQuestions);
   };
 
-  // Validar los campos antes de avanzar
   const validateFields = () => {
     const newErrors = {
       modalidad: !data.modalidad,
@@ -54,21 +50,10 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
     return !Object.values(newErrors).includes(true);
   };
 
-  // Manejo del botón "Preview"
   const handlePreview = () => {
     if (validateFields()) {
       handleQuestionsChange(questions);
       nextStep();
-    }
-  };
-
-  // Manejo del evento Enter
-  const handleKeyDown = (index, event) => {
-    if (event.key === 'Enter') {
-      event.preventDefault(); // Previene el comportamiento por defecto
-      const newQuestions = [...questions];
-      newQuestions[index] = newQuestions[index] + '.\n'; // Agrega un punto y salto de línea
-      setQuestions(newQuestions);
     }
   };
 
@@ -133,7 +118,6 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
             <TextField
               value={question}
               onChange={(e) => handleQuestionChange(index, e)}
-              onKeyDown={(event) => handleKeyDown(index, event)} // Aquí se añade el evento onKeyDown
               fullWidth
               placeholder={`Pregunta ${index + 1}`}
               required
@@ -157,13 +141,50 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
       </Box>
 
       {/* Botones de navegación */}
-      <Box display="flex" justifyContent="space-between" mt={3}>
-        <Button variant="contained" color="secondary" onClick={prevStep}>
-          Anterior
+      <Box display="flex" justifyContent="space-between" alignItems="center" mt={3}>
+        {/* Botón de Volver */}
+        <Button
+          onClick={prevStep}
+          sx={{
+            color: "#1E50A2",
+            fontWeight: "bold",
+            textTransform: "none"
+          }}
+        >
+          ← Volver
         </Button>
-        <Button variant="contained" color="primary" onClick={handlePreview}>
-          Vista Previa
-        </Button>
+
+        {/* Botones de Vista Previa y Continuar */}
+        <Box display="flex" gap={2}>
+          <Button
+            onClick={handlePreview}
+            sx={{
+              color: "#1E50A2",
+              fontWeight: "bold",
+              textTransform: "none",
+              display: "flex",
+              alignItems: "center",
+              gap: 1
+            }}
+          >
+            Vista previa <AiOutlineEye size={20} />
+          </Button>
+
+          <Button
+            variant="contained"
+            sx={{
+              bgcolor: "#1E50A2",
+              color: "white",
+              fontWeight: "bold",
+              textTransform: "none",
+              display: "flex",
+              alignItems: "center",
+              gap: 1
+            }}
+          >
+            Continuar →
+          </Button>
+        </Box>
       </Box>
     </Box>
   );

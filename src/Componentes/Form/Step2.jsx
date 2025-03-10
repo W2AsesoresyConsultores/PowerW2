@@ -75,12 +75,31 @@ const Step2 = ({ data, handleChange, nextStep, prevStep }) => {
                 helperText={errors.beneficios || "Use viñetas separando por líneas para cada beneficio"}
             />
             <Box mt={3} display="flex" justifyContent="space-between">
-                <Button variant="contained" color="secondary" onClick={prevStep}>
-                    Anterior
-                </Button>
-                <Button variant="contained" color="primary" onClick={handleNext}>
-                    Siguiente
-                </Button>
+                  <Button
+                        onClick={prevStep}
+                        sx={{
+                          color: "#1E50A2",
+                          fontWeight: "bold",
+                          textTransform: "none"
+                        }}
+                      >
+                        ← Volver
+                      </Button>
+                      <Button onClick={handleNext}
+                                  variant="contained"
+                                  sx={{
+                                    bgcolor: "#1E50A2",
+                                    color: "white",
+                                    fontWeight: "bold",
+                                    textTransform: "none",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: 1
+                                  }}
+                                >
+                                  Continuar →
+                                </Button>
+            
             </Box>
         </Box>
     );

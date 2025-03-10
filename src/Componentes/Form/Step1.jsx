@@ -197,9 +197,21 @@ const Step1 = ({ data, handleChange, nextStep }) => {
             )}
 
             <Box mt={3} display="flex" justifyContent="flex-end">
-                <Button variant="contained" color="primary" onClick={handleNextStep}>
-                    Siguiente
-                </Button>
+                <Button onClick={handleNextStep}
+                            variant="contained"
+                            sx={{
+                              bgcolor: "#1E50A2",
+                              color: "white",
+                              fontWeight: "bold",
+                              textTransform: "none",
+                              display: "flex",
+                              alignItems: "center",
+                              gap: 1
+                            }}
+                          >
+                            Continuar →
+                          </Button>
+            
             </Box>
         </Box>
     );
