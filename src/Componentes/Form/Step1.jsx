@@ -47,20 +47,22 @@ const Step1 = ({ data, handleChange, nextStep }) => {
 
     const validateFields = () => {
         let newErrors = {};
-        if (!data.puesto.trim()) newErrors.puesto = "Este campo es obligatorio";
-        if (!data.descripcion.trim()) newErrors.descripcion = "Este campo es obligatorio";
-        if (!data.ubicacion.trim()) newErrors.ubicacion = "Este campo es obligatorio";
-
-        if (sueldoOption === "sueldoFijo" && !data.sueldo.trim()) {
+        if (!data.puesto?.trim()) newErrors.puesto = "Este campo es obligatorio";
+        if (!data.descripcion?.trim()) newErrors.descripcion = "Este campo es obligatorio";
+        if (!data.ubicacion?.trim()) newErrors.ubicacion = "Este campo es obligatorio";
+        if (!data.cantidadPersonas?.trim()) newErrors.cantidadPersonas = "Este campo es obligatorio"; // Evita el error
+    
+        if (sueldoOption === "sueldoFijo" && !data.sueldo?.trim()) {
             newErrors.sueldo = "Este campo es obligatorio";
         } else if (sueldoOption === "sueldoRango") {
-            if (!sueldoDesde.trim()) newErrors.sueldoDesde = "Este campo es obligatorio";
-            if (!sueldoHasta.trim()) newErrors.sueldoHasta = "Este campo es obligatorio";
+            if (!sueldoDesde?.trim()) newErrors.sueldoDesde = "Este campo es obligatorio";
+            if (!sueldoHasta?.trim()) newErrors.sueldoHasta = "Este campo es obligatorio";
         }
-
+    
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
+    
 
     const handleNextStep = () => {
         if (validateFields()) {
