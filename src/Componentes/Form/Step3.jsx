@@ -169,7 +169,7 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
           >
             Vista previa <AiOutlineEye size={20} />
           </Button>
-
+{/*
           <Button
             variant="contained"
             sx={{
@@ -182,8 +182,8 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange }
               gap: 1
             }}
           >
-            Continuar →
-          </Button>
+            Crear Oferta
+          </Button> */}
         </Box>
       </Box>
     </Box>

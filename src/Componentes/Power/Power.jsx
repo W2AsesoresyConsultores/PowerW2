@@ -9,7 +9,6 @@ import FooterPower from './FooterPower'
 function Power() {
   return (
     <>
-
     <HeaderPower />
     <HeroPower />
     <TrabajosContainer />

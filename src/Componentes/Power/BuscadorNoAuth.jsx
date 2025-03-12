@@ -46,7 +46,7 @@ function Buscador() {
   };
 
   return (
-    <div className="relative w-full flex justify-center items-center z-50 my-6">
+    <div className="relative w-full flex justify-center items-center z-999 my-6">
       {/* Contenedor del input y el ícono */}
       <div className="relative w-[95%] md:w-1/2">
         {/* Ícono dentro del input */}
