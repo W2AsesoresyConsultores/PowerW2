@@ -72,7 +72,7 @@ function InfoJobPower({ selectedJob }) {
       content: (
         <ul>
           {selectedJob.beneficios
-            .split(".")
+            .split("\n")
             .map(
               (beneficio, index) =>
                 beneficio.trim() && <li key={index}>{beneficio.trim()}</li>
@@ -85,7 +85,7 @@ function InfoJobPower({ selectedJob }) {
       content: (
         <ul>
           {selectedJob.requisitos
-            .split(".")
+            .split("\n")
             .map(
               (requisito, index) =>
                 requisito.trim() && <li key={index}>{requisito.trim()}</li>
@@ -98,7 +98,7 @@ function InfoJobPower({ selectedJob }) {
       content: (
         <ul>
           {selectedJob.funciones
-            .split(".")
+            .split("\n")
             .map(
               (funcion, index) =>
                 funcion.trim() && <li key={index}>{funcion.trim()}</li>
