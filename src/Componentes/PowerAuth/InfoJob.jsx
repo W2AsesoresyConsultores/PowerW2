@@ -175,7 +175,7 @@ function InfoJob({ selectedJob }) {
           {selectedJob.ubicacion}
         </span>
         <span className="bg-primarycolor text-white py-1 px-3 text-xs rounded-full font-medium tracking-wide gap-1 flex items-center font-inter">
-          S/. {selectedJob.sueldo}
+          S/ {selectedJob.sueldo}
         </span>
       </div>
 

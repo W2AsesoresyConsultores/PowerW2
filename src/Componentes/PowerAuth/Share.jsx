@@ -138,7 +138,7 @@ function Share() {
             <MdOutlineMapsHomeWork /> {selectedJob.modalidad}
           </span>
           <span className="bg-blue-100 text-primarycolor text-sm px-3 py-1 rounded-full flex gap-2 items-center">
-            S/. {selectedJob.sueldo}
+            S/ {selectedJob.sueldo}
           </span>
         </div>
         <span className="text-gray-500 text-sm mb-4 text-center my-4">

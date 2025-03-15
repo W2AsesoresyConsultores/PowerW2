@@ -183,7 +183,7 @@ const JobList = () => {
                     </div>
                     
                     <div className="flex items-center gap-2">
-  <span className="font-bold">S/.</span>
+  <span className="font-bold">S/</span>
   <p>{job.sueldo}</p>
 </div>
                   </div>

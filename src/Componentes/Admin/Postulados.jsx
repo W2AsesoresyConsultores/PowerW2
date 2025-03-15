@@ -202,7 +202,7 @@ function Postulados() {
                       {jobDetails && jobDetails.modalidad}
                     </span>
                     <span className="block text-base font-medium text-white">
-                      S/. {jobDetails && jobDetails.sueldo}
+                      S/ {jobDetails && jobDetails.sueldo}
                     </span>
                   </div>
                 </div>

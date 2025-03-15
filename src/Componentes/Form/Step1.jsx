@@ -157,7 +157,7 @@ const Step1 = ({ data, handleChange, nextStep }) => {
                     error={!!errors.sueldo}
                     helperText={errors.sueldo}
                     InputProps={{
-                        startAdornment: <InputAdornment position="start">S/.</InputAdornment>,
+                        startAdornment: <InputAdornment position="start">S/</InputAdornment>,
                     }}
                 />
             )}
@@ -176,7 +176,7 @@ const Step1 = ({ data, handleChange, nextStep }) => {
                         error={!!errors.sueldoDesde}
                         helperText={errors.sueldoDesde}
                         InputProps={{
-                            startAdornment: <InputAdornment position="start">S/.</InputAdornment>,
+                            startAdornment: <InputAdornment position="start">S/</InputAdornment>,
                         }}
                     />
                     <span>-</span>
@@ -192,7 +192,7 @@ const Step1 = ({ data, handleChange, nextStep }) => {
                         error={!!errors.sueldoHasta}
                         helperText={errors.sueldoHasta}
                         InputProps={{
-                            startAdornment: <InputAdornment position="start">S/.</InputAdornment>,
+                            startAdornment: <InputAdornment position="start">S/</InputAdornment>,
                         }}
                     />
                 </Box>

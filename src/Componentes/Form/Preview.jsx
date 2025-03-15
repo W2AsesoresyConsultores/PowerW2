@@ -224,7 +224,7 @@ const Preview = ({
                             {step1Data.ubicacion}
                         </span>
                         <span className="bg-primarycolor text-white py-1 px-3 text-xs rounded-full font-medium tracking-wide gap-1 flex items-center font-inter">
-                            S/. {step1Data.sueldo}
+                            S/ {step1Data.sueldo} 
                         </span>
                     </div>
 

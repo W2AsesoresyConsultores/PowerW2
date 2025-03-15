@@ -125,7 +125,7 @@ function InfoJobMovil() {
         </div>
         <div className='mt-4 text-sm text-gray-700 flex items-center '>
           <TbMoneybag className='mr-2' />
-          <span className='font-semibold'>S/. {selectedJob?.sueldo}</span>
+          <span className='font-semibold'>S/ {selectedJob?.sueldo}</span>
           <span className='mx-2'> | </span>
           <FaRegBuilding className='inline-block mr-2' />
           <span className='font-semibold'>{selectedJob?.modalidad}</span>

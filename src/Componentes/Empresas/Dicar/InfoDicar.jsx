@@ -161,7 +161,7 @@ function InfoDicar({ selectedJob }) {
           {selectedJob.ubicacion}
         </span>
         <span className="bg-green-50 text-gray-700 py-1 px-3 text-xs rounded-full font-regular tracking-wide gap-1 flex items-center">
-          S/. {selectedJob.sueldo}
+          S/ {selectedJob.sueldo}
         </span>
       </div>
 
