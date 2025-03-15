@@ -4,7 +4,6 @@ import { UserAuth } from '../../Context/AuthContext';
 import Step1 from './Step1';
 import Step2 from './Step2';
 import Step3 from './Step3';
-import Preview from './Preview';
 import HeaderAdmin from '../Admin/HeaderAdmin';
 import MenuAdmin from '../Admin/MenuAdmin';
 import { Box, Stepper, Step, StepLabel } from '@mui/material';
@@ -107,8 +106,8 @@ const FormOferta = () => {
     };
 
     // Submit data to Supabase
-    const handleSubmit = async (submittedData) => {
-        const { data, error } = await supabase.from("Oferta").insert([submittedData]);
+    const handleSubmit = async () => {
+        const { data, error } = await supabase.from("Oferta").insert([formData]);
 
         if (error) {
             console.error('Error al insertar:', error);
@@ -143,14 +142,9 @@ const FormOferta = () => {
         setStep(1); // Return to the first step
     };
 
-    // Confirm data submission from Preview
+    // Confirm data submission from Step3
     const handleConfirm = async () => {
-        await handleSubmit(formData); // Submit all form data
-    };
-
-    // Cancel preview and return to Step 3
-    const handleCancel = () => {
-        setStep(3); // Return to the previous step
+        await handleSubmit(); // Submit all form data
     };
 
     return (
@@ -194,15 +188,7 @@ const FormOferta = () => {
                                 nextStep={nextStep} 
                                 prevStep={prevStep}  
                                 handleQuestionsChange={handleQuestionsChange}
-                            />
-                        )}
-                        {step === 4 && (
-                            <Preview
-                                step1Data={formData}
-                                step2Data={formData}
-                                step3Data={formData}
-                                onConfirm={handleConfirm}
-                                onCancel={handleCancel}
+                                onCreateOffer={handleSubmit} // Pasar la función de creación de oferta
                             />
                         )}
                     </form>
