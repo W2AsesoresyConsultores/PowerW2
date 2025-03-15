@@ -36,12 +36,12 @@ const Step1 = ({ data, handleChange, nextStep }) => {
 
     const handleSueldoRangoChange = (event) => {
         const { name, value } = event.target;
-        const numericValue = value.replace(/\D/g, "");
-
+        const numericValue = value.replace(/\D/g, ""); // Permite solo números
+    
         if (name === "sueldoDesde") {
-            handleChange({ target: { name: "sueldo", value: `${numericValue} - ${sueldoHasta}` } });
+            handleChange({ target: { name: "sueldo", value: `${numericValue} - S/${sueldoHasta.replace("S/", "").trim()}` } });
         } else {
-            handleChange({ target: { name: "sueldo", value: `${sueldoDesde} - ${numericValue}` } });
+            handleChange({ target: { name: "sueldo", value: `${sueldoDesde} - S/${numericValue}` } });
         }
     };
 
@@ -94,7 +94,7 @@ const Step1 = ({ data, handleChange, nextStep }) => {
                <TextField
     label="Cantidad de Personas a Contratar"
     variant="outlined"
-    name="personas"
+    name="cantidadPersonas"
     value={data.cantidadPersonas}
     onChange={(e) => {
         const value = e.target.value.replace(/\D/g, ""); // Permite solo números
@@ -181,20 +181,20 @@ const Step1 = ({ data, handleChange, nextStep }) => {
                     />
                     <span>-</span>
                     <TextField
-                        label="Hasta"
-                        variant="outlined"
-                        name="sueldoHasta"
-                        value={sueldoHasta}
-                        onChange={handleSueldoRangoChange}
-                        required
-                        margin="normal"
-                        sx={{ flex: 1 }}
-                        error={!!errors.sueldoHasta}
-                        helperText={errors.sueldoHasta}
-                        InputProps={{
-                            startAdornment: <InputAdornment position="start">S/</InputAdornment>,
-                        }}
-                    />
+    label="Hasta"
+    variant="outlined"
+    name="sueldoHasta"
+    value={sueldoHasta.replace("S/", "")} // Se muestra sin "S/"
+    onChange={handleSueldoRangoChange}
+    required
+    margin="normal"
+    sx={{ flex: 1 }}
+    error={!!errors.sueldoHasta}
+    helperText={errors.sueldoHasta}
+    InputProps={{
+        startAdornment: <InputAdornment position="start">S/</InputAdornment>, // Solo decorativo
+    }}
+/>
                 </Box>
             )}
 

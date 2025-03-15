@@ -14,6 +14,7 @@ const FormOferta = () => {
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
         puesto: '',
+        cantidadPersonas: '',
         descripcion: '',
         requisitos: '',
         ubicacion: '',
@@ -120,6 +121,7 @@ const FormOferta = () => {
     const resetForm = () => {
         setFormData({
             puesto: '',
+            cantidadPersonas: '',
             descripcion: '',
             requisitos: '',
             ubicacion: '',
@@ -167,9 +169,6 @@ const FormOferta = () => {
                         </Step>
                         <Step>
                             <StepLabel>Información adicional</StepLabel>
-                        </Step>
-                        <Step>
-                            <StepLabel>Previsualización</StepLabel>
                         </Step>
                     </Stepper>
                     <form onSubmit={(e) => e.preventDefault()}>

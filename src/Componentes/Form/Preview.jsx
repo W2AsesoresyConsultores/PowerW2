@@ -123,6 +123,7 @@ const Preview = ({
         try {
             const newJobData = {
                 puesto: step1Data.puesto,
+                cantidadPersonas: step1Data.cantidadPersonas,
                 descripcion: step1Data.descripcion,
                 requisitos: step1Data.requisitos,
                 funciones: step1Data.funciones,

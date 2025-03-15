@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../../supabase/supabase.config';
 import { useParams } from 'react-router-dom';
-import Step1 from './Step1';
-import Step2 from './Step2';
+import EditStep1 from './EditStep1';
+import EditStep2 from './EditStep2';
 import EditStep3 from './EditStep3';
 import HeaderAdmin from '../Admin/HeaderAdmin';
 import MenuAdmin from '../Admin/MenuAdmin';
@@ -34,40 +34,42 @@ const EditJob = () => {
 
     useEffect(() => {
         const fetchJob = async () => {
-            const { data, error } = await supabase
-                .from('Oferta')
-                .select('*')
-                .eq('id_oferta', id_oferta)
-                .single();
+            try {
+                const { data, error } = await supabase
+                    .from('Oferta')
+                    .select('*')
+                    .eq('id_oferta', id_oferta)
+                    .single();
 
-            if (error) {
-                console.error('Error fetching job:', error);
-            } else {
+                if (error) throw error;
                 setFormData(data);
+            } catch (error) {
+                console.error('Error fetching job:', error.message);
             }
         };
 
         fetchJob();
     }, [id_oferta]);
 
-    const nextStep = () => setStep(step + 1);
-    const prevStep = () => setStep(step - 1);
+    const nextStep = () => setStep((prevStep) => prevStep + 1);
+    const prevStep = () => setStep((prevStep) => prevStep - 1);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        setFormData((prevData) => ({ ...prevData, [name]: value }));
     };
 
     const handleSubmit = async (submittedData) => {
-        const { data, error } = await supabase
-            .from('Oferta')
-            .update(submittedData)
-            .eq('id_oferta', id_oferta);
+        try {
+            const { error } = await supabase
+                .from('Oferta')
+                .update(submittedData)
+                .eq('id_oferta', id_oferta);
 
-        if (error) {
-            console.error('Error updating job:', error);
-        } else {
-            console.log('Job updated:', data);
+            if (error) throw error;
+            console.log('Job updated successfully');
+        } catch (error) {
+            console.error('Error updating job:', error.message);
         }
     };
 
@@ -90,8 +92,8 @@ const EditJob = () => {
                         </Step>
                     </Stepper>
                     <form onSubmit={(e) => e.preventDefault()}>
-                        {step === 1 && <Step1 data={formData} handleChange={handleChange} nextStep={nextStep} />}
-                        {step === 2 && <Step2 data={formData} handleChange={handleChange} nextStep={nextStep} prevStep={prevStep} />}
+                        {step === 1 && <EditStep1 data={formData} handleChange={handleChange} nextStep={nextStep} />}
+                        {step === 2 && <EditStep2 data={formData} handleChange={handleChange} nextStep={nextStep} prevStep={prevStep} />}
                         {step === 3 && <EditStep3 data={formData} handleChange={handleChange} prevStep={prevStep} onSubmit={handleSubmit} />}
                     </form>
                 </Box>
