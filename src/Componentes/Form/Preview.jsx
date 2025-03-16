@@ -25,7 +25,7 @@ const Preview = ({ open, onClose, data }) => {
                     <div className="flex items-center gap-4">
                         <div className="rounded-lg w-12 h-12">
                             <img
-                                src={data.empresa_img_url}
+                                src={data.empresa_url}
                                 className="w-full h-full rounded-lg"
                                 alt={data.empresa}
                             />
