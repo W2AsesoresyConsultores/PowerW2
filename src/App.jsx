@@ -24,6 +24,7 @@ import Proceso from "./Componentes/Entrevistas/Proceso.jsx";
 import Entrevistas from "./Componentes/Entrevistas/Entrevistas.jsx";
 import { ThemeContextProvider } from './Context/ThemeContext.jsx';
 import Dicar from "./Componentes/Empresas/Dicar/Dicar.jsx";
+import Ransa from "./Componentes/Empresas/Ransa/Ransa.jsx";
 import OfertasCompartidas from "./Componentes/Admin/OfertasCompartidas.jsx";
 import Juniors from './Componentes/Empresas/Juniors/Juniors.jsx'
 
@@ -58,6 +59,7 @@ function App() {
               <Route path="/Postulados/:id" element={<ProtectedRoute><PgPostulados /></ProtectedRoute>} />
               <Route path="/Profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
               <Route path="/Dicar" element={<Dicar />} />
+              <Route path="/Ransa" element={<Ransa />} />
               <Route path="/OfertasCompartidas" element={<ProtectedRoute><OfertasCompartidas /></ProtectedRoute>} />
             </Routes>
           </JobsProviderCompartido> {/* Cierra el proveedor aquí */}
