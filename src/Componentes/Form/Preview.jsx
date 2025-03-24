@@ -14,10 +14,10 @@ const Preview = ({ open, onClose, data }) => {
                     maxWidth: 600,
                     mx: 'auto',
                     mt: '10%',
+                    maxHeight: '80vh', // Agregar altura máxima
+                    overflowY: 'auto',  // Habilitar el scroll vertical
                 }}
             >
-           
-           
                 <h2 className="font-bold text-3xl text-newprimarycolor font-source">
                     {data.puesto}
                 </h2>
@@ -34,7 +34,6 @@ const Preview = ({ open, onClose, data }) => {
                             <p className="text-sm font-medium text-gray-800 font-inter">
                                 {data.empresa}
                             </p>
-                            <p className="text-xs text-gray-600 font-inter">{data.nombre_reclutador || 'Reclutador no encontrado'}</p>
                         </div>
                     </div>
                 </div>
@@ -56,30 +55,30 @@ const Preview = ({ open, onClose, data }) => {
                     </p>
                     <h3 className="font-semibold text-black font-inter text-lg mt-4">¿Por qué deberías unirte a nosotros?</h3>
                     <ul>
-                        {data.beneficios.split('.').map((beneficio, index) => (
+                        {data.beneficios.split('\n').map((beneficio, index) => (
                             beneficio.trim() && <li key={index} className="text-gray-800 text-base font-inter ml-2">{beneficio.trim()}</li>
                         ))}
                     </ul>
                     <h3 className="font-semibold text-black font-inter text-lg mt-4">¿Qué buscamos?</h3>
                     <ul>
-                        {data.requisitos.split('.').map((requisito, index) => (
+                        {data.requisitos.split('\n').map((requisito, index) => (
                             requisito.trim() && <li key={index} className="text-gray-800 text-base font-inter ml-2">{requisito.trim()}</li>
                         ))}
                     </ul>
                     <h3 className="font-semibold text-black font-inter text-lg mt-4">¿Qué es lo que harás?</h3>
                     <ul>
-                        {data.funciones.split('.').map((funcion, index) => (
+                        {data.funciones.split('\n').map((funcion, index) => (
                             funcion.trim() && <li key={index} className="text-gray-800 text-base font-inter ml-2">{funcion.trim()}</li>
                         ))}
                     </ul>
                     <h3 className="font-semibold text-black font-inter text-lg mt-4">Horario de Trabajo</h3>
                     <ul>
-                        {data.horario.split('.').map((horario, index) => (
+                        {data.horario.split('\n').map((horario, index) => (
                             horario.trim() && <li key={index} className="text-gray-800 text-base font-inter ml-2">{horario.trim()}</li>
                         ))}
                     </ul>
                 </div>
-<Typography>
+                <Typography>
                     <strong>Preguntas para el Postulante:</strong>
                     <ul>
                         {data.questions.map((question, index) => (

@@ -22,6 +22,7 @@ const FormOferta = () => {
         horario: '',
         empresa: '',
         id_empresa: null,
+        empresa_img_url: '', // Cambiar a empresa_img_url
         beneficios: '',
         modalidad: '',
         preg_1: '',
@@ -56,13 +57,13 @@ const FormOferta = () => {
         fetchIdEmpresa();
     }, [user]);
 
-    // Fetch empresa name based on idEmpresa
+    // Fetch empresa name and image URL based on idEmpresa
     useEffect(() => {
         const fetchNombreEmpresa = async () => {
             if (idEmpresa) {
                 const { data: empresaData, error: empresaError } = await supabase
                     .from('Empresa')
-                    .select('nombre_empresa')
+                    .select('nombre_empresa, empresa_url') // Asegúrate de que este campo sea correcto
                     .eq('id_empresa', idEmpresa)
                     .single();
 
@@ -73,6 +74,7 @@ const FormOferta = () => {
                     setFormData(prevState => ({
                         ...prevState,
                         empresa: empresaData?.nombre_empresa,
+                        empresa_img_url: empresaData?.empresa_url, // Cambiar a empresa_img_url
                         id_empresa: idEmpresa
                     }));
                 }
@@ -129,6 +131,7 @@ const FormOferta = () => {
             horario: '',
             empresa: '',
             id_empresa: null,
+            empresa_img_url: '', // Resetear también la URL de la imagen
             beneficios: '',
             modalidad: '',
             preg_1: '',

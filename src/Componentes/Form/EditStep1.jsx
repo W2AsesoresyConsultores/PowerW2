@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, TextField, Button, MenuItem, Select, FormControl, InputLabel, InputAdornment } from "@mui/material";
+import EmpresaSelectorEdit from './EmpresaSelectorEdit'; // Importar el selector de empresas
 
 const EditStep1 = ({ data, handleChange, nextStep, errors = {} }) => {
   const [sueldoOption, setSueldoOption] = useState("");
@@ -43,28 +44,40 @@ const EditStep1 = ({ data, handleChange, nextStep, errors = {} }) => {
     }
   };
 
+  const handleEmpresaChange = (empresa) => {
+    if (empresa) {
+      handleChange({ target: { name: "empresa", value: empresa.nombre_empresa } });
+      handleChange({ target: { name: "empresa_img_url", value: empresa.empresa_url } });
+      handleChange({ target: { name: "id_empresa", value: empresa.id_empresa } });
+    }
+  };
+
   return (
     <Box sx={{ maxWidth: 600, mx: "auto", mt: 0, p: 3, bgcolor: "background.paper", borderRadius: 2, boxShadow: 1 }}>
-     
+      
       <TextField label="Puesto" variant="outlined" name="puesto" value={data.puesto} onChange={handleChange} fullWidth required margin="normal" error={!!errors.puesto} helperText={errors.puesto} />
 
       <TextField
-  label="Cantidad de Personas a Contratar"
-  variant="outlined"
-  name="cantidadPersonas"
-  value={data.cantidadPersonas || ""} // Asegura que siempre tenga un valor
-  onChange={(e) => {
-    const value = e.target.value.replace(/\D/g, "");
-    handleChange({ target: { name: "cantidadPersonas", value } });
-  }}
-  fullWidth
-  required
-  margin="normal"
-  error={!!errors.cantidadPersonas}
-  helperText={errors.cantidadPersonas}
-/>
+        label="Cantidad de Personas a Contratar"
+        variant="outlined"
+        name="cantidadPersonas"
+        value={data.cantidadPersonas || ""} // Asegura que siempre tenga un valor
+        onChange={(e) => {
+          const value = e.target.value.replace(/\D/g, "");
+          handleChange({ target: { name: "cantidadPersonas", value } });
+        }}
+        fullWidth
+        required
+        margin="normal"
+        error={!!errors.cantidadPersonas}
+        helperText={errors.cantidadPersonas}
+      />
 
-      <TextField label="Empresa" variant="outlined" name="empresa" value={data.empresa} onChange={handleChange} fullWidth required margin="normal" error={!!errors.empresa} helperText={errors.empresa} />
+      {/* Reemplazar el campo de texto de la empresa con el selector */}
+      <EmpresaSelectorEdit 
+        onEmpresaChange={handleEmpresaChange} 
+        empresaSeleccionada={data.empresa} // Pasar la empresa seleccionada
+      />
 
       <TextField label="Descripción" variant="outlined" name="descripcion" value={data.descripcion} onChange={handleChange} fullWidth required multiline rows={4} margin="normal" error={!!errors.descripcion} helperText={errors.descripcion} />
       

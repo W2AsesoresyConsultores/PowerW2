@@ -82,31 +82,33 @@ const Vista = () => {
                 </div>
 
                 <div className="mb-4">
-                    <h3 className="font-semibold text-black font-inter text-lg">Descripción</h3>
-                    <p className="text-gray-800 text-base font-inter ml-2">
-                        {jobData.descripcion}
-                    </p>
+                <h3 className="font-semibold text-black font-inter text-lg">Descripción</h3>
+                    {jobData.descripcion.split('\n').map((linea, index) => (
+                        <p key={index} className="text-gray-800 text-base font-inter ml-2">
+                            {linea.trim()}
+                        </p>
+                    ))}
                     <h3 className="font-semibold text-black font-inter text-lg mt-4">¿Por qué deberías unirte a nosotros?</h3>
                     <ul>
-                        {jobData.beneficios.split('.').map((beneficio, index) => (
+                        {jobData.beneficios.split('\n').map((beneficio, index) => (
                             beneficio.trim() && <li key={index} className="text-gray-800 text-base font-inter ml-2">{beneficio.trim()}</li>
                         ))}
                     </ul>
                     <h3 className="font-semibold text-black font-inter text-lg mt-4">¿Qué buscamos?</h3>
                     <ul>
-                        {jobData.requisitos.split('.').map((requisito, index) => (
+                        {jobData.requisitos.split('\n').map((requisito, index) => (
                             requisito.trim() && <li key={index} className="text-gray-800 text-base font-inter ml-2">{requisito.trim()}</li>
                         ))}
                     </ul>
                     <h3 className="font-semibold text-black font-inter text-lg mt-4">¿Qué es lo que harás?</h3>
                     <ul>
-                        {jobData.funciones.split('.').map((funcion, index) => (
+                        {jobData.funciones.split('\n').map((funcion, index) => (
                             funcion.trim() && <li key={index} className="text-gray-800 text-base font-inter ml-2">{funcion.trim()}</li>
                         ))}
                     </ul>
                     <h3 className="font-semibold text-black font-inter text-lg mt-4">Horario de Trabajo</h3>
                     <ul>
-                        {jobData.horario.split('.').map((horario, index) => (
+                        {jobData.horario.split('\n').map((horario, index) => (
                             horario.trim() && <li key={index} className="text-gray-800 text-base font-inter ml-2">{horario.trim()}</li>
                         ))}
                     </ul>

@@ -19,7 +19,9 @@ const EditJob = () => {
         sueldo: '',
         funciones: '',
         horario: '',
-        empresa: '',
+        empresa: '',           // Campo agregado
+        empresa_img_url: '',   // Campo agregado
+        id_empresa: null,      // Campo agregado
         wtsp_url: '',
         beneficios: '',
         modalidad: '',
@@ -59,15 +61,16 @@ const EditJob = () => {
         setFormData((prevData) => ({ ...prevData, [name]: value }));
     };
 
-    const handleSubmit = async (submittedData) => {
+    const handleSubmit = async () => {
         try {
             const { error } = await supabase
                 .from('Oferta')
-                .update(submittedData)
+                .update(formData) // Usa formData directamente
                 .eq('id_oferta', id_oferta);
 
             if (error) throw error;
             console.log('Job updated successfully');
+            // Opcional: Redirigir o resetear el formulario aquí
         } catch (error) {
             console.error('Error updating job:', error.message);
         }
@@ -92,9 +95,29 @@ const EditJob = () => {
                         </Step>
                     </Stepper>
                     <form onSubmit={(e) => e.preventDefault()}>
-                        {step === 1 && <EditStep1 data={formData} handleChange={handleChange} nextStep={nextStep} />}
-                        {step === 2 && <EditStep2 data={formData} handleChange={handleChange} nextStep={nextStep} prevStep={prevStep} />}
-                        {step === 3 && <EditStep3 data={formData} handleChange={handleChange} prevStep={prevStep} onSubmit={handleSubmit} />}
+                        {step === 1 && (
+                            <EditStep1 
+                                data={formData} 
+                                handleChange={handleChange} 
+                                nextStep={nextStep} 
+                            />
+                        )}
+                        {step === 2 && (
+                            <EditStep2 
+                                data={formData} 
+                                handleChange={handleChange} 
+                                nextStep={nextStep} 
+                                prevStep={prevStep} 
+                            />
+                        )}
+                        {step === 3 && (
+                            <EditStep3 
+                                data={formData} 
+                                handleChange={handleChange} 
+                                prevStep={prevStep} 
+                                onSubmit={handleSubmit} 
+                            />
+                        )}
                     </form>
                 </Box>
             </div>

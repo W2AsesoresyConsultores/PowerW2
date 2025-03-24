@@ -5,11 +5,29 @@ import { AiOutlineEye } from "react-icons/ai"; // Icono de ojo
 import { Box, TextField, Button, Select, MenuItem, IconButton, Typography, FormHelperText, FormControl } from "@mui/material";
 import EmpresaSelector from './EmpresaSelector'; // Asegúrate de que la ruta sea correcta
 import Preview from './Preview'; // Asegúrate de que la ruta sea correcta
+import { supabase } from '../../supabase/supabase.config'; // Importa supabase
 
 const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange, onCreateOffer }) => {
     const [questions, setQuestions] = useState([""]);
     const [errors, setErrors] = useState({ modalidad: false, horario: false, empresa: false, questions: false });
     const [previewOpen, setPreviewOpen] = useState(false);
+    const [empresas, setEmpresas] = useState([]); // Añadir estado para las empresas
+
+    useEffect(() => {
+        const fetchEmpresas = async () => {
+            const { data: empresasData, error } = await supabase
+                .from('Empresa')
+                .select('id_empresa, nombre_empresa, empresa_url');
+
+            if (error) {
+                console.error('Error al obtener las empresas:', error);
+            } else {
+                setEmpresas(empresasData);
+            }
+        };
+
+        fetchEmpresas();
+    }, []);
 
     useEffect(() => {
         const existingQuestions = [
@@ -166,7 +184,9 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange, 
                 {/* Botones de Vista Previa y Crear Oferta */}
                 <Box display="flex" gap={2}>
                     <Button
-                        onClick={handleOpenPreview}
+                        onClick={() => {
+                            handleOpenPreview();
+                        }}
                         sx={{
                             color: "#1E50A2",
                             fontWeight: "bold",
@@ -203,7 +223,15 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange, 
             </Box>
 
             {/* Componente de Vista Previa */}
-            <Preview open={previewOpen} onClose={() => setPreviewOpen(false)} data={{ ...data, questions }} />
+            <Preview 
+                open={previewOpen} 
+                onClose={() => setPreviewOpen(false)} 
+                data={{ 
+                    ...data, 
+                    questions, 
+                    empresa_url: empresas.find(emp => emp.nombre_empresa === data.empresa)?.empresa_url // Agregar la URL aquí
+                }} 
+            />
         </Box>
     );
 };
