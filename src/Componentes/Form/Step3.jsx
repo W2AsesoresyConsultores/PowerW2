@@ -65,7 +65,7 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange, 
         const newErrors = {
             modalidad: !data.modalidad,
             horario: !data.horario.trim(),
-            empresa: !data.empresa // Validación para el campo de empresa
+            empresa: !data.id_empresa // Validar si id_empresa está definido
         };
 
         setErrors(newErrors);
@@ -130,8 +130,13 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange, 
 
             {/* Campo de Selección de Empresa */}
             <EmpresaSelector
-                onEmpresaChange={(empresa) => handleChange({ target: { name: 'empresa', value: empresa } })}
-                empresaSeleccionada={data.empresa}
+                onEmpresaChange={(empresa) => {
+                    console.log('Empresa seleccionada:', empresa); // Verificar la empresa seleccionada
+                    handleChange({ target: { name: 'empresa', value: empresa.nombre_empresa } });
+                    handleChange({ target: { name: 'id_empresa', value: empresa.id_empresa } });
+                    handleChange({ target: { name: 'empresa_img_url', value: empresa.empresa_url } });
+                }}
+                empresaSeleccionada={data.empresa} // Debe ser el objeto completo
             />
             {errors.empresa && <FormHelperText error>Este campo es obligatorio</FormHelperText>}
 
@@ -184,9 +189,7 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange, 
                 {/* Botones de Vista Previa y Crear Oferta */}
                 <Box display="flex" gap={2}>
                     <Button
-                        onClick={() => {
-                            handleOpenPreview();
-                        }}
+                        onClick={handleOpenPreview}
                         sx={{
                             color: "#1E50A2",
                             fontWeight: "bold",

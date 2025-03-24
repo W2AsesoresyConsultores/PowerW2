@@ -9,7 +9,7 @@ const EmpresaSelector = ({ onEmpresaChange, empresaSeleccionada }) => {
         const fetchEmpresas = async () => {
             const { data: empresasData, error } = await supabase
                 .from('Empresa')
-                .select('id_empresa, nombre_empresa, empresa_url'); // Incluye la URL de la imagen
+                .select('id_empresa, nombre_empresa, empresa_url');
 
             if (error) {
                 console.error('Error al obtener las empresas:', error);
@@ -22,8 +22,9 @@ const EmpresaSelector = ({ onEmpresaChange, empresaSeleccionada }) => {
     }, []);
 
     const handleChange = (event) => {
-        const empresaSeleccionada = event.target.value;
-        onEmpresaChange(empresaSeleccionada); // Propagar el cambio
+        const selectedId = event.target.value;
+        const selectedEmpresa = empresas.find(emp => emp.id_empresa === selectedId);
+        onEmpresaChange(selectedEmpresa); // Propagar el objeto completo
     };
 
     return (
@@ -31,10 +32,10 @@ const EmpresaSelector = ({ onEmpresaChange, empresaSeleccionada }) => {
             <InputLabel id="select-empresa-label">Seleccionar Empresa</InputLabel>
             <Select
                 labelId="select-empresa-label"
-                value={empresaSeleccionada}
+                value={empresaSeleccionada ? empresaSeleccionada.id_empresa : ''} // Usar el id de la empresa
                 onChange={handleChange}
                 renderValue={(selectedValue) => {
-                    const empresa = empresas.find(emp => emp.nombre_empresa === selectedValue);
+                    const empresa = empresas.find(emp => emp.id_empresa === selectedValue);
                     return empresa ? (
                         <div style={{ display: 'flex', alignItems: 'center' }}>
                             <img 
@@ -48,7 +49,7 @@ const EmpresaSelector = ({ onEmpresaChange, empresaSeleccionada }) => {
                 }}
             >
                 {empresas.map((empresa) => (
-                    <MenuItem key={empresa.id_empresa} value={empresa.nombre_empresa}>
+                    <MenuItem key={empresa.id_empresa} value={empresa.id_empresa}>
                         <ListItemIcon>
                             <img 
                                 src={empresa.empresa_url} 

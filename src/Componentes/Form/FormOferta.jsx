@@ -91,7 +91,8 @@ const FormOferta = () => {
     // Handle form data changes
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        console.log(`Cambiando ${name} a ${value}`); // Para verificar qué se está cambiando
+        setFormData(prevState => ({ ...prevState, [name]: value }));
     };
 
     // Handle question-specific changes
@@ -109,13 +110,14 @@ const FormOferta = () => {
 
     // Submit data to Supabase
     const handleSubmit = async () => {
+        console.log('Datos a enviar:', formData); // Asegúrate de que los valores son correctos
         const { data, error } = await supabase.from("Oferta").insert([formData]);
-
+    
         if (error) {
             console.error('Error al insertar:', error);
         } else {
             console.log('Oferta creada:', data);
-            resetForm(); // Reset form data after submission
+            resetForm(); // Resetear datos del formulario después de la inserción
         }
     };
 
