@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { IoMdAdd } from "react-icons/io";
 import { MdDeleteForever } from "react-icons/md";
-import { AiOutlineEye } from "react-icons/ai"; // Icono de ojo
+import { AiOutlineEye } from "react-icons/ai";
 import { Box, TextField, Button, Select, MenuItem, IconButton, Typography, FormHelperText, FormControl } from "@mui/material";
-import EmpresaSelector from './EmpresaSelector'; // Asegúrate de que la ruta sea correcta
-import Preview from './Preview'; // Asegúrate de que la ruta sea correcta
-import { supabase } from '../../supabase/supabase.config'; // Importa supabase
+import EmpresaSelector from './EmpresaSelector';
+import Preview from './Preview';
+import ShareModal from './ShareModal'; // Importa ShareModal
+import { supabase } from '../../supabase/supabase.config';
 
 const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange, onCreateOffer }) => {
     const [questions, setQuestions] = useState([""]);
     const [errors, setErrors] = useState({ modalidad: false, horario: false, empresa: false, questions: false });
     const [previewOpen, setPreviewOpen] = useState(false);
-    const [empresas, setEmpresas] = useState([]); // Añadir estado para las empresas
+    const [empresas, setEmpresas] = useState([]);
+    const [shareModalOpen, setShareModalOpen] = useState(false); // Estado para el ShareModal
+    const [createdJob, setCreatedJob] = useState(null); // Para almacenar la oferta creada
 
     useEffect(() => {
         const fetchEmpresas = async () => {
@@ -65,7 +68,7 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange, 
         const newErrors = {
             modalidad: !data.modalidad,
             horario: !data.horario.trim(),
-            empresa: !data.id_empresa // Validar si id_empresa está definido
+            empresa: !data.id_empresa
         };
 
         setErrors(newErrors);
@@ -73,8 +76,20 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange, 
     };
 
     const handleOpenPreview = () => {
-        handleQuestionsChange(questions); // Asegúrate de guardar las preguntas
+        handleQuestionsChange(questions);
         setPreviewOpen(true);
+    };
+
+    const handleCreateOffer = async () => {
+        const isValid = validateFields();
+        if (isValid) {
+            await handleQuestionsChange(questions);
+            const createdData = await onCreateOffer(); // Asegúrate de que esto devuelva los datos
+            if (createdData) {
+                setCreatedJob(createdData[0]); // Guarda la oferta creada
+                setShareModalOpen(true); // Abre el ShareModal
+            }
+        }
     };
 
     return (
@@ -131,12 +146,12 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange, 
             {/* Campo de Selección de Empresa */}
             <EmpresaSelector
                 onEmpresaChange={(empresa) => {
-                    console.log('Empresa seleccionada:', empresa); // Verificar la empresa seleccionada
+                    console.log('Empresa seleccionada:', empresa);
                     handleChange({ target: { name: 'empresa', value: empresa.nombre_empresa } });
                     handleChange({ target: { name: 'id_empresa', value: empresa.id_empresa } });
                     handleChange({ target: { name: 'empresa_img_url', value: empresa.empresa_url } });
                 }}
-                empresaSeleccionada={data.empresa} // Debe ser el objeto completo
+                empresaSeleccionada={data.empresa}
             />
             {errors.empresa && <FormHelperText error>Este campo es obligatorio</FormHelperText>}
 
@@ -174,7 +189,6 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange, 
 
             {/* Botones de navegación */}
             <Box display="flex" justifyContent="space-between" alignItems="center" mt={3}>
-                {/* Botón de Volver */}
                 <Button
                     onClick={prevStep}
                     sx={{
@@ -186,7 +200,6 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange, 
                     ← Volver
                 </Button>
 
-                {/* Botones de Vista Previa y Crear Oferta */}
                 <Box display="flex" gap={2}>
                     <Button
                         onClick={handleOpenPreview}
@@ -203,13 +216,7 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange, 
                     </Button>
                     <Button
                         variant="contained"
-                        onClick={async () => {
-                            const isValid = validateFields(); // Validar campos
-                            if (isValid) {
-                                await handleQuestionsChange(questions); // Guardar preguntas antes de crear la oferta
-                                await onCreateOffer(); // Llamar a la función para crear la oferta
-                            }
-                        }}
+                        onClick={handleCreateOffer} // Cambia aquí
                         sx={{
                             bgcolor: "#1E50A2",
                             color: "white",
@@ -232,9 +239,17 @@ const Step3 = ({ data, handleChange, nextStep, prevStep, handleQuestionsChange, 
                 data={{ 
                     ...data, 
                     questions, 
-                    empresa_url: empresas.find(emp => emp.nombre_empresa === data.empresa)?.empresa_url // Agregar la URL aquí
+                    empresa_url: empresas.find(emp => emp.nombre_empresa === data.empresa)?.empresa_url 
                 }} 
             />
+
+            {/* Componente del ShareModal */}
+            {shareModalOpen && createdJob && (
+                <ShareModal 
+                    selectedJob={createdJob} // Pasa la oferta creada
+                    onClose={() => setShareModalOpen(false)} 
+                />
+            )}
         </Box>
     );
 };

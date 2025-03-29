@@ -7,6 +7,7 @@ import Step3 from './Step3';
 import HeaderAdmin from '../Admin/HeaderAdmin';
 import MenuAdmin from '../Admin/MenuAdmin';
 import { Box, Stepper, Step, StepLabel } from '@mui/material';
+import ShareModal from './ShareModal'; // Asegúrate de importar ShareModal
 
 const FormOferta = () => {
     const { user } = UserAuth();
@@ -22,7 +23,7 @@ const FormOferta = () => {
         horario: '',
         empresa: '',
         id_empresa: null,
-        empresa_img_url: '', // Cambiar a empresa_img_url
+        empresa_img_url: '',
         beneficios: '',
         modalidad: '',
         preg_1: '',
@@ -35,6 +36,8 @@ const FormOferta = () => {
     });
     const [idEmpresa, setIdEmpresa] = useState(null);
     const [nombreEmpresa, setNombreEmpresa] = useState('');
+    const [shareModalOpen, setShareModalOpen] = useState(false);
+    const [createdJob, setCreatedJob] = useState(null);
 
     // Fetch empresa id based on user
     useEffect(() => {
@@ -63,7 +66,7 @@ const FormOferta = () => {
             if (idEmpresa) {
                 const { data: empresaData, error: empresaError } = await supabase
                     .from('Empresa')
-                    .select('nombre_empresa, empresa_url') // Asegúrate de que este campo sea correcto
+                    .select('nombre_empresa, empresa_url')
                     .eq('id_empresa', idEmpresa)
                     .single();
 
@@ -74,7 +77,7 @@ const FormOferta = () => {
                     setFormData(prevState => ({
                         ...prevState,
                         empresa: empresaData?.nombre_empresa,
-                        empresa_img_url: empresaData?.empresa_url, // Cambiar a empresa_img_url
+                        empresa_img_url: empresaData?.empresa_url,
                         id_empresa: idEmpresa
                     }));
                 }
@@ -91,7 +94,6 @@ const FormOferta = () => {
     // Handle form data changes
     const handleChange = (e) => {
         const { name, value } = e.target;
-        console.log(`Cambiando ${name} a ${value}`); // Para verificar qué se está cambiando
         setFormData(prevState => ({ ...prevState, [name]: value }));
     };
 
@@ -110,14 +112,18 @@ const FormOferta = () => {
 
     // Submit data to Supabase
     const handleSubmit = async () => {
-        console.log('Datos a enviar:', formData); // Asegúrate de que los valores son correctos
-        const { data, error } = await supabase.from("Oferta").insert([formData]);
+        console.log('Datos a enviar:', formData); 
+        const { data, error } = await supabase.from("Oferta").insert([formData]).select(); // Asegúrate de usar .select()
     
         if (error) {
             console.error('Error al insertar:', error);
+            return null;
         } else {
             console.log('Oferta creada:', data);
-            resetForm(); // Resetear datos del formulario después de la inserción
+            setCreatedJob(data[0]); // Guarda la oferta creada
+            setShareModalOpen(true); // Abre el ShareModal
+            resetForm(); 
+            return data; // Asegúrate de retornar los datos creados
         }
     };
 
@@ -133,7 +139,7 @@ const FormOferta = () => {
             horario: '',
             empresa: '',
             id_empresa: null,
-            empresa_img_url: '', // Resetear también la URL de la imagen
+            empresa_img_url: '',
             beneficios: '',
             modalidad: '',
             preg_1: '',
@@ -145,11 +151,6 @@ const FormOferta = () => {
             id_reclutador: user?.id || null,
         });
         setStep(1); // Return to the first step
-    };
-
-    // Confirm data submission from Step3
-    const handleConfirm = async () => {
-        await handleSubmit(); // Submit all form data
     };
 
     return (
@@ -199,6 +200,14 @@ const FormOferta = () => {
                     </form>
                 </Box>
             </div>
+
+            {/* Mostrar el ShareModal si está abierto */}
+            {shareModalOpen && createdJob && (
+                <ShareModal 
+                    selectedJob={createdJob} // Pasa la oferta creada
+                    onClose={() => setShareModalOpen(false)} 
+                />
+            )}
         </div>
     );
 };
